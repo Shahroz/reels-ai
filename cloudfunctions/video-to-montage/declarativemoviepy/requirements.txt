@@ -1,0 +1,3 @@
+git+https://github.com/Zulko/moviepy.git
+google-cloud-storage
+numpy<2.0

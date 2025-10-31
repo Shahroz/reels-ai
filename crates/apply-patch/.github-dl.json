@@ -1,0 +1,7 @@
+{
+  "owner": "openai",
+  "repo": "codex",
+  "reference": "main",
+  "path": "codex-rs/apply-patch",
+  "url": "https://github.com/openai/codex/tree/main/codex-rs/apply-patch"
+}

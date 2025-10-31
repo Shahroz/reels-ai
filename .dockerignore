@@ -1,0 +1,36 @@
+# Exclude version control
+.git
+.gitignore
+
+# Exclude Cargo build artifacts
+**/target
+target/
+
+# Exclude Node.js dependencies
+**/node_modules
+**/frontend/node_modules
+
+# Exclude Python bytecode caches
+**/__pycache__
+*.py[cod]
+*.pyo
+
+# Exclude log files
+*.log
+
+# Exclude local environment files
+.env
+.env.*
+
+# Exclude PostgreSQL data directories
+**/pgdata
+
+# Exclude editor and OS files
+.vscode
+.idea
+*.swp
+*~
+.DS_Store
+
+# Exclude CI/CD config
+.github

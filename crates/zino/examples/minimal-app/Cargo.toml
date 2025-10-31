@@ -1,0 +1,11 @@
+[package]
+name = "minimal-app"
+description = "A minimal example to run a server."
+version = "0.10.1"
+edition = { workspace = true }
+rust-version = { workspace = true }
+publish = { workspace = true }
+
+[dependencies]
+zino = { workspace = true, features = ["axum"] }
+

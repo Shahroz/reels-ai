@@ -1,0 +1,645 @@
+
+{
+  "output_path": "gs://realestate_prod/031e2742-1e20-4132-9553-5245bb3b6202/f56476b5-f051-4d65-8d47-82412012ec4d-instagram.mov",
+  "size": [
+    1080,
+    1920
+  ],
+  "fps": 30,
+  "audio": {
+    "type": "audio",
+    "source": "gs://real-estate-videos/montages_music/On The Flip - The Grey Room _ Density & Time.mp3",
+    "effects": [
+      {
+        "type": "multiply_volume",
+        "factor": 0.4
+      },
+      {
+        "type": "audio_fadein",
+        "duration": 2
+      },
+      {
+        "type": "audio_fadeout",
+        "duration": 4
+      }
+    ]
+  },
+  "clip": {
+    "type": "concatenate",
+    "transition": {
+      "type": "crossfade",
+      "duration": 0.5
+    },
+    "clips": [
+      {
+        "type": "composite",
+        "duration": 4,
+        "clips": [
+          {
+            "type": "color",
+            "size": [
+              1080,
+              1920
+            ],
+            "color": [
+              20,
+              20,
+              25
+            ],
+            "duration": 4
+          },
+          {
+            "type": "text",
+            "text": "Property Enhancements",
+            "font_size": 90,
+            "color": "white",
+            "align": "center",
+            "width": 900,
+            "position": [
+              "center",
+              "center"
+            ],
+            "duration": 3.5,
+            "start": 0.5,
+            "effects": [
+              {
+                "type": "fadein",
+                "duration": 1
+              }
+            ]
+          },
+          {
+            "type": "image",
+            "source": "gs://real-estate-videos/test_videos/bounti-white-transparent.png",
+            "duration": 4,
+            "position": [
+              "center",
+              1700
+            ],
+            "effects": [
+              {
+                "type": "resize",
+                "width": 300
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "composite",
+        "duration": 3,
+        "clips": [
+          {
+            "type": "enhanced_image",
+            "source": "gs://realestate_prod/031e2742-1e20-4132-9553-5245bb3b6202/f56476b5-f051-4d65-8d47-82412012ec4d.mov@00:05",
+            "prompt": "",
+            "duration": 3
+          },
+          {
+            "type": "text",
+            "text": "Welcoming Entryway",
+            "font_size": 70,
+            "color": "white",
+            "position": [
+              "center",
+              150
+            ],
+            "duration": 3
+          },
+          {
+            "type": "text",
+            "text": "BEFORE",
+            "font_size": 50,
+            "color": "lightgray",
+            "position": [
+              "center",
+              1750
+            ],
+            "duration": 3
+          },
+          {
+            "type": "image",
+            "source": "gs://real-estate-videos/test_videos/bounti-white-transparent.png",
+            "duration": 3,
+            "position": [
+              860,
+              1800
+            ],
+            "effects": [
+              {
+                "type": "resize",
+                "width": 200
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "composite",
+        "duration": 4,
+        "clips": [
+          {
+            "type": "enhanced_image",
+            "source": "gs://realestate_prod/031e2742-1e20-4132-9553-5245bb3b6202/f56476b5-f051-4d65-8d47-82412012ec4d.mov@00:05",
+            "prompt": "Virtually stage this empty hallway. Add a stylish runner rug on the dark wood-look floor, place a slim, modern console table against the left wall with a decorative lamp and a piece of art above it. Enhance the lighting to be bright and inviting. Realistic, 4K, interior photography.",
+            "duration": 4
+          },
+          {
+            "type": "text",
+            "text": "Welcoming Entryway",
+            "font_size": 70,
+            "color": "white",
+            "position": [
+              "center",
+              150
+            ],
+            "duration": 4
+          },
+          {
+            "type": "text",
+            "text": "AFTER",
+            "font_size": 50,
+            "color": "white",
+            "position": [
+              "center",
+              1750
+            ],
+            "duration": 4
+          },
+          {
+            "type": "image",
+            "source": "gs://real-estate-videos/test_videos/bounti-white-transparent.png",
+            "duration": 4,
+            "position": [
+              860,
+              1800
+            ],
+            "effects": [
+              {
+                "type": "resize",
+                "width": 200
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "composite",
+        "duration": 3,
+        "clips": [
+          {
+            "type": "enhanced_image",
+            "source": "gs://realestate_prod/031e2742-1e20-4132-9553-5245bb3b6202/f56476b5-f051-4d65-8d47-82412012ec4d.mov@01:00",
+            "prompt": "",
+            "duration": 3
+          },
+          {
+            "type": "text",
+            "text": "Clean & Modern Kitchen",
+            "font_size": 70,
+            "color": "white",
+            "position": [
+              "center",
+              150
+            ],
+            "duration": 3
+          },
+          {
+            "type": "text",
+            "text": "BEFORE",
+            "font_size": 50,
+            "color": "lightgray",
+            "position": [
+              "center",
+              1750
+            ],
+            "duration": 3
+          },
+          {
+            "type": "image",
+            "source": "gs://real-estate-videos/test_videos/bounti-white-transparent.png",
+            "duration": 3,
+            "position": [
+              860,
+              1800
+            ],
+            "effects": [
+              {
+                "type": "resize",
+                "width": 200
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "composite",
+        "duration": 4,
+        "clips": [
+          {
+            "type": "enhanced_image",
+            "source": "gs://realestate_prod/031e2742-1e20-4132-9553-5245bb3b6202/f56476b5-f051-4d65-8d47-82412012ec4d.mov@01:00",
+            "prompt": "Remove all clutter from the granite countertops and kitchen island. Place a decorative bowl of fresh green apples on the island. Add two modern bar stools neatly tucked under the island overhang. Ensure the stainless steel appliances are clean and reflective. Brighten the image for a clean, airy feel. Photorealistic, magazine quality.",
+            "duration": 4
+          },
+          {
+            "type": "text",
+            "text": "Clean & Modern Kitchen",
+            "font_size": 70,
+            "color": "white",
+            "position": [
+              "center",
+              150
+            ],
+            "duration": 4
+          },
+          {
+            "type": "text",
+            "text": "AFTER",
+            "font_size": 50,
+            "color": "white",
+            "position": [
+              "center",
+              1750
+            ],
+            "duration": 4
+          },
+          {
+            "type": "image",
+            "source": "gs://real-estate-videos/test_videos/bounti-white-transparent.png",
+            "duration": 4,
+            "position": [
+              860,
+              1800
+            ],
+            "effects": [
+              {
+                "type": "resize",
+                "width": 200
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "composite",
+        "duration": 3,
+        "clips": [
+          {
+            "type": "enhanced_image",
+            "source": "gs://realestate_prod/031e2742-1e20-4132-9553-5245bb3b6202/f56476b5-f051-4d65-8d47-82412012ec4d.mov@01:11",
+            "prompt": "",
+            "duration": 3
+          },
+          {
+            "type": "text",
+            "text": "Open-Concept Living",
+            "font_size": 70,
+            "color": "white",
+            "position": [
+              "center",
+              150
+            ],
+            "duration": 3
+          },
+          {
+            "type": "text",
+            "text": "BEFORE",
+            "font_size": 50,
+            "color": "lightgray",
+            "position": [
+              "center",
+              1750
+            ],
+            "duration": 3
+          },
+          {
+            "type": "image",
+            "source": "gs://real-estate-videos/test_videos/bounti-white-transparent.png",
+            "duration": 3,
+            "position": [
+              860,
+              1800
+            ],
+            "effects": [
+              {
+                "type": "resize",
+                "width": 200
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "composite",
+        "duration": 4,
+        "clips": [
+          {
+            "type": "enhanced_image",
+            "source": "gs://realestate_prod/031e2742-1e20-4132-9553-5245bb3b6202/f56476b5-f051-4d65-8d47-82412012ec4d.mov@01:11",
+            "prompt": "Replace the existing furniture and clutter with a modern, neutral-colored sectional sofa, a light-colored area rug over the LVP flooring, a sleek coffee table, and a large TV mounted on the far wall. The room should look clean, spacious, and professionally staged. Let warm, natural light fill the space from the windows. High-resolution, real estate photography.",
+            "duration": 4
+          },
+          {
+            "type": "text",
+            "text": "Open-Concept Living",
+            "font_size": 70,
+            "color": "white",
+            "position": [
+              "center",
+              150
+            ],
+            "duration": 4
+          },
+          {
+            "type": "text",
+            "text": "AFTER",
+            "font_size": 50,
+            "color": "white",
+            "position": [
+              "center",
+              1750
+            ],
+            "duration": 4
+          },
+          {
+            "type": "image",
+            "source": "gs://real-estate-videos/test_videos/bounti-white-transparent.png",
+            "duration": 4,
+            "position": [
+              860,
+              1800
+            ],
+            "effects": [
+              {
+                "type": "resize",
+                "width": 200
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "composite",
+        "duration": 3,
+        "clips": [
+          {
+            "type": "enhanced_image",
+            "source": "gs://realestate_prod/031e2742-1e20-4132-9553-5245bb3b6202/f56476b5-f051-4d65-8d47-82412012ec4d.mov@01:17",
+            "prompt": "",
+            "duration": 3
+          },
+          {
+            "type": "text",
+            "text": "Serene Primary Bedroom",
+            "font_size": 70,
+            "color": "white",
+            "position": [
+              "center",
+              150
+            ],
+            "duration": 3
+          },
+          {
+            "type": "text",
+            "text": "BEFORE",
+            "font_size": 50,
+            "color": "lightgray",
+            "position": [
+              "center",
+              1750
+            ],
+            "duration": 3
+          },
+          {
+            "type": "image",
+            "source": "gs://real-estate-videos/test_videos/bounti-white-transparent.png",
+            "duration": 3,
+            "position": [
+              860,
+              1800
+            ],
+            "effects": [
+              {
+                "type": "resize",
+                "width": 200
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "composite",
+        "duration": 4,
+        "clips": [
+          {
+            "type": "enhanced_image",
+            "source": "gs://realestate_prod/031e2742-1e20-4132-9553-5245bb3b6202/f56476b5-f051-4d65-8d47-82412012ec4d.mov@01:17",
+            "prompt": "Virtually stage this empty bedroom. Clean the stains from the carpet. Add a king-sized bed with a tufted headboard against the far wall, flanked by two matching nightstands with lamps. Place a large, light-colored area rug under the bed. The decor should be serene and luxurious, with neutral tones. Make the room look bright and spacious. 4K, photorealistic.",
+            "duration": 4
+          },
+          {
+            "type": "text",
+            "text": "Serene Primary Bedroom",
+            "font_size": 70,
+            "color": "white",
+            "position": [
+              "center",
+              150
+            ],
+            "duration": 4
+          },
+          {
+            "type": "text",
+            "text": "AFTER",
+            "font_size": 50,
+            "color": "white",
+            "position": [
+              "center",
+              1750
+            ],
+            "duration": 4
+          },
+          {
+            "type": "image",
+            "source": "gs://real-estate-videos/test_videos/bounti-white-transparent.png",
+            "duration": 4,
+            "position": [
+              860,
+              1800
+            ],
+            "effects": [
+              {
+                "type": "resize",
+                "width": 200
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "composite",
+        "duration": 3,
+        "clips": [
+          {
+            "type": "color",
+            "size": [
+              1080,
+              1920
+            ],
+            "color": [
+              20,
+              20,
+              25
+            ],
+            "duration": 3
+          },
+          {
+            "type": "text",
+            "text": "Modern Staging Concepts",
+            "font_size": 80,
+            "color": "white",
+            "align": "center",
+            "width": 900,
+            "position": [
+              "center",
+              "center"
+            ],
+            "duration": 2.5,
+            "start": 0.5,
+            "effects": [
+              {
+                "type": "fadein",
+                "duration": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "composite",
+        "duration": 6,
+        "clips": [
+          {
+            "type": "enhanced_image",
+            "source": "gs://realestate_prod/031e2742-1e20-4132-9553-5245bb3b6202/f56476b5-f051-4d65-8d47-82412012ec4d.mov@01:00",
+            "prompt": "Virtually update the kitchen to a modern style. Change the light brown cabinets to a sleek, dark grey. Replace the hardware with minimalist matte black handles. Add three contemporary bar stools with black metal legs at the island. Place a single large, modern white orchid in a black pot on the island.",
+            "duration": 6
+          },
+          {
+            "type": "text",
+            "text": "Modern Kitchen",
+            "font_size": 70,
+            "color": "white",
+            "position": [
+              "center",
+              150
+            ],
+            "duration": 6
+          },
+          {
+            "type": "image",
+            "source": "gs://real-estate-videos/test_videos/bounti-white-transparent.png",
+            "duration": 6,
+            "position": [
+              860,
+              1800
+            ],
+            "effects": [
+              {
+                "type": "resize",
+                "width": 200
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "composite",
+        "duration": 6,
+        "clips": [
+          {
+            "type": "enhanced_image",
+            "source": "gs://realestate_prod/031e2742-1e20-4132-9553-5245bb3b6202/f56476b5-f051-4d65-8d47-82412012ec4d.mov@01:11",
+            "prompt": "Virtually stage the living room with a modern aesthetic. Add a low-profile sectional sofa in a light grey fabric, a geometric area rug in black and white, and a minimalist coffee table made of concrete and dark wood. Mount a large abstract painting on the main wall. Ensure the space feels open and chic. Photorealistic, 4K.",
+            "duration": 6
+          },
+          {
+            "type": "text",
+            "text": "Modern Living",
+            "font_size": 70,
+            "color": "white",
+            "position": [
+              "center",
+              150
+            ],
+            "duration": 6
+          },
+          {
+            "type": "image",
+            "source": "gs://real-estate-videos/test_videos/bounti-white-transparent.png",
+            "duration": 6,
+            "position": [
+              860,
+              1800
+            ],
+            "effects": [
+              {
+                "type": "resize",
+                "width": 200
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "composite",
+        "duration": 5,
+        "clips": [
+          {
+            "type": "color",
+            "size": [
+              1080,
+              1920
+            ],
+            "color": [
+              20,
+              20,
+              25
+            ],
+            "duration": 5
+          },
+          {
+            "type": "text",
+            "text": "See The Potential",
+            "font_size": 90,
+            "color": "white",
+            "align": "center",
+            "width": 900,
+            "position": [
+              "center",
+              "center"
+            ],
+            "duration": 4.5,
+            "start": 0.5
+          },
+          {
+            "type": "image",
+            "source": "gs://real-estate-videos/test_videos/bounti-white-transparent.png",
+            "duration": 5,
+            "position": [
+              "center",
+              1700
+            ],
+            "effects": [
+              {
+                "type": "resize",
+                "width": 300
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

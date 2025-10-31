@@ -1,0 +1,407 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "WebsocketEvent",
+  "description": "Messages sent by the AgentLoop service to clients over WebSocket.",
+  "oneOf": [
+    {
+      "description": "Streamed reasoning or status updates from the agent.",
+      "type": "object",
+      "properties": {
+        "ReasoningUpdate": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "ReasoningUpdate"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "description": "Result of a tool execution initiated by the agent.",
+      "type": "object",
+      "properties": {
+        "ToolExecution": {
+          "$ref": "#/$defs/ToolResult"
+        }
+      },
+      "required": [
+        "ToolExecution"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "description": "Feedback from the background context evaluator.",
+      "type": "object",
+      "properties": {
+        "ContextFeedback": {
+          "$ref": "#/$defs/ContextEvaluatorFeedback"
+        }
+      },
+      "required": [
+        "ContextFeedback"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "description": "Current session status and optional time remaining.",
+      "type": "object",
+      "properties": {
+        "StatusUpdate": {
+          "$ref": "#/$defs/StatusResponse"
+        }
+      },
+      "required": [
+        "StatusUpdate"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "description": "The final synthesized answer generated at the end of the session.",
+      "type": "object",
+      "properties": {
+        "FinalAnswer": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "FinalAnswer"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "description": "Indicates session completion, timeout, or forced termination.",
+      "type": "object",
+      "properties": {
+        "SessionTerminated": {
+          "type": "object",
+          "properties": {
+            "session_id": {
+              "description": "The ID of the terminated session.",
+              "type": "string"
+            },
+            "reason": {
+              "description": "An optional reason for the termination.",
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "session_id"
+          ]
+        }
+      },
+      "required": [
+        "SessionTerminated"
+      ],
+      "additionalProperties": false
+    }
+  ],
+  "$defs": {
+    "ToolResult": {
+      "description": "Represents the result status and details of a tool execution.",
+      "oneOf": [
+        {
+          "description": "Indicates successful execution with tool-specific outcome details.",
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string",
+              "const": "Success"
+            },
+            "details": {
+              "description": "Enum detailing the specific outcomes of successfully executed tools.",
+              "type": "object",
+              "oneOf": [
+                {
+                  "description": "Outcome for the 'search' tool.",
+                  "type": "object",
+                  "properties": {
+                    "tool_type": {
+                      "type": "string",
+                      "const": "Search"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "query": {
+                          "type": "string"
+                        },
+                        "snippets": {
+                          "description": "The search result snippets or summary returned by the handler.",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "query",
+                        "snippets"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "tool_type",
+                    "data"
+                  ]
+                },
+                {
+                  "description": "Outcome for the 'browse' tool.",
+                  "type": "object",
+                  "properties": {
+                    "tool_type": {
+                      "type": "string",
+                      "const": "Browse"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "url": {
+                          "type": "string"
+                        },
+                        "content_preview": {
+                          "description": "A preview of the fetched content.",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "url",
+                        "content_preview"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "tool_type",
+                    "data"
+                  ]
+                },
+                {
+                  "description": "Outcome for the 'save_context' tool.",
+                  "type": "object",
+                  "properties": {
+                    "tool_type": {
+                      "type": "string",
+                      "const": "SaveContext"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "source": {
+                          "description": "Optional source identifier for the saved content.",
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "content_length": {
+                          "description": "Length of the content that was intended to be saved.",
+                          "type": "integer",
+                          "format": "uint",
+                          "minimum": 0
+                        }
+                      },
+                      "required": [
+                        "content_length"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "tool_type",
+                    "data"
+                  ]
+                },
+                {
+                  "description": "Generic outcome for tools not having a specific variant.",
+                  "type": "object",
+                  "properties": {
+                    "tool_type": {
+                      "type": "string",
+                      "const": "Generic"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "tool_name": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "description": "The raw string result returned by the handler.",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "tool_name",
+                        "result"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "tool_type",
+                    "data"
+                  ]
+                }
+              ]
+            }
+          },
+          "required": [
+            "status",
+            "details"
+          ]
+        },
+        {
+          "description": "Indicates failed execution with the tool name and error message.",
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string",
+              "const": "Failure"
+            },
+            "details": {
+              "type": "object",
+              "properties": {
+                "tool_name": {
+                  "type": "string"
+                },
+                "error": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "tool_name",
+                "error"
+              ]
+            }
+          },
+          "required": [
+            "status",
+            "details"
+          ]
+        }
+      ]
+    },
+    "ContextEvaluatorFeedback": {
+      "type": "object",
+      "properties": {
+        "relevance_score": {
+          "description": "A score indicating the relevance or sufficiency of the current context.\n Ranges from 0.0 (insufficient) to 1.0 (sufficient).",
+          "type": "number",
+          "format": "double"
+        },
+        "suggestions": {
+          "description": "A list of suggested next steps for the agent based on the context analysis.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "needs_update": {
+          "description": "Flag indicating whether the context is deemed insufficient or needs updating.\n True if updates/clarifications are needed, false otherwise.",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "relevance_score",
+        "suggestions",
+        "needs_update"
+      ]
+    },
+    "StatusResponse": {
+      "description": "Response payload for the session status endpoint.",
+      "type": "object",
+      "properties": {
+        "session_id": {
+          "description": "The unique identifier of the session.",
+          "type": "string"
+        },
+        "status": {
+          "description": "The current status of the session.",
+          "$ref": "#/$defs/SessionStatus"
+        },
+        "time_remaining": {
+          "description": "Optional remaining time until the session expires, in seconds.\n Uses a custom serializer/deserializer if needed (assumed crate::utils::serde_option_duration_as_secs exists).",
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Duration"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "session_id",
+        "status"
+      ]
+    },
+    "SessionStatus": {
+      "description": "Represents the status of an agent session.",
+      "oneOf": [
+        {
+          "description": "The session is initializing or waiting to start processing.",
+          "type": "string",
+          "const": "Pending"
+        },
+        {
+          "description": "The session is actively processing the user request.\n Includes optional progress information.",
+          "type": "object",
+          "properties": {
+            "Running": {
+              "type": "object",
+              "properties": {
+                "progress": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              }
+            }
+          },
+          "required": [
+            "Running"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "description": "The session has completed successfully.",
+          "type": "string",
+          "const": "Completed"
+        },
+        {
+          "description": "The session encountered an error during processing.",
+          "type": "string",
+          "const": "Error"
+        },
+        {
+          "description": "The session was interrupted by user request.",
+          "type": "string",
+          "const": "Interrupted"
+        },
+        {
+          "description": "The session timed out due to inactivity.",
+          "type": "string",
+          "const": "Timeout"
+        }
+      ]
+    },
+    "Duration": {
+      "type": "object",
+      "properties": {
+        "secs": {
+          "type": "integer",
+          "format": "uint64",
+          "minimum": 0
+        },
+        "nanos": {
+          "type": "integer",
+          "format": "uint32",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "secs",
+        "nanos"
+      ]
+    }
+  }
+}

@@ -1,0 +1,279 @@
+ perform analysis of run_research_loop.rs it is wrong right now - these are the logs Summarization LLM Typed Response Received (30               │
+[2025-04-24T20:10:11Z INFO  agentloop::evaluator::run_research_loop] History compacted successfully for session                         │
+[2025-04-24T20:10:11Z INFO  agentloop::evaluator::run_research_loop] Calling LLM for session               │
+Calling typed LLM with prompt (first 100 chars): IMPORTANT: Save all key findings, conclusions, and        │
+Typed LLM Response Received: user_answer='Okay, I need to search for information about     │
+│ 'bounti.ai'. I'll perform a search and save the finding...', agent_reasoning='The user is asking for information about 'bounti.ai'. This        │
+[2025-04-24T20:10:17Z INFO  agentloop::evaluator::run_research_loop] LLM response for session     │
+│ 294cc4d7-2ff4-4bd8-9e68-1a9f4235c0bd: User Answer: 'Okay, I need to search for information about 'bounti.ai'. I'll perform a search and save    │
+│ the finding...', Agent Reasoning: 'The user is asking for information about 'bounti.ai'. This requires external information retrieval. ...',    │
+        agent_reasoning: "The user is asking for information about 'bounti.ai'. This requires external          │
+│ information retrieval. I need to use the search tool to find out what bounti.ai is. The findings will then be saved to context as requested by  │
+        user_answer: "Okay, I need to search for information about 'bounti.ai'. I'll perform a search and save the     │
+                parameters: Search {
+[2025-04-24T20:10:17Z INFO  agentloop::evaluator::run_research_loop]
+[2025-04-24T20:10:17Z INFO  agentloop::evaluator::run_research_loop]   │bd
+│ Dispatching tool 'search' for session 294cc4d7-2ff4-4bd8-9e68-1a9f4235c0bd with params: Search { query: "what is bounti.ai"                     │
+[2025-04-24T20:10:18Z INFO  agentloop::evaluator::run_research_loop] Tool 'search' executed successfully for session                          │
+│ 294cc4d7-2ff4-4bd8-9e68-1a9f4235c0bd. Output: '{"searchParameters":{"q":"what is                                                                │
+[2025-04-24T20:10:18Z INFO  agentloop::evaluator::run_research_loop]     │
+Calling typed unified LLM for summarization (prompt 3609                     │
+[2025-04-24T20:10:21Z INFO  agentloop::evaluator::run_research_loop] History   │
+[2025-04-24T20:10:21Z INFO  agentloop::evaluator::run_research_loop]    │
+Calling typed LLM with prompt (first 100 chars): IMPORTANT: Save all key findings, │
+Typed LLM Response Received: user_answer='Okay, I need to search for      │
+│ information about 'bounti.ai'. I'll perform a search and save the finding...', agent_reasoning='The user is asking for information about        │
+[2025-04-24T20:10:28Z INFO  agentloop::evaluator::run_research_loop] LLM        │
+│ response for session 294cc4d7-2ff4-4bd8-9e68-1a9f4235c0bd: User Answer: 'Okay, I need to search for information about 'bounti.ai'. I'll perform │
+│  a search and save the finding...', Agent Reasoning: 'The user is asking for information about 'bounti.ai'. This requires external information  │
+        agent_reasoning: "The user is asking for information about 'bounti.ai'. This requires  │
+│ external information retrieval. I need to use the search tool to find out what bounti.ai is. The findings will then be saved to context as      │
+        user_answer: "Okay, I need to search for information about 'bounti.ai'. I'll perform a search and │
+                parameters: Search {
+[2025-04-24T20:10:28Z INFO                                 │
+[2025-04-24T20:10:28Z INFO    │earch_loop] LLM requested 1 actions for session 294cc4d7-2ff4-4bd8-9e68-1a9f4235c0bd
+│ agentloop::evaluator::run_research_loop] Dispatching tool 'search' for session 294cc4d7-2ff4-4bd8-9e68-1a9f4235c0bd with params: Search {       │
+[2025-04-24T20:10:29Z INFO  agentloop::evaluator::run_research_loop] Tool 'search' executed successfully for       │
+│ session 294cc4d7-2ff4-4bd8-9e68-1a9f4235c0bd. Output: '{"searchParameters":{"q":"what is                                                        │
+[2025-04-24T20:10:29Z INFO  agentloop::evaluator::run_research_loop]     │
+Calling typed unified LLM for summarization (prompt 3884                     │
+[2025-04-24T20:10:31Z INFO  agentloop::evaluator::run_research_loop] History   │
+[2025-04-24T20:10:31Z INFO  agentloop::evaluator::run_research_loop]    │
+Calling typed LLM with prompt (first 100 chars): IMPORTANT: Save all key findings, │
+Typed LLM Response Received: user_answer='Okay, I need to search for      │
+│ information about 'bounti.ai'. I'll perform a search and save the finding...', agent_reasoning='The user is asking for information about        │
+[2025-04-24T20:10:38Z INFO  agentloop::evaluator::run_research_loop] LLM        │
+│ response for session 294cc4d7-2ff4-4bd8-9e68-1a9f4235c0bd: User Answer: 'Okay, I need to search for information about 'bounti.ai'. I'll perform │
+│  a search and save the finding...', Agent Reasoning: 'The user is asking for information about 'bounti.ai'. This requires external information  │
+        agent_reasoning: "The user is asking for information about 'bounti.ai'. This requires  │
+│ external information retrieval. I need to use the search tool to find out what bounti.ai is. The findings will then be saved to context as      │
+        user_answer: "Okay, I need to search for information about 'bounti.ai'. I'll perform a search and │
+                parameters: Search {
+[2025-04-24T20:10:38Z INFO                                 │
+[2025-04-24T20:10:38Z INFO    │earch_loop] LLM requested 1 actions for session 294cc4d7-2ff4-4bd8-9e68-1a9f4235c0bd
+│ agentloop::evaluator::run_research_loop] Dispatching tool 'search' for session 294cc4d7-2ff4-4bd8-9e68-1a9f4235c0bd with params: Search {       │
+[2025-04-24T20:10:38Z INFO  agentloop::evaluator::run_research_loop] Tool 'search' executed successfully for       │
+│ session 294cc4d7-2ff4-4bd8-9e68-1a9f4235c0bd. Output: '{"searchParameters":{"q":"what is                                                        │
+[2025-04-24T20:10:38Z INFO  agentloop::evaluator::run_research_loop]     │
+Calling typed unified LLM for summarization (prompt 3857                     │
+[2025-04-24T20:10:41Z INFO  agentloop::evaluator::run_research_loop] History   │
+[2025-04-24T20:10:41Z INFO  agentloop::evaluator::run_research_loop]    │
+Calling typed LLM with prompt (first 100 chars): IMPORTANT: Save all key findings, │
+WebSocket session stopping for SessionId:                                 │
+[2025-04-24T20:10:44Z INFO  actix_web::middleware::logger] 127.0.0.1 "GET                                  │
+│ /session/294cc4d7-2ff4-4bd8-9e68-1a9f4235c0bd/stream HTTP/1.1" 101 11623 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)                   │
+Typed LLM Response Received: user_answer='Okay, I need to      │/537.36" 35.007364
+│ search for information about 'bounti.ai'. I'll perform a search and save the finding...', agent_reasoning='The user is asking for information   │
+[2025-04-24T20:10:47Z INFO  agentloop::evaluator::run_research_loop] LLM  │
+│ response for session 294cc4d7-2ff4-4bd8-9e68-1a9f4235c0bd: User Answer: 'Okay, I need to search for information about 'bounti.ai'. I'll perform │
+│  a search and save the finding...', Agent Reasoning: 'The user is asking for information about 'bounti.ai'. This requires external information  │
+        agent_reasoning: "The user is asking for information about 'bounti.ai'. This requires  │
+│ external information retrieval. I need to use the search tool to find out what bounti.ai is. The findings will then be saved to context as      │
+        user_answer: "Okay, I need to search for information about 'bounti.ai'. I'll perform a search and │
+                parameters: Search {
+[2025-04-24T20:10:47Z INFO                                 │
+[2025-04-24T20:10:47Z INFO    │earch_loop] LLM requested 1 actions for session 294cc4d7-2ff4-4bd8-9e68-1a9f4235c0bd
+│ agentloop::evaluator::run_research_loop] Dispatching tool 'search' for session 294cc4d7-2ff4-4bd8-9e68-1a9f4235c0bd with params: Search {       │
+[2025-04-24T20:10:47Z INFO  agentloop::evaluator::run_research_loop] Tool 'search' executed successfully for       │
+│ session 294cc4d7-2ff4-4bd8-9e68-1a9f4235c0bd. Output: '{"searchParameters":{"q":"what is                                                        │
+[2025-04-24T20:10:47Z INFO  agentloop::evaluator::run_research_loop]     │
+Calling typed unified LLM for summarization (prompt 3900                     │
+[2025-04-24T20:10:50Z INFO  agentloop::evaluator::run_research_loop] History   │
+[2025-04-24T20:10:50Z INFO  agentloop::evaluator::run_research_loop]    │
+Calling typed LLM with prompt (first 100 chars): IMPORTANT: Save all key findings, │
+Typednding sessions found.ding sessions...o the session context usin...
+│ LLM Response Received: user_answer='Okay, I need to search for information about 'bounti.ai'. I'll perform a search and save the finding...',   │
+[2025-04-24T20:10:56Z │user is asking for information about 'bounti.ai'. This requires external information retrieval. ...'
+│ INFO  agentloop::evaluator::run_research_loop] LLM response for session 294cc4d7-2ff4-4bd8-9e68-1a9f4235c0bd: User Answer: 'Okay, I need to     │
+│ search for information about 'bounti.ai'. I'll perform a search and save the finding...', Agent Reasoning: 'The user is asking for information  │
+        agent_reasoning: "The user is    │l information retrieval. ...', Full answer: LlmAgentResponse {
+│ asking for information about 'bounti.ai'. This requires external information retrieval. I need to use the search tool to find out what          │
+        user_answer: "Okay, I need to search  │ to context as requested by the task instructions.",
+                  │ice {'bounti.ai'. I'll perform a search and save the findings.",
+        ],  },  },  query: "what is bounti.ai",
+[2025-04-24T20:10:56Z INFO  agentloop::evaluator::run_research_loop] LLM requested 1 actions for session                                     │
+[2025-04-24T20:10:56Z INFO  agentloop::evaluator::run_research_loop] Dispatching tool 'search' for session │
+[2025-04-24T20:10:57Z INFO                              │h { query: "what is bounti.ai" }
+user
+perform analysis of run_research_loop.rs it is wrong right now - these are the logs Summarization LLM Typed Response Received (30 chars).
+[2025-04-24T20:10:11Z INFO  agentloop::evaluator::run_research_loop] History compacted successfully for session
+294cc4d7-2ff4-4bd8-9e68-1a9f4235c0bd
+[2025-04-24T20:10:11Z INFO  agentloop::evaluator::run_research_loop] Calling LLM for session 294cc4d7-2ff4-4bd8-9e68-1a9f4235c0bd
+Calling typed LLM with prompt (first 100 chars): IMPORTANT: Save all key findings, conclusions, and important data points to the session context
+usin...
+Typed LLM Response Received: user_answer='Okay, I need to search for information about 'bounti.ai'. I'll perform a search and save the finding...',
+ agent_reasoning='The user is asking for information about 'bounti.ai'. This requires external information retrieval. ...'
+[2025-04-24T20:10:17Z INFO  agentloop::evaluator::run_research_loop] LLM response for session 294cc4d7-2ff4-4bd8-9e68-1a9f4235c0bd: User Answer:
+'Okay, I need to search for information about 'bounti.ai'. I'll perform a search and save the finding...', Agent Reasoning: 'The user is asking for
+ information about 'bounti.ai'. This requires external information retrieval. ...', Full answer: LlmAgentResponse {
+        agent_reasoning: "The user is asking for information about 'bounti.ai'. This requires external information retrieval. I need to use the
+search tool to find out what bounti.ai is. The findings will then be saved to context as requested by the task instructions.",
+        user_answer: "Okay, I need to search for information about 'bounti.ai'. I'll perform a search and save the findings.",
+        actions: [
+            ToolChoice {
+                name: "search",
+                parameters: Search {
+                    query: "what is bounti.ai",
+                },
+            },
+        ],
+    }
+[2025-04-24T20:10:17Z INFO  agentloop::evaluator::run_research_loop] LLM requested 1 actions for session 294cc4d7-2ff4-4bd8-9e68-1a9f4235c0bd
+[2025-04-24T20:10:17Z INFO  agentloop::evaluator::run_research_loop] Dispatching tool 'search' for session 294cc4d7-2ff4-4bd8-9e68-1a9f4235c0bd
+with params: Search { query: "what is bounti.ai" }
+[2025-04-24T20:10:18Z INFO  agentloop::evaluator::run_research_loop] Tool 'search' executed successfully for session
+294cc4d7-2ff4-4bd8-9e68-1a9f4235c0bd. Output: '{"searchParameters":{"q":"what is
+bounti.ai","type":"search","engine":"google"},"knowledgeGraph":{"t...'
+[2025-04-24T20:10:18Z INFO  agentloop::evaluator::run_research_loop] Compaction needed for session 294cc4d7-2ff4-4bd8-9e68-1a9f4235c0bd
+Calling typed unified LLM for summarization (prompt 3609 chars)...
+Summarization LLM Typed Response Received (226 chars).
+[2025-04-24T20:10:21Z INFO  agentloop::evaluator::run_research_loop] History compacted successfully for session
+294cc4d7-2ff4-4bd8-9e68-1a9f4235c0bd
+[2025-04-24T20:10:21Z INFO  agentloop::evaluator::run_research_loop] Calling LLM for session 294cc4d7-2ff4-4bd8-9e68-1a9f4235c0bd
+Calling typed LLM with prompt (first 100 chars): IMPORTANT: Save all key findings, conclusions, and important data points to the session context
+usin...
+Typed LLM Response Received: user_answer='Okay, I need to search for information about 'bounti.ai'. I'll perform a search and save the finding...',
+ agent_reasoning='The user is asking for information about 'bounti.ai'. This requires external information retrieval. ...'
+[2025-04-24T20:10:28Z INFO  agentloop::evaluator::run_research_loop] LLM response for session 294cc4d7-2ff4-4bd8-9e68-1a9f4235c0bd: User Answer:
+'Okay, I need to search for information about 'bounti.ai'. I'll perform a search and save the finding...', Agent Reasoning: 'The user is asking for
+ information about 'bounti.ai'. This requires external information retrieval. ...', Full answer: LlmAgentResponse {
+        agent_reasoning: "The user is asking for information about 'bounti.ai'. This requires external information retrieval. I need to use the
+search tool to find out what bounti.ai is. The findings will then be saved to context as requested by the task instructions.",
+        user_answer: "Okay, I need to search for information about 'bounti.ai'. I'll perform a search and save the findings.",
+        actions: [
+            ToolChoice {
+                name: "search",
+                parameters: Search {
+                    query: "what is bounti.ai",
+                },
+            },
+        ],
+    }
+[2025-04-24T20:10:28Z INFO  agentloop::evaluator::run_research_loop] LLM requested 1 actions for session 294cc4d7-2ff4-4bd8-9e68-1a9f4235c0bd
+[2025-04-24T20:10:28Z INFO  agentloop::evaluator::run_research_loop] Dispatching tool 'search' for session 294cc4d7-2ff4-4bd8-9e68-1a9f4235c0bd
+with params: Search { query: "what is bounti.ai" }
+[2025-04-24T20:10:29Z INFO  agentloop::evaluator::run_research_loop] Tool 'search' executed successfully for session
+294cc4d7-2ff4-4bd8-9e68-1a9f4235c0bd. Output: '{"searchParameters":{"q":"what is
+bounti.ai","type":"search","engine":"google"},"knowledgeGraph":{"t...'
+[2025-04-24T20:10:29Z INFO  agentloop::evaluator::run_research_loop] Compaction needed for session 294cc4d7-2ff4-4bd8-9e68-1a9f4235c0bd
+Calling typed unified LLM for summarization (prompt 3884 chars)...
+Summarization LLM Typed Response Received (168 chars).
+[2025-04-24T20:10:31Z INFO  agentloop::evaluator::run_research_loop] History compacted successfully for session
+294cc4d7-2ff4-4bd8-9e68-1a9f4235c0bd
+[2025-04-24T20:10:31Z INFO  agentloop::evaluator::run_research_loop] Calling LLM for session 294cc4d7-2ff4-4bd8-9e68-1a9f4235c0bd
+Calling typed LLM with prompt (first 100 chars): IMPORTANT: Save all key findings, conclusions, and important data points to the session context
+usin...
+Typed LLM Response Received: user_answer='Okay, I need to search for information about 'bounti.ai'. I'll perform a search and save the finding...',
+ agent_reasoning='The user is asking for information about 'bounti.ai'. This requires external information retrieval. ...'
+[2025-04-24T20:10:38Z INFO  agentloop::evaluator::run_research_loop] LLM response for session 294cc4d7-2ff4-4bd8-9e68-1a9f4235c0bd: User Answer:
+'Okay, I need to search for information about 'bounti.ai'. I'll perform a search and save the finding...', Agent Reasoning: 'The user is asking for
+ information about 'bounti.ai'. This requires external information retrieval. ...', Full answer: LlmAgentResponse {
+        agent_reasoning: "The user is asking for information about 'bounti.ai'. This requires external information retrieval. I need to use the
+search tool to find out what bounti.ai is. The findings will then be saved to context as requested by the task instructions.",
+        user_answer: "Okay, I need to search for information about 'bounti.ai'. I'll perform a search and save the findings.",
+        actions: [
+            ToolChoice {
+                name: "search",
+                parameters: Search {
+                    query: "what is bounti.ai",
+                },
+            },
+        ],
+    }
+[2025-04-24T20:10:38Z INFO  agentloop::evaluator::run_research_loop] LLM requested 1 actions for session 294cc4d7-2ff4-4bd8-9e68-1a9f4235c0bd
+[2025-04-24T20:10:38Z INFO  agentloop::evaluator::run_research_loop] Dispatching tool 'search' for session 294cc4d7-2ff4-4bd8-9e68-1a9f4235c0bd
+with params: Search { query: "what is bounti.ai" }
+[2025-04-24T20:10:38Z INFO  agentloop::evaluator::run_research_loop] Tool 'search' executed successfully for session
+294cc4d7-2ff4-4bd8-9e68-1a9f4235c0bd. Output: '{"searchParameters":{"q":"what is
+bounti.ai","type":"search","engine":"google"},"knowledgeGraph":{"t...'
+[2025-04-24T20:10:38Z INFO  agentloop::evaluator::run_research_loop] Compaction needed for session 294cc4d7-2ff4-4bd8-9e68-1a9f4235c0bd
+Calling typed unified LLM for summarization (prompt 3857 chars)...
+Summarization LLM Typed Response Received (165 chars).
+[2025-04-24T20:10:41Z INFO  agentloop::evaluator::run_research_loop] History compacted successfully for session
+294cc4d7-2ff4-4bd8-9e68-1a9f4235c0bd
+[2025-04-24T20:10:41Z INFO  agentloop::evaluator::run_research_loop] Calling LLM for session 294cc4d7-2ff4-4bd8-9e68-1a9f4235c0bd
+Calling typed LLM with prompt (first 100 chars): IMPORTANT: Save all key findings, conclusions, and important data points to the session context
+usin...
+WebSocket session stopping for SessionId: 294cc4d7-2ff4-4bd8-9e68-1a9f4235c0bd
+[2025-04-24T20:10:44Z INFO  actix_web::middleware::logger] 127.0.0.1 "GET /session/294cc4d7-2ff4-4bd8-9e68-1a9f4235c0bd/stream HTTP/1.1" 101 11623
+"-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36" 35.007364
+Typed LLM Response Received: user_answer='Okay, I need to search for information about 'bounti.ai'. I'll perform a search and save the finding...',
+ agent_reasoning='The user is asking for information about 'bounti.ai'. This requires external information retrieval. ...'
+[2025-04-24T20:10:47Z INFO  agentloop::evaluator::run_research_loop] LLM response for session 294cc4d7-2ff4-4bd8-9e68-1a9f4235c0bd: User Answer:
+'Okay, I need to search for information about 'bounti.ai'. I'll perform a search and save the finding...', Agent Reasoning: 'The user is asking for
+ information about 'bounti.ai'. This requires external information retrieval. ...', Full answer: LlmAgentResponse {
+        agent_reasoning: "The user is asking for information about 'bounti.ai'. This requires external information retrieval. I need to use the
+search tool to find out what bounti.ai is. The findings will then be saved to context as requested by the task instructions.",
+        user_answer: "Okay, I need to search for information about 'bounti.ai'. I'll perform a search and save the findings.",
+        actions: [
+            ToolChoice {
+                name: "search",
+                parameters: Search {
+                    query: "what is bounti.ai",
+                },
+            },
+        ],
+    }
+[2025-04-24T20:10:47Z INFO  agentloop::evaluator::run_research_loop] LLM requested 1 actions for session 294cc4d7-2ff4-4bd8-9e68-1a9f4235c0bd
+[2025-04-24T20:10:47Z INFO  agentloop::evaluator::run_research_loop] Dispatching tool 'search' for session 294cc4d7-2ff4-4bd8-9e68-1a9f4235c0bd
+with params: Search { query: "what is bounti.ai" }
+[2025-04-24T20:10:47Z INFO  agentloop::evaluator::run_research_loop] Tool 'search' executed successfully for session
+294cc4d7-2ff4-4bd8-9e68-1a9f4235c0bd. Output: '{"searchParameters":{"q":"what is
+bounti.ai","type":"search","engine":"google"},"knowledgeGraph":{"t...'
+[2025-04-24T20:10:47Z INFO  agentloop::evaluator::run_research_loop] Compaction needed for session 294cc4d7-2ff4-4bd8-9e68-1a9f4235c0bd
+Calling typed unified LLM for summarization (prompt 3900 chars)...
+Summarization LLM Typed Response Received (255 chars).
+[2025-04-24T20:10:50Z INFO  agentloop::evaluator::run_research_loop] History compacted successfully for session
+294cc4d7-2ff4-4bd8-9e68-1a9f4235c0bd
+[2025-04-24T20:10:50Z INFO  agentloop::evaluator::run_research_loop] Calling LLM for session 294cc4d7-2ff4-4bd8-9e68-1a9f4235c0bd
+Calling typed LLM with prompt (first 100 chars): IMPORTANT: Save all key findings, conclusions, and important data points to the session context
+usin...
+Evaluator checking for pending sessions...
+No pending sessions found.
+Typed LLM Response Received: user_answer='Okay, I need to search for information about 'bounti.ai'. I'll perform a search and save the finding...',
+ agent_reasoning='The user is asking for information about 'bounti.ai'. This requires external information retrieval. ...'
+[2025-04-24T20:10:56Z INFO  agentloop::evaluator::run_research_loop] LLM response for session 294cc4d7-2ff4-4bd8-9e68-1a9f4235c0bd: User Answer:
+'Okay, I need to search for information about 'bounti.ai'. I'll perform a search and save the finding...', Agent Reasoning: 'The user is asking for
+ information about 'bounti.ai'. This requires external information retrieval. ...', Full answer: LlmAgentResponse {
+        agent_reasoning: "The user is asking for information about 'bounti.ai'. This requires external information retrieval. I need to use the
+search tool to find out what bounti.ai is. The findings will then be saved to context as requested by the task instructions.",
+        user_answer: "Okay, I need to search for information about 'bounti.ai'. I'll perform a search and save the findings.",
+        actions: [
+            ToolChoice {
+                name: "search",
+                parameters: Search {
+                    query: "what is bounti.ai",
+                },
+            },
+        ],
+    }
+[2025-04-24T20:10:56Z INFO  agentloop::evaluator::run_research_loop] LLM requested 1 actions for session 294cc4d7-2ff4-4bd8-9e68-1a9f4235c0bd
+[2025-04-24T20:10:56Z INFO  agentloop::evaluator::run_research_loop] Dispatching tool 'search' for session 294cc4d7-2ff4-4bd8-9e68-1a9f4235c0bd
+with params: Search { query: "what is bounti.ai" }
+[2025-04-24T20:10:57Z INFO  agentloop::evaluator::run_research_loop] Tool 'search' executed successfully for session
+294cc4d7-2ff4-4bd8-9e68-1a9f4235c0bd. Output: '{"searchParameters":{"q":"what is
+bounti.ai","type":"search","engine":"google"},"knowledgeGraph":{"t...'
+[2025-04-24T20:10:57Z INFO  agentloop::evaluator::run_research_loop] Compaction needed for session 294cc4d7-2ff4-4bd8-9e68-1a9f4235c0bd
+Calling typed unified LLM for summarization (prompt 3913 chars)...
+Summarization LLM Typed Response Received (267 chars).
+[2025-04-24T20:10:59Z INFO  agentloop::evaluator::run_research_loop] History compacted successfully for session
+294cc4d7-2ff4-4bd8-9e68-1a9f4235c0bd
+[2025-04-24T20:10:59Z INFO  agentloop::evaluator::run_research_loop] Calling LLM for session 294cc4d7-2ff4-4bd8-9e68-1a9f4235c0bd
+Calling typed LLM with prompt (first 100 chars): IMPORTANT: Save all key findings, conclusions, and important data points to the session context
+usin...
+ also it is not sharing useful updates as websocket messages - user_answers should be sent as a ws message further more the compaction logic is
+trigger when the conversation has just started and as you can see in the logs the agent repeats the same search - also there should be multiple
+actions per one agent response for example if it can see multiple snippets worth browsing it should do it - at the end please coordinate the
+messages with the frontend and update handling of the messages in the frontend too -
+
+    system
+    ⚠️  Connection closed prematurely while waiting for the model. Please try again.
+user
+[vite] connecting...
+SettingsToolbar.jsx:34 Uncaught Error: @vitejs/plugin-react can't detect preamble. Something is wrong.
+    at SettingsToolbar.jsx:34:8
+(anonymous) @ SettingsToolbar.jsx:34Understand this error
+client:618 [vite] connected. fix this in crates/agentloop/frontend
+
+    command
+

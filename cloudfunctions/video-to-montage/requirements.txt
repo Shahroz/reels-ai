@@ -1,0 +1,16 @@
+# Framework
+Flask
+functions-framework
+
+# Google Cloud
+google-cloud-storage
+google-cloud-logging
+google-auth
+
+# AI
+google-genai
+
+# declarativemoviepy dependencies
+git+https://github.com/Zulko/moviepy.git
+numpy<2.0
+Pillow

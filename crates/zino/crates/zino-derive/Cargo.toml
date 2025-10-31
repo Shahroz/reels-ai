@@ -1,0 +1,26 @@
+[package]
+name = "zino-derive"
+description = "Derived traits for zino."
+version = "0.32.2"
+readme = "README.md"
+documentation = "https://docs.rs/zino-derive"
+homepage = { workspace = true }
+repository = { workspace = true }
+edition = { workspace = true }
+rust-version = { workspace = true }
+license = { workspace = true }
+
+[lib]
+proc-macro = true
+
+[dependencies]
+proc-macro2 = "1.0.94"
+quote = "1.0.40"
+syn = "2.0.100"
+convert_case = { workspace = true }
+zino-core = { workspace = true }
+zino-orm = { workspace = true }
+
+[lints.rust]
+unsafe_code = "forbid"
+unreachable_pub = "deny"

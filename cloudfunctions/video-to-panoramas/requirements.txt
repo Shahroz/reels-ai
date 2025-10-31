@@ -1,0 +1,5 @@
+google-cloud-storage==2.18.2
+opencv-python-headless==4.9.0.80
+numpy==1.26.4
+Flask==3.0.3
+google-cloud-logging==3.11.3

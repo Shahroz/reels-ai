@@ -1,0 +1,8 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/agentloop",
+    "crates/reels/backend"
+]
+
+# Note: embedded-studio/backend is excluded as it has its own independent build pipeline

@@ -1,0 +1,741 @@
+{
+  "output_path": "gs://realestate_prod/031e2742-1e20-4132-9553-5245bb3b6202/f56476b5-f051-4d65-8d47-82412012ec4d-montage-4-watermark.mov",
+  "size": [
+    1920,
+    1080
+  ],
+  "fps": 30,
+  "audio": {
+    "type": "audio",
+    "source": "gs://real-estate-videos/montages_music/On The Flip - The Grey Room _ Density & Time.mp3",
+    "effects": [
+      {
+        "type": "multiply_volume",
+        "factor": 0.4
+      },
+      {
+        "type": "audio_fadein",
+        "duration": 2
+      },
+      {
+        "type": "audio_fadeout",
+        "duration": 5
+      }
+    ]
+  },
+  "clip": {
+    "type": "composite",
+    "clips": [
+      {
+        "type": "concatenate",
+        "transition": {
+          "type": "crossfade",
+          "duration": 0.5
+        },
+        "clips": [
+          {
+            "type": "composite",
+            "duration": 4,
+            "size": [
+              1920,
+              1080
+            ],
+            "clips": [
+              {
+                "type": "color",
+                "size": [
+                  1920,
+                  1080
+                ],
+                "color": [
+                  25,
+                  25,
+                  40
+                ],
+                "duration": 4
+              },
+              {
+                "type": "text",
+                "text": "A Modern & Spacious Home",
+                "font_size": 90,
+                "color": "white",
+                "position": [
+                  "center",
+                  "center"
+                ],
+                "start": 0.5,
+                "duration": 3,
+                "effects": [
+                  {
+                    "type": "fadein",
+                    "duration": 1
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "composite",
+            "duration": 5,
+            "clips": [
+              {
+                "type": "color",
+                "size": [
+                  1920,
+                  1080
+                ],
+                "color": [
+                  0,
+                  0,
+                  0
+                ],
+                "duration": 5
+              },
+              {
+                "type": "video",
+                "source": "gs://realestate_prod/031e2742-1e20-4132-9553-5245bb3b6202/f56476b5-f051-4d65-8d47-82412012ec4d.mov",
+                "position": [
+                  "center",
+                  "center"
+                ],
+                "effects": [
+                  {
+                    "type": "subclip",
+                    "t_start": 57,
+                    "t_end": 63
+                  },
+                  {
+                    "type": "multiply_speed",
+                    "factor": 1.2
+                  },
+                  {
+                    "type": "resize",
+                    "width": 1920
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "composite",
+            "duration": 3.33,
+            "clips": [
+              {
+                "type": "color",
+                "size": [
+                  1920,
+                  1080
+                ],
+                "color": [
+                  0,
+                  0,
+                  0
+                ],
+                "duration": 3.33
+              },
+              {
+                "type": "video",
+                "source": "gs://realestate_prod/031e2742-1e20-4132-9553-5245bb3b6202/f56476b5-f051-4d65-8d47-82412012ec4d.mov",
+                "position": [
+                  "center",
+                  "center"
+                ],
+                "effects": [
+                  {
+                    "type": "subclip",
+                    "t_start": 69,
+                    "t_end": 73
+                  },
+                  {
+                    "type": "multiply_speed",
+                    "factor": 1.2
+                  },
+                  {
+                    "type": "resize",
+                    "width": 1920
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "composite",
+            "duration": 2.5,
+            "clips": [
+              {
+                "type": "color",
+                "size": [
+                  1920,
+                  1080
+                ],
+                "color": [
+                  0,
+                  0,
+                  0
+                ],
+                "duration": 2.5
+              },
+              {
+                "type": "video",
+                "source": "gs://realestate_prod/031e2742-1e20-4132-9553-5245bb3b6202/f56476b5-f051-4d65-8d47-82412012ec4d.mov",
+                "position": [
+                  "center",
+                  "center"
+                ],
+                "effects": [
+                  {
+                    "type": "subclip",
+                    "t_start": 78,
+                    "t_end": 81
+                  },
+                  {
+                    "type": "multiply_speed",
+                    "factor": 1.2
+                  },
+                  {
+                    "type": "resize",
+                    "width": 1920
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "composite",
+            "duration": 4.17,
+            "clips": [
+              {
+                "type": "color",
+                "size": [
+                  1920,
+                  1080
+                ],
+                "color": [
+                  0,
+                  0,
+                  0
+                ],
+                "duration": 4.17
+              },
+              {
+                "type": "video",
+                "source": "gs://realestate_prod/031e2742-1e20-4132-9553-5245bb3b6202/f56476b5-f051-4d65-8d47-82412012ec4d.mov",
+                "position": [
+                  "center",
+                  "center"
+                ],
+                "effects": [
+                  {
+                    "type": "subclip",
+                    "t_start": 88,
+                    "t_end": 93
+                  },
+                  {
+                    "type": "multiply_speed",
+                    "factor": 1.2
+                  },
+                  {
+                    "type": "resize",
+                    "width": 1920
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "composite",
+            "duration": 4,
+            "size": [
+              1920,
+              1080
+            ],
+            "clips": [
+              {
+                "type": "color",
+                "size": [
+                  1920,
+                  1080
+                ],
+                "color": [
+                  25,
+                  25,
+                  40
+                ],
+                "duration": 4
+              },
+              {
+                "type": "text",
+                "text": "Visualize the Possibilities",
+                "font_size": 80,
+                "color": "white",
+                "position": [
+                  "center",
+                  "center"
+                ],
+                "start": 0.5,
+                "duration": 3.5,
+                "effects": [
+                  {
+                    "type": "fadein",
+                    "duration": 1
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "composite",
+            "duration": 8,
+            "size": [
+              1920,
+              1080
+            ],
+            "clips": [
+              {
+                "type": "color",
+                "size": [
+                  1920,
+                  1080
+                ],
+                "color": [
+                  25,
+                  25,
+                  40
+                ],
+                "duration": 8
+              },
+              {
+                "type": "text",
+                "text": "Modern Open-Concept Kitchen",
+                "font_size": 60,
+                "color": "white",
+                "position": [
+                  "center",
+                  100
+                ],
+                "start": 0,
+                "duration": 8
+              },
+              {
+                "type": "enhanced_image",
+                "source": "gs://realestate_prod/031e2742-1e20-4132-9553-5245bb3b6202/f56476b5-f051-4d65-8d47-82412012ec4d.mov@01:01",
+                "prompt": "",
+                "duration": 4.5,
+                "position": [
+                  "center",
+                  180
+                ],
+                "start": 0,
+                "effects": [
+                  {
+                    "type": "resize",
+                    "height": 750
+                  }
+                ]
+              },
+              {
+                "type": "enhanced_image",
+                "source": "gs://realestate_prod/031e2742-1e20-4132-9553-5245bb3b6202/f56476b5-f051-4d65-8d47-82412012ec4d.mov@01:01",
+                "prompt": "Create a high-resolution, photorealistic real estate photo of a modern kitchen island with a gray and black granite countertop and an undermount stainless steel sink. The island is completely clear of clutter, except for a bowl of fresh lemons. In the background, a spacious, brightly lit living room is visible, staged with contemporary neutral-colored furniture. The LVP flooring is clean and reflects the natural light. The overall feel is bright, clean, and inviting.",
+                "duration": 4,
+                "position": [
+                  "center",
+                  180
+                ],
+                "start": 4,
+                "effects": [
+                  {
+                    "type": "resize",
+                    "height": 750
+                  },
+                  {
+                    "type": "fadein",
+                    "duration": 0.5
+                  }
+                ]
+              },
+              {
+                "type": "text",
+                "text": "BEFORE",
+                "font_size": 40,
+                "color": "lightgray",
+                "position": [
+                  "center",
+                  880
+                ],
+                "start": 0.5,
+                "duration": 3.5
+              },
+              {
+                "type": "text",
+                "text": "AFTER",
+                "font_size": 40,
+                "color": "lightgray",
+                "position": [
+                  "center",
+                  880
+                ],
+                "start": 4,
+                "duration": 4
+              }
+            ]
+          },
+          {
+            "type": "composite",
+            "duration": 8,
+            "size": [
+              1920,
+              1080
+            ],
+            "clips": [
+              {
+                "type": "color",
+                "size": [
+                  1920,
+                  1080
+                ],
+                "color": [
+                  25,
+                  25,
+                  40
+                ],
+                "duration": 8
+              },
+              {
+                "type": "text",
+                "text": "Bright & Airy Living Space",
+                "font_size": 60,
+                "color": "white",
+                "position": [
+                  "center",
+                  100
+                ],
+                "start": 0,
+                "duration": 8
+              },
+              {
+                "type": "enhanced_image",
+                "source": "gs://realestate_prod/031e2742-1e20-4132-9553-5245bb3b6202/f56476b5-f051-4d65-8d47-82412012ec4d.mov@01:12",
+                "prompt": "",
+                "duration": 4.5,
+                "position": [
+                  "center",
+                  180
+                ],
+                "start": 0,
+                "effects": [
+                  {
+                    "type": "resize",
+                    "height": 750
+                  }
+                ]
+              },
+              {
+                "type": "enhanced_image",
+                "source": "gs://realestate_prod/031e2742-1e20-4132-9553-5245bb3b6202/f56476b5-f051-4d65-8d47-82412012ec4d.mov@01:12",
+                "prompt": "Generate a bright and airy, photorealistic real estate photo of a spacious living room with dark LVP wood flooring. The room is virtually staged with a modern L-shaped sectional sofa, a round wooden coffee table, and a large, light-colored area rug. The high ceilings and white ceiling fan are prominent. The sliding glass door provides a clear view of a neat concrete patio and a well-maintained green lawn with a wooden fence. The room is filled with abundant natural light.",
+                "duration": 4,
+                "position": [
+                  "center",
+                  180
+                ],
+                "start": 4,
+                "effects": [
+                  {
+                    "type": "resize",
+                    "height": 750
+                  },
+                  {
+                    "type": "fadein",
+                    "duration": 0.5
+                  }
+                ]
+              },
+              {
+                "type": "text",
+                "text": "BEFORE",
+                "font_size": 40,
+                "color": "lightgray",
+                "position": [
+                  "center",
+                  880
+                ],
+                "start": 0.5,
+                "duration": 3.5
+              },
+              {
+                "type": "text",
+                "text": "AFTER",
+                "font_size": 40,
+                "color": "lightgray",
+                "position": [
+                  "center",
+                  880
+                ],
+                "start": 4,
+                "duration": 4
+              }
+            ]
+          },
+          {
+            "type": "composite",
+            "duration": 8,
+            "size": [
+              1920,
+              1080
+            ],
+            "clips": [
+              {
+                "type": "color",
+                "size": [
+                  1920,
+                  1080
+                ],
+                "color": [
+                  25,
+                  25,
+                  40
+                ],
+                "duration": 8
+              },
+              {
+                "type": "text",
+                "text": "Serene Master Suite",
+                "font_size": 60,
+                "color": "white",
+                "position": [
+                  "center",
+                  100
+                ],
+                "start": 0,
+                "duration": 8
+              },
+              {
+                "type": "enhanced_image",
+                "source": "gs://realestate_prod/031e2742-1e20-4132-9553-5245bb3b6202/f56476b5-f051-4d65-8d47-82412012ec4d.mov@01:17",
+                "prompt": "",
+                "duration": 4.5,
+                "position": [
+                  "center",
+                  180
+                ],
+                "start": 0,
+                "effects": [
+                  {
+                    "type": "resize",
+                    "height": 750
+                  }
+                ]
+              },
+              {
+                "type": "enhanced_image",
+                "source": "gs://realestate_prod/031e2742-1e20-4132-9553-5245bb3b6202/f56476b5-f051-4d65-8d47-82412012ec4d.mov@01:17",
+                "prompt": "A professionally staged, photorealistic real estate photo of a large master bedroom. The walls are a soft, neutral greige. The room features a king-sized bed with a tall, upholstered headboard and crisp white hotel-style bedding, two dark wood nightstands with modern lamps, and a cozy reading chair in the corner. The tray ceiling is a focal point. The beige carpet is pristine and has a uniform, clean appearance. Sunlight streams through the two large windows. The mood is serene, luxurious, and peaceful.",
+                "duration": 4,
+                "position": [
+                  "center",
+                  180
+                ],
+                "start": 4,
+                "effects": [
+                  {
+                    "type": "resize",
+                    "height": 750
+                  },
+                  {
+                    "type": "fadein",
+                    "duration": 0.5
+                  }
+                ]
+              },
+              {
+                "type": "text",
+                "text": "BEFORE",
+                "font_size": 40,
+                "color": "lightgray",
+                "position": [
+                  "center",
+                  880
+                ],
+                "start": 0.5,
+                "duration": 3.5
+              },
+              {
+                "type": "text",
+                "text": "AFTER",
+                "font_size": 40,
+                "color": "lightgray",
+                "position": [
+                  "center",
+                  880
+                ],
+                "start": 4,
+                "duration": 4
+              }
+            ]
+          },
+          {
+            "type": "composite",
+            "duration": 8,
+            "size": [
+              1920,
+              1080
+            ],
+            "clips": [
+              {
+                "type": "color",
+                "size": [
+                  1920,
+                  1080
+                ],
+                "color": [
+                  25,
+                  25,
+                  40
+                ],
+                "duration": 8
+              },
+              {
+                "type": "text",
+                "text": "Spa-Like Double Vanity",
+                "font_size": 60,
+                "color": "white",
+                "position": [
+                  "center",
+                  100
+                ],
+                "start": 0,
+                "duration": 8
+              },
+              {
+                "type": "enhanced_image",
+                "source": "gs://realestate_prod/031e2742-1e20-4132-9553-5245bb3b6202/f56476b5-f051-4d65-8d47-82412012ec4d.mov@01:32",
+                "prompt": "",
+                "duration": 4.5,
+                "position": [
+                  "center",
+                  180
+                ],
+                "start": 0,
+                "effects": [
+                  {
+                    "type": "resize",
+                    "height": 750
+                  }
+                ]
+              },
+              {
+                "type": "enhanced_image",
+                "source": "gs://realestate_prod/031e2742-1e20-4132-9553-5245bb3b6202/f56476b5-f051-4d65-8d47-82412012ec4d.mov@01:32",
+                "prompt": "Create a high-resolution, photorealistic real estate photo of a modern bathroom's long double vanity. The granite countertop is completely clear, except for two neatly folded white hand towels, a small decorative orchid, and a high-end soap dispenser by each sink. The two white undermount sinks and brushed nickel faucets are sparkling clean. The large, clean mirror above the vanity reflects a bright, tidy room. The lighting is soft and flattering, creating a luxurious spa-like atmosphere.",
+                "duration": 4,
+                "position": [
+                  "center",
+                  180
+                ],
+                "start": 4,
+                "effects": [
+                  {
+                    "type": "resize",
+                    "height": 750
+                  },
+                  {
+                    "type": "fadein",
+                    "duration": 0.5
+                  }
+                ]
+              },
+              {
+                "type": "text",
+                "text": "BEFORE",
+                "font_size": 40,
+                "color": "lightgray",
+                "position": [
+                  "center",
+                  880
+                ],
+                "start": 0.5,
+                "duration": 3.5
+              },
+              {
+                "type": "text",
+                "text": "AFTER",
+                "font_size": 40,
+                "color": "lightgray",
+                "position": [
+                  "center",
+                  880
+                ],
+                "start": 4,
+                "duration": 4
+              }
+            ]
+          },
+          {
+            "type": "composite",
+            "duration": 5,
+            "size": [
+              1920,
+              1080
+            ],
+            "clips": [
+              {
+                "type": "color",
+                "size": [
+                  1920,
+                  1080
+                ],
+                "color": [
+                  25,
+                  25,
+                  40
+                ],
+                "duration": 5
+              },
+              {
+                "type": "text",
+                "text": "Contact Us For A Tour!",
+                "font_size": 70,
+                "color": "white",
+                "width": 1000,
+                "align": "center",
+                "position": [
+                  "center",
+                  400
+                ],
+                "start": 0.5,
+                "duration": 4
+              },
+              {
+                "type": "text",
+                "text": "Jane Doe Realty\n(555) 123-4567\njane.doe@realestate.com",
+                "font_size": 40,
+                "color": "lightgray",
+                "width": 1000,
+                "align": "center",
+                "position": [
+                  "center",
+                  550
+                ],
+                "start": 2,
+                "duration": 2.5
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "image",
+        "source": "gs://real-estate-videos/test_videos/bounti-white-transparent.png",
+        "position": ["right", "bottom"],
+        "margin": 20,
+        "effects": [
+          {
+            "type": "resize",
+            "width": 200
+          }
+        ]
+      }
+    ]
+  }
+}

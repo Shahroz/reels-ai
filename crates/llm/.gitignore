@@ -1,0 +1,17 @@
+/target
+.idea/
+*.txt
+.env
+.git
+#aider
+#aider/tests
+#aider/website
+references/
+refactoring-assistant-ui
+.ras/index_lod_3.yaml
+.ras/logs/
+.ras/logs/**/*.yaml
+.ras/prompts/
+scratchpad/
+references/
+*.ndjson

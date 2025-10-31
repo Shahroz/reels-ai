@@ -1,0 +1,40 @@
+//! Module for user credit allocation related database query functions.
+//!
+//! This module aggregates specific query operations for user credit allocation entities.
+//! It adheres to the one-item-per-file and FQN guidelines.
+//! Organizes functions for user credit allocation management.
+
+pub mod create_user_credit_allocation;
+pub mod create_or_update_user_credit_allocation;
+pub mod create_or_update_user_credit_allocation_with_transaction;
+pub mod create_or_update_user_credit_allocation_for_one_time_payment;
+pub mod create_or_update_user_credit_allocation_for_one_time_payment_with_transaction;
+pub mod get_user_credit_allocation_by_user_id;
+pub mod update_user_credit_allocation;
+pub mod update_user_credit_allocation_with_transaction;
+pub mod delete_user_credit_allocation;
+pub mod deduct_user_credits;
+pub mod deduct_user_credits_with_transaction;
+pub mod claim_daily_credits;
+pub mod check_credits_availability;
+pub mod is_user_free_user;
+pub mod is_old_user_exempt_from_credit_checks;
+pub mod check_valid_product_type;
+
+// Re-export all functions for convenience
+pub use create_user_credit_allocation::create_user_credit_allocation;
+pub use create_or_update_user_credit_allocation::create_or_update_user_credit_allocation;
+pub use create_or_update_user_credit_allocation_with_transaction::create_or_update_user_credit_allocation_with_transaction;
+pub use create_or_update_user_credit_allocation_for_one_time_payment::create_or_update_user_credit_allocation_for_one_time_payment;
+pub use create_or_update_user_credit_allocation_for_one_time_payment_with_transaction::create_or_update_user_credit_allocation_for_one_time_payment_with_transaction;
+pub use get_user_credit_allocation_by_user_id::get_user_credit_allocation_by_user_id;
+pub use update_user_credit_allocation::update_user_credit_allocation;
+pub use update_user_credit_allocation_with_transaction::update_user_credit_allocation_with_transaction;
+pub use delete_user_credit_allocation::delete_user_credit_allocation;
+pub use deduct_user_credits::deduct_user_credits;
+pub use deduct_user_credits_with_transaction::{deduct_user_credits_with_transaction, CreditChangesParams};
+pub use claim_daily_credits::claim_daily_credits;
+pub use check_credits_availability::check_credits_availability;
+pub use is_user_free_user::is_user_free_user;
+pub use is_old_user_exempt_from_credit_checks::is_old_user_exempt_from_credit_checks;
+pub use check_valid_product_type::check_valid_product_type;

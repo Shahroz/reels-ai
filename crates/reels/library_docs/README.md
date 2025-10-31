@@ -1,0 +1,1 @@
+these are some random snippets I find useful

@@ -1,0 +1,10 @@
+pub mod few_shots_traits;
+pub mod typed;
+pub mod vendors;
+pub mod hacky_json_loads;
+pub mod hacky_yaml_loads;
+pub mod hacky_toml_loads;
+pub mod broken_json_loads;
+pub mod constants;
+pub mod unified_conversation;
+pub mod llm_typed_unified;

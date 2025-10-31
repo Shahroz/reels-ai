@@ -1,0 +1,25 @@
+{
+  "output_path": "composition.mp4",
+  "size": [1280, 720],
+  "fps": 24,
+  "clip": {
+    "type": "composite",
+    "duration": 5,
+    "clips": [
+      {
+        "type": "color",
+        "size": [1280, 720],
+        "color": [50, 100, 200],
+        "duration": 5
+      },
+      {
+        "type": "text",
+        "text": "Hello from declarative moviepy!",
+        "font_size": 50,
+        "color": "white",
+        "start": 0.5,
+        "duration": 4
+      }
+    ]
+  }
+}

@@ -1,0 +1,1352 @@
+{
+  "output_path": "real_estate_tour_2.mp4",
+  "size": [1920, 1080],
+  "fps": 30,
+  "audio": {
+    "type": "audio",
+    "source": "gs://real-estate-videos/montages_music/Call me crazy - Patrick Patrikios.mp3",
+    "effects": [
+      {"type": "multiply_volume", "factor": 0.3},
+      {"type": "audio_fadein", "duration": 2},
+      {"type": "audio_fadeout", "duration": 3}
+   ]
+ },
+  "clip": {
+    "type": "concatenate",
+    "transition": {
+      "type": "crossfade",
+      "duration": 0.5
+    },
+    "clips": [
+      {
+        "type": "composite",
+        "duration": 4,
+        "size": [1920, 1080],
+        "clips": [
+          {
+            "type": "color",
+            "size": [1920, 1080],
+            "color": [25, 25, 40],
+            "duration": 4
+          },
+          {
+            "type": "text",
+            "text": "A Beautiful Home Tour",
+            "font_size": 90,
+            "color": "white",
+            "position": ["center", "center"],
+            "start": 0.5,
+            "duration": 3,
+            "effects": [
+              { "type": "fadein", "duration": 1 }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "composite",
+        "duration": 10,
+        "clips": [
+          {
+            "type": "video",
+            "source": "gs://real-estate-videos/test_videos/2G Video Tour - Compressed.mp4",
+            "effects": [
+              { "type": "subclip", "t_start": 18, "t_end": 28 }
+            ]
+          },
+          {
+            "type": "text",
+            "text": "Bright & Welcoming Entrance",
+            "font_size": 70,
+            "color": "white",
+            "position": ["center", 1600],
+            "start": 1,
+            "duration": 4,
+            "effects": [
+              { "type": "fadein", "duration": 1 },
+              { "type": "fadeout", "duration": 1 }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "composite",
+        "duration": 12,
+        "clips": [
+          {
+            "type": "video",
+            "source": "gs://real-estate-videos/test_videos/2G Video Tour - Compressed.mp4",
+            "effects": [
+              { "type": "subclip", "t_start": 38, "t_end": 50 }
+            ]
+          },
+          {
+            "type": "text",
+            "text": "Modern Kitchen with Granite Countertops",
+            "font_size": 70,
+            "color": "white",
+            "width": 1000,
+            "align": "center",
+            "position": ["center", "center"],
+            "start": 1,
+            "duration": 5,
+            "effects": [
+              { "type": "fadein", "duration": 1 },
+              { "type": "fadeout", "duration": 1 }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "composite",
+        "duration": 9,
+        "clips": [
+          {
+            "type": "video",
+            "source": "gs://real-estate-videos/test_videos/2G Video Tour - Compressed.mp4",
+            "effects": [
+              { "type": "subclip", "t_start": 50, "t_end": 59 }
+            ]
+          },
+          {
+            "type": "text",
+            "text": "Spacious Living Area",
+            "font_size": 70,
+            "color": "white",
+            "position": ["center", "center"],
+            "start": 1,
+            "duration": 4,
+            "effects": [
+              { "type": "fadein", "duration": 1 },
+              { "type": "fadeout", "duration": 1 }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "composite",
+        "duration": 13,
+        "clips": [
+          {
+            "type": "video",
+            "source": "gs://real-estate-videos/test_videos/2G Video Tour - Compressed.mp4",
+            "effects": [
+              { "type": "subclip", "t_start": 63, "t_end": 76 }
+            ]
+          },
+          {
+            "type": "text",
+            "text": "Cozy & Private Backyard",
+            "font_size": 70,
+            "color": "white",
+            "position": ["center", "center"],
+            "start": 1,
+            "duration": 4,
+            "effects": [
+              { "type": "fadein", "duration": 1 },
+              { "type": "fadeout", "duration": 1 }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "composite",
+        "duration": 9,
+        "clips": [
+          {
+            "type": "video",
+            "source": "gs://real-estate-videos/test_videos/2G Video Tour - Compressed.mp4",
+            "effects": [
+              { "type": "subclip", "t_start": 110, "t_end": 119 }
+            ]
+          },
+          {
+            "type": "text",
+            "text": "Comfortable Primary Bedroom",
+            "font_size": 70,
+            "color": "white",
+            "position": ["center", "center"],
+            "start": 1,
+            "duration": 4,
+            "effects": [
+              { "type": "fadein", "duration": 1 },
+              { "type": "fadeout", "duration": 1 }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "composite",
+        "duration": 13,
+        "clips": [
+          {
+            "type": "video",
+            "source": "gs://real-estate-videos/test_videos/2G Video Tour - Compressed.mp4",
+            "effects": [
+              { "type": "subclip", "t_start": 120, "t_end": 133 }
+            ]
+          },
+          {
+            "type": "text",
+            "text": "Luxurious Primary Bathroom",
+            "font_size": 70,
+            "color": "white",
+            "position": ["center", "center"],
+            "start": 1,
+            "duration": 4,
+            "effects": [
+              { "type": "fadein", "duration": 1 },
+              { "type": "fadeout", "duration": 1 }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "composite",
+        "duration": 5,
+        "size": [1920, 1080],
+        "clips": [
+          {
+            "type": "color",
+            "size": [1920, 1080],
+            "color": [25, 25, 40],
+            "duration": 5
+          },
+          {
+            "type": "text",
+            "text": "Contact us for a viewing!",
+            "font_size": 60,
+            "color": "white",
+            "width": 1000,
+            "align": "center",
+            "position": ["center", 400],
+            "start": 0.5,
+            "duration": 4
+          },
+          {
+            "type": "text",
+            "text": "Jane Doe\n(123) 456-7890\njane.doe@realestate.com",
+            "font_size": 40,
+            "color": "lightgray",
+            "width": 1000,
+            "align": "center",
+            "position": ["center", 550],
+            "start": 2.0,
+            "duration": 2.5
+          }
+        ]
+      },
+      {
+            "type": "composite",
+            "duration": 4,
+            "size": [
+                  1920,
+                  1080
+            ],
+            "clips": [
+                  {
+                        "type": "color",
+                        "size": [
+                              1920,
+                              1080
+                        ],
+                        "color": [
+                              25,
+                              25,
+                              40
+                        ],
+                        "duration": 4
+                  },
+                  {
+                        "type": "text",
+                        "text": "Virtual Staging & Photo Enhancements",
+                        "font_size": 80,
+                        "color": "white",
+                        "width": 1800,
+                        "align": "center",
+                        "position": [
+                              "center",
+                              "center"
+                        ],
+                        "start": 0.5,
+                        "duration": 3.5,
+                        "effects": [
+                              {
+                                    "type": "fadein",
+                                    "duration": 1
+                              }
+                        ]
+                  }
+            ]
+      },
+      {
+            "type": "composite",
+            "duration": 10,
+            "size": [
+                  1920,
+                  1080
+            ],
+            "clips": [
+                  {
+                        "type": "color",
+                        "size": [
+                              1920,
+                              1080
+                        ],
+                        "color": [
+                              25,
+                              25,
+                              40
+                        ],
+                        "duration": 10
+                  },
+                  {
+                        "type": "text",
+                        "text": "Curb Appeal Boost - Before & After",
+                        "font_size": 60,
+                        "color": "white",
+                        "position": [
+                              "center",
+                              100
+                        ],
+                        "start": 0,
+                        "duration": 10
+                  },
+                  {
+                        "type": "text",
+                        "text": "BEFORE",
+                        "font_size": 40,
+                        "color": "lightgray",
+                        "position": [
+                              480,
+                              950
+                        ],
+                        "start": 0,
+                        "duration": 5
+                  },
+                  {
+                        "type": "enhanced_image",
+                        "source": "gs://real-estate-videos/test_videos/2G Video Tour - Compressed.mp4@00:00",
+                        "prompt": "",
+                        "duration": 5,
+                        "position": [
+                              480,
+                              550
+                        ],
+                        "start": 0,
+                        "effects": [
+                              { "type": "resize", "height": 600 },
+                              { "type": "fadein", "duration": 0.5 }
+                        ]
+                  },
+                  {
+                        "type": "text",
+                        "text": "AFTER",
+                        "font_size": 40,
+                        "color": "lightgray",
+                        "position": [
+                              1440,
+                              950
+                        ],
+                        "start": 5,
+                        "duration": 5
+                  },
+                  {
+                        "type": "enhanced_image",
+                        "source": "gs://real-estate-videos/test_videos/2G Video Tour - Compressed.mp4@00:00",
+                        "prompt": "Using the existing photo as a base, remove the green truck from the driveway. Enhance the green of the tree and shrubs to make them look more vibrant. Make the sky a clearer, more saturated blue with a few soft, white clouds. Add colorful flowering plants, like yellow marigolds and purple lantana, to the garden beds to increase curb appeal.",
+                        "duration": 5,
+                        "position": [
+                              1440,
+                              550
+                        ],
+                        "start": 5,
+                        "effects": [
+                              { "type": "resize", "height": 600 },
+                              { "type": "fadein", "duration": 0.5 }
+                        ]
+                  }
+            ]
+      },
+      {
+            "type": "composite",
+            "duration": 10,
+            "size": [
+                  1920,
+                  1080
+            ],
+            "clips": [
+                  {
+                        "type": "color",
+                        "size": [
+                              1920,
+                              1080
+                        ],
+                        "color": [
+                              25,
+                              25,
+                              40
+                        ],
+                        "duration": 10
+                  },
+                  {
+                        "type": "text",
+                        "text": "Twilight Charm - Before & After",
+                        "font_size": 60,
+                        "color": "white",
+                        "position": [
+                              "center",
+                              100
+                        ],
+                        "start": 0,
+                        "duration": 10
+                  },
+                  {
+                        "type": "text",
+                        "text": "BEFORE",
+                        "font_size": 40,
+                        "color": "lightgray",
+                        "position": [
+                              480,
+                              950
+                        ],
+                        "start": 0,
+                        "duration": 5
+                  },
+                  {
+                        "type": "enhanced_image",
+                        "source": "gs://real-estate-videos/test_videos/2G Video Tour - Compressed.mp4@00:00",
+                        "prompt": "",
+                        "duration": 5,
+                        "position": [
+                              480,
+                              550
+                        ],
+                        "start": 0,
+                        "effects": [
+                              { "type": "resize", "height": 600 },
+                              { "type": "fadein", "duration": 0.5 }
+                        ]
+                  },
+                  {
+                        "type": "text",
+                        "text": "AFTER",
+                        "font_size": 40,
+                        "color": "lightgray",
+                        "position": [
+                              1440,
+                              950
+                        ],
+                        "start": 5,
+                        "duration": 5
+                  },
+                  {
+                        "type": "enhanced_image",
+                        "source": "gs://real-estate-videos/test_videos/2G Video Tour - Compressed.mp4@00:00",
+                        "prompt": "Transform the scene to a twilight setting. Remove the truck. Deepen the sky to a rich indigo blue. Turn on the exterior lights by the garage and front door, and add a warm, inviting glow from the windows as if the interior is lit. The overall mood should be cozy and high-end.",
+                        "duration": 5,
+                        "position": [
+                              1440,
+                              550
+                        ],
+                        "start": 5,
+                        "effects": [
+                              { "type": "resize", "height": 600 },
+                              { "type": "fadein", "duration": 0.5 }
+                        ]
+                  }
+            ]
+      },
+      {
+            "type": "composite",
+            "duration": 10,
+            "size": [
+                  1920,
+                  1080
+            ],
+            "clips": [
+                  {
+                        "type": "color",
+                        "size": [
+                              1920,
+                              1080
+                        ],
+                        "color": [
+                              25,
+                              25,
+                              40
+                        ],
+                        "duration": 10
+                  },
+                  {
+                        "type": "text",
+                        "text": "Gourmet Chef's Kitchen - Before & After",
+                        "font_size": 55,
+                        "color": "white",
+                        "position": [
+                              "center",
+                              100
+                        ],
+                        "start": 0,
+                        "duration": 10
+                  },
+                  {
+                        "type": "text",
+                        "text": "BEFORE",
+                        "font_size": 40,
+                        "color": "lightgray",
+                        "position": [
+                              480,
+                              950
+                        ],
+                        "start": 0,
+                        "duration": 5
+                  },
+                  {
+                        "type": "enhanced_image",
+                        "source": "gs://real-estate-videos/test_videos/2G Video Tour - Compressed.mp4@00:42",
+                        "prompt": "",
+                        "duration": 5,
+                        "position": [
+                              480,
+                              550
+                        ],
+                        "start": 0,
+                        "effects": [
+                              { "type": "resize", "height": 600 },
+                              { "type": "fadein", "duration": 0.5 }
+                        ]
+                  },
+                  {
+                        "type": "text",
+                        "text": "AFTER",
+                        "font_size": 40,
+                        "color": "lightgray",
+                        "position": [
+                              1440,
+                              950
+                        ],
+                        "start": 5,
+                        "duration": 5
+                  },
+                  {
+                        "type": "enhanced_image",
+                        "source": "gs://real-estate-videos/test_videos/2G Video Tour - Compressed.mp4@00:42",
+                        "prompt": "Virtually stage the kitchen. On the granite island, place a wooden cutting board with freshly chopped colorful bell peppers, a glass bowl of lemons, and a bottle of artisan olive oil. On the back counter, add a high-end stand mixer in a vibrant red color. The scene should feel like a chef's workspace.",
+                        "duration": 5,
+                        "position": [
+                              1440,
+                              550
+                        ],
+                        "start": 5,
+                        "effects": [
+                              { "type": "resize", "height": 600 },
+                              { "type": "fadein", "duration": 0.5 }
+                        ]
+                  }
+            ]
+      },
+      {
+            "type": "composite",
+            "duration": 10,
+            "size": [
+                  1920,
+                  1080
+            ],
+            "clips": [
+                  {
+                        "type": "color",
+                        "size": [
+                              1920,
+                              1080
+                        ],
+                        "color": [
+                              25,
+                              25,
+                              40
+                        ],
+                        "duration": 10
+                  },
+                  {
+                        "type": "text",
+                        "text": "Modern & Sleek - Before & After",
+                        "font_size": 60,
+                        "color": "white",
+                        "position": [
+                              "center",
+                              100
+                        ],
+                        "start": 0,
+                        "duration": 10
+                  },
+                  {
+                        "type": "text",
+                        "text": "BEFORE",
+                        "font_size": 40,
+                        "color": "lightgray",
+                        "position": [
+                              480,
+                              950
+                        ],
+                        "start": 0,
+                        "duration": 5
+                  },
+                  {
+                        "type": "enhanced_image",
+                        "source": "gs://real-estate-videos/test_videos/2G Video Tour - Compressed.mp4@00:42",
+                        "prompt": "",
+                        "duration": 5,
+                        "position": [
+                              480,
+                              550
+                        ],
+                        "start": 0,
+                        "effects": [
+                              { "type": "resize", "height": 600 },
+                              { "type": "fadein", "duration": 0.5 }
+                        ]
+                  },
+                  {
+                        "type": "text",
+                        "text": "AFTER",
+                        "font_size": 40,
+                        "color": "lightgray",
+                        "position": [
+                              1440,
+                              950
+                        ],
+                        "start": 5,
+                        "duration": 5
+                  },
+                  {
+                        "type": "enhanced_image",
+                        "source": "gs://real-estate-videos/test_videos/2G Video Tour - Compressed.mp4@00:42",
+                        "prompt": "Update the kitchen's look. Change the cabinet hardware to long, sleek, matte black handles. Remove the current decor from the island and replace it with a single, large modern white orchid in a black pot. Add two contemporary bar stools with black metal legs and light wood seats at the island.",
+                        "duration": 5,
+                        "position": [
+                              1440,
+                              550
+                        ],
+                        "start": 5,
+                        "effects": [
+                              { "type": "resize", "height": 600 },
+                              { "type": "fadein", "duration": 0.5 }
+                        ]
+                  }
+            ]
+      },
+      {
+            "type": "composite",
+            "duration": 10,
+            "size": [
+                  1920,
+                  1080
+            ],
+            "clips": [
+                  {
+                        "type": "color",
+                        "size": [
+                              1920,
+                              1080
+                        ],
+                        "color": [
+                              25,
+                              25,
+                              40
+                        ],
+                        "duration": 10
+                  },
+                  {
+                        "type": "text",
+                        "text": "Cozy Family Movie Night - Before & After",
+                        "font_size": 55,
+                        "color": "white",
+                        "position": [
+                              "center",
+                              100
+                        ],
+                        "start": 0,
+                        "duration": 10
+                  },
+                  {
+                        "type": "text",
+                        "text": "BEFORE",
+                        "font_size": 40,
+                        "color": "lightgray",
+                        "position": [
+                              480,
+                              950
+                        ],
+                        "start": 0,
+                        "duration": 5
+                  },
+                  {
+                        "type": "enhanced_image",
+                        "source": "gs://real-estate-videos/test_videos/2G Video Tour - Compressed.mp4@00:57",
+                        "prompt": "",
+                        "duration": 5,
+                        "position": [
+                              480,
+                              550
+                        ],
+                        "start": 0,
+                        "effects": [
+                              { "type": "resize", "height": 600 },
+                              { "type": "fadein", "duration": 0.5 }
+                        ]
+                  },
+                  {
+                        "type": "text",
+                        "text": "AFTER",
+                        "font_size": 40,
+                        "color": "lightgray",
+                        "position": [
+                              1440,
+                              950
+                        ],
+                        "start": 5,
+                        "duration": 5
+                  },
+                  {
+                        "type": "enhanced_image",
+                        "source": "gs://real-estate-videos/test_videos/2G Video Tour - Compressed.mp4@00:57",
+                        "prompt": "Virtually furnish the living room. Replace the current sofas with a large, comfortable L-shaped sectional in a neutral gray fabric. Add plush throw pillows in shades of navy blue and cream, and a chunky knit blanket. Place a large, soft area rug with a subtle geometric pattern. Mount the TV on the wall and place a sleek, modern, low-profile media console below it.",
+                        "duration": 5,
+                        "position": [
+                              1440,
+                              550
+                        ],
+                        "start": 5,
+                        "effects": [
+                              { "type": "resize", "height": 600 },
+                              { "type": "fadein", "duration": 0.5 }
+                        ]
+                  }
+            ]
+      },
+      {
+            "type": "composite",
+            "duration": 10,
+            "size": [
+                  1920,
+                  1080
+            ],
+            "clips": [
+                  {
+                        "type": "color",
+                        "size": [
+                              1920,
+                              1080
+                        ],
+                        "color": [
+                              25,
+                              25,
+                              40
+                        ],
+                        "duration": 10
+                  },
+                  {
+                        "type": "text",
+                        "text": "Bright & Airy Living - Before & After",
+                        "font_size": 55,
+                        "color": "white",
+                        "position": [
+                              "center",
+                              100
+                        ],
+                        "start": 0,
+                        "duration": 10
+                  },
+                  {
+                        "type": "text",
+                        "text": "BEFORE",
+                        "font_size": 40,
+                        "color": "lightgray",
+                        "position": [
+                              480,
+                              950
+                        ],
+                        "start": 0,
+                        "duration": 5
+                  },
+                  {
+                        "type": "enhanced_image",
+                        "source": "gs://real-estate-videos/test_videos/2G Video Tour - Compressed.mp4@00:57",
+                        "prompt": "",
+                        "duration": 5,
+                        "position": [
+                              480,
+                              550
+                        ],
+                        "start": 0,
+                        "effects": [
+                              { "type": "resize", "height": 600 },
+                              { "type": "fadein", "duration": 0.5 }
+                        ]
+                  },
+                  {
+                        "type": "text",
+                        "text": "AFTER",
+                        "font_size": 40,
+                        "color": "lightgray",
+                        "position": [
+                              1440,
+                              950
+                        ],
+                        "start": 5,
+                        "duration": 5
+                  },
+                  {
+                        "type": "enhanced_image",
+                        "source": "gs://real-estate-videos/test_videos/2G Video Tour - Compressed.mp4@00:57",
+                        "prompt": "Create a bright, minimalist living space. Remove all existing furniture. Add a light-colored linen sofa, two stylish accent chairs in a textured fabric, and a round coffee table made of light wood. Place a large, vibrant area rug with a modern abstract design on the floor. Add a tall fiddle-leaf fig plant in the corner near the window.",
+                        "duration": 5,
+                        "position": [
+                              1440,
+                              550
+                        ],
+                        "start": 5,
+                        "effects": [
+                              { "type": "resize", "height": 600 },
+                              { "type": "fadein", "duration": 0.5 }
+                        ]
+                  }
+            ]
+      },
+      {
+            "type": "composite",
+            "duration": 10,
+            "size": [
+                  1920,
+                  1080
+            ],
+            "clips": [
+                  {
+                        "type": "color",
+                        "size": [
+                              1920,
+                              1080
+                        ],
+                        "color": [
+                              25,
+                              25,
+                              40
+                        ],
+                        "duration": 10
+                  },
+                  {
+                        "type": "text",
+                        "text": "Outdoor Oasis - Before & After",
+                        "font_size": 60,
+                        "color": "white",
+                        "position": [
+                              "center",
+                              100
+                        ],
+                        "start": 0,
+                        "duration": 10
+                  },
+                  {
+                        "type": "text",
+                        "text": "BEFORE",
+                        "font_size": 40,
+                        "color": "lightgray",
+                        "position": [
+                              480,
+                              950
+                        ],
+                        "start": 0,
+                        "duration": 5
+                  },
+                  {
+                        "type": "enhanced_image",
+                        "source": "gs://real-estate-videos/test_videos/2G Video Tour - Compressed.mp4@01:08",
+                        "prompt": "",
+                        "duration": 5,
+                        "position": [
+                              480,
+                              550
+                        ],
+                        "start": 0,
+                        "effects": [
+                              { "type": "resize", "height": 600 },
+                              { "type": "fadein", "duration": 0.5 }
+                        ]
+                  },
+                  {
+                        "type": "text",
+                        "text": "AFTER",
+                        "font_size": 40,
+                        "color": "lightgray",
+                        "position": [
+                              1440,
+                              950
+                        ],
+                        "start": 5,
+                        "duration": 5
+                  },
+                  {
+                        "type": "enhanced_image",
+                        "source": "gs://real-estate-videos/test_videos/2G Video Tour - Compressed.mp4@01:08",
+                        "prompt": "Enhance the backyard for entertaining. On the paved patio, add an outdoor seating set including a small wicker sofa, two matching chairs with comfortable cushions, and a coffee table. Drape a string of warm Edison bulb lights from the covered patio overhead. Add a modern, smokeless fire pit in the gravel area.",
+                        "duration": 5,
+                        "position": [
+                              1440,
+                              550
+                        ],
+                        "start": 5,
+                        "effects": [
+                              { "type": "resize", "height": 600 },
+                              { "type": "fadein", "duration": 0.5 }
+                        ]
+                  }
+            ]
+      },
+      {
+            "type": "composite",
+            "duration": 10,
+            "size": [
+                  1920,
+                  1080
+            ],
+            "clips": [
+                  {
+                        "type": "color",
+                        "size": [
+                              1920,
+                              1080
+                        ],
+                        "color": [
+                              25,
+                              25,
+                              40
+                        ],
+                        "duration": 10
+                  },
+                  {
+                        "type": "text",
+                        "text": "Garden Paradise - Before & After",
+                        "font_size": 60,
+                        "color": "white",
+                        "position": [
+                              "center",
+                              100
+                        ],
+                        "start": 0,
+                        "duration": 10
+                  },
+                  {
+                        "type": "text",
+                        "text": "BEFORE",
+                        "font_size": 40,
+                        "color": "lightgray",
+                        "position": [
+                              480,
+                              950
+                        ],
+                        "start": 0,
+                        "duration": 5
+                  },
+                  {
+                        "type": "enhanced_image",
+                        "source": "gs://real-estate-videos/test_videos/2G Video Tour - Compressed.mp4@01:08",
+                        "prompt": "",
+                        "duration": 5,
+                        "position": [
+                              480,
+                              550
+                        ],
+                        "start": 0,
+                        "effects": [
+                              { "type": "resize", "height": 600 },
+                              { "type": "fadein", "duration": 0.5 }
+                        ]
+                  },
+                  {
+                        "type": "text",
+                        "text": "AFTER",
+                        "font_size": 40,
+                        "color": "lightgray",
+                        "position": [
+                              1440,
+                              950
+                        ],
+                        "start": 5,
+                        "duration": 5
+                  },
+                  {
+                        "type": "enhanced_image",
+                        "source": "gs://real-estate-videos/test_videos/2G Video Tour - Compressed.mp4@01:08",
+                        "prompt": "Make the backyard greener. Enhance the existing plants and trees to appear fuller and more lush. Add vibrant flowering bushes, like bright pink bougainvillea, climbing the back wall. Make the artificial turf look even greener and more pristine, and add a few colorful potted plants on the patio.",
+                        "duration": 5,
+                        "position": [
+                              1440,
+                              550
+                        ],
+                        "start": 5,
+                        "effects": [
+                              { "type": "resize", "height": 600 },
+                              { "type": "fadein", "duration": 0.5 }
+                        ]
+                  }
+            ]
+      },
+      {
+            "type": "composite",
+            "duration": 10,
+            "size": [
+                  1920,
+                  1080
+            ],
+            "clips": [
+                  {
+                        "type": "color",
+                        "size": [
+                              1920,
+                              1080
+                        ],
+                        "color": [
+                              25,
+                              25,
+                              40
+                        ],
+                        "duration": 10
+                  },
+                  {
+                        "type": "text",
+                        "text": "Serene & Luxurious Retreat - Before & After",
+                        "font_size": 50,
+                        "color": "white",
+                        "position": [
+                              "center",
+                              100
+                        ],
+                        "start": 0,
+                        "duration": 10
+                  },
+                  {
+                        "type": "text",
+                        "text": "BEFORE",
+                        "font_size": 40,
+                        "color": "lightgray",
+                        "position": [
+                              480,
+                              950
+                        ],
+                        "start": 0,
+                        "duration": 5
+                  },
+                  {
+                        "type": "enhanced_image",
+                        "source": "gs://real-estate-videos/test_videos/2G Video Tour - Compressed.mp4@01:55",
+                        "prompt": "",
+                        "duration": 5,
+                        "position": [
+                              480,
+                              550
+                        ],
+                        "start": 0,
+                        "effects": [
+                              { "type": "resize", "height": 600 },
+                              { "type": "fadein", "duration": 0.5 }
+                        ]
+                  },
+                  {
+                        "type": "text",
+                        "text": "AFTER",
+                        "font_size": 40,
+                        "color": "lightgray",
+                        "position": [
+                              1440,
+                              950
+                        ],
+                        "start": 5,
+                        "duration": 5
+                  },
+                  {
+                        "type": "enhanced_image",
+                        "source": "gs://real-estate-videos/test_videos/2G Video Tour - Compressed.mp4@01:55",
+                        "prompt": "Upgrade the primary bedroom. Change the bed to a king-size with a tall, upholstered headboard in a light grey fabric. Dress the bed with high-end, layered white linens, a duvet, accent pillows in muted earth tones, and a textured throw blanket. Replace the nightstands and dresser with a matching, modern light-wood set. Add a large, plush area rug under the bed.",
+                        "duration": 5,
+                        "position": [
+                              1440,
+                              550
+                        ],
+                        "start": 5,
+                        "effects": [
+                              { "type": "resize", "height": 600 },
+                              { "type": "fadein", "duration": 0.5 }
+                        ]
+                  }
+            ]
+      },
+      {
+            "type": "composite",
+            "duration": 10,
+            "size": [
+                  1920,
+                  1080
+            ],
+            "clips": [
+                  {
+                        "type": "color",
+                        "size": [
+                              1920,
+                              1080
+                        ],
+                        "color": [
+                              25,
+                              25,
+                              40
+                        ],
+                        "duration": 10
+                  },
+                  {
+                        "type": "text",
+                        "text": "Boho Chic Bedroom - Before & After",
+                        "font_size": 55,
+                        "color": "white",
+                        "position": [
+                              "center",
+                              100
+                        ],
+                        "start": 0,
+                        "duration": 10
+                  },
+                  {
+                        "type": "text",
+                        "text": "BEFORE",
+                        "font_size": 40,
+                        "color": "lightgray",
+                        "position": [
+                              480,
+                              950
+                        ],
+                        "start": 0,
+                        "duration": 5
+                  },
+                  {
+                        "type": "enhanced_image",
+                        "source": "gs://real-estate-videos/test_videos/2G Video Tour - Compressed.mp4@01:55",
+                        "prompt": "",
+                        "duration": 5,
+                        "position": [
+                              480,
+                              550
+                        ],
+                        "start": 0,
+                        "effects": [
+                              { "type": "resize", "height": 600 },
+                              { "type": "fadein", "duration": 0.5 }
+                        ]
+                  },
+                  {
+                        "type": "text",
+                        "text": "AFTER",
+                        "font_size": 40,
+                        "color": "lightgray",
+                        "position": [
+                              1440,
+                              950
+                        ],
+                        "start": 5,
+                        "duration": 5
+                  },
+                  {
+                        "type": "enhanced_image",
+                        "source": "gs://real-estate-videos/test_videos/2G Video Tour - Compressed.mp4@01:55",
+                        "prompt": "Give the bedroom a bohemian feel. Add a large macrame wall hanging above the bed. Change the bedding to include a patterned duvet cover and textured pillows. Add a rattan accent chair in the corner and more potted plants, like a snake plant on the dresser and a hanging plant near the window.",
+                        "duration": 5,
+                        "position": [
+                              1440,
+                              550
+                        ],
+                        "start": 5,
+                        "effects": [
+                              { "type": "resize", "height": 600 },
+                              { "type": "fadein", "duration": 0.5 }
+                        ]
+                  }
+            ]
+      },
+      {
+            "type": "composite",
+            "duration": 10,
+            "size": [
+                  1920,
+                  1080
+            ],
+            "clips": [
+                  {
+                        "type": "color",
+                        "size": [
+                              1920,
+                              1080
+                        ],
+                        "color": [
+                              25,
+                              25,
+                              40
+                        ],
+                        "duration": 10
+                  },
+                  {
+                        "type": "text",
+                        "text": "Spa-like Sanctuary - Before & After",
+                        "font_size": 55,
+                        "color": "white",
+                        "position": [
+                              "center",
+                              100
+                        ],
+                        "start": 0,
+                        "duration": 10
+                  },
+                  {
+                        "type": "text",
+                        "text": "BEFORE",
+                        "font_size": 40,
+                        "color": "lightgray",
+                        "position": [
+                              480,
+                              950
+                        ],
+                        "start": 0,
+                        "duration": 5
+                  },
+                  {
+                        "type": "enhanced_image",
+                        "source": "gs://real-estate-videos/test_videos/2G Video Tour - Compressed.mp4@02:04",
+                        "prompt": "",
+                        "duration": 5,
+                        "position": [
+                              480,
+                              550
+                        ],
+                        "start": 0,
+                        "effects": [
+                              { "type": "resize", "height": 600 },
+                              { "type": "fadein", "duration": 0.5 }
+                        ]
+                  },
+                  {
+                        "type": "text",
+                        "text": "AFTER",
+                        "font_size": 40,
+                        "color": "lightgray",
+                        "position": [
+                              "center",
+                              "center"
+                        ],
+                        "start": 5,
+                        "duration": 5
+                  },
+                  {
+                        "type": "enhanced_image",
+                        "source": "gs://real-estate-videos/test_videos/2G Video Tour - Compressed.mp4@02:04",
+                        "prompt": "Create a spa-like bathroom. First, remove the person's reflection from the mirror. Change the cabinet color to a clean, modern white. Replace the faucets with sleek, brushed nickel fixtures. Neatly place folded white towels, a high-end soap dispenser set, and a small orchid on the vanity. Add a wooden bath tray with a book and a candle across the soaking tub.",
+                        "duration": 5,
+                        "position": [
+                              "center",
+                              "center"
+                        ],
+                        "start": 5,
+                        "effects": [
+                              { "type": "resize", "height": 600 },
+                              { "type": "fadein", "duration": 0.5 }
+                        ]
+                  }
+            ]
+      },
+      {
+            "type": "composite",
+            "duration": 10,
+            "size": [
+                  1920,
+                  1080
+            ],
+            "clips": [
+                  {
+                        "type": "color",
+                        "size": [
+                              1920,
+                              1080
+                        ],
+                        "color": [
+                              25,
+                              25,
+                              40
+                        ],
+                        "duration": 10
+                  },
+                  {
+                        "type": "text",
+                        "text": "Bold & Modern Update - Before & After",
+                        "font_size": 50,
+                        "color": "white",
+                        "position": [
+                              "center",
+                              100
+                        ],
+                        "start": 0,
+                        "duration": 10
+                  },
+                  {
+                        "type": "text",
+                        "text": "BEFORE",
+                        "font_size": 40,
+                        "color": "lightgray",
+                        "position": [
+                              480,
+                              950
+                        ],
+                        "start": 0,
+                        "duration": 5
+                  },
+                  {
+                        "type": "enhanced_image",
+                        "source": "gs://real-estate-videos/test_videos/2G Video Tour - Compressed.mp4@02:04",
+                        "prompt": "",
+                        "duration": 5,
+                        "position": [
+                              "center",
+                              "center"
+                        ],
+                        "start": 0,
+                        "effects": [
+                              { "type": "resize", "height": 600 },
+                              { "type": "fadein", "duration": 0.5 }
+                        ]
+                  },
+                  {
+                        "type": "text",
+                        "text": "AFTER",
+                        "font_size": 40,
+                        "color": "lightgray",
+                        "position": [
+                              1440,
+                              950
+                        ],
+                        "start": 5,
+                        "duration": 5
+                  },
+                  {
+                        "type": "enhanced_image",
+                        "source": "gs://real-estate-videos/test_videos/2G Video Tour - Compressed.mp4@02:04",
+                        "prompt": "Give the bathroom a modern, bold look. Remove the person's reflection from the mirror. Paint the vanity cabinets a deep navy blue. Replace the hardware and faucets with modern brushed gold fixtures. Add a decorative runner rug with a black and white pattern in front of the vanity.",
+                        "duration": 5,
+                        "position": [
+                              "center",
+                              "center"
+                        ],
+                        "start": 5,
+                        "effects": [
+                              { "type": "resize", "height": 600 },
+                              { "type": "fadein", "duration": 0.5 }
+                        ]
+                  }
+            ]
+      }
+    ]
+  }
+}

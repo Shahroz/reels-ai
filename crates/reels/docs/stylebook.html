@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Holmes Murphy Style Guide - Enhanced</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /*------------------------------------*\
+          :ROOT & BASE STYLES
+        \*------------------------------------*/
+        :root {
+            --primary-red: #C02427;
+            --primary-blue: #005587;
+            --accent-orange: #F37321;
+            --accent-yellow: #FFC72C;
+            --accent-teal: #00838A;
+            --dark-gray: #333333;
+            --medium-gray: #666666;
+            --light-gray: #e0e0e0; /* Lighter gray for borders/backgrounds */
+            --light-gray-bg: #f8f8f8;
+            --neutral-white: #FFFFFF;
+
+            --font-heading: 'Montserrat', sans-serif;
+            --font-body: 'Open Sans', sans-serif;
+
+            --border-radius-sm: 4px;
+            --border-radius-md: 8px;
+        }
+
+        body {
+            font-family: var(--font-body);
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--dark-gray);
+            margin: 0;
+            padding: 20px;
+            background-color: var(--neutral-white);
+        }
+
+        .styleguide-section {
+            margin-bottom: 40px;
+            padding: 20px;
+            border: 1px solid #eee;
+            border-radius: var(--border-radius-md);
+            overflow: hidden; /* Contain floats/margins */
+        }
+
+        .styleguide-section h2 {
+            margin-top: 0;
+            border-bottom: 2px solid var(--primary-blue);
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            font-family: var(--font-heading);
+            color: var(--primary-blue);
+        }
+
+        .styleguide-section h3 {
+            font-size: 1.2rem;
+            margin-top: 30px;
+            margin-bottom: 10px;
+            color: var(--primary-blue);
+            border-bottom: 1px solid var(--light-gray);
+            padding-bottom: 3px;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #eee;
+            margin: 30px 0;
+        }
+
+        /* Utility Class */
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+
+        /*------------------------------------*\
+          COLOR PALETTE (No Change)
+        \*------------------------------------*/
+        .color-swatch {
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+            margin: 5px;
+            border: 1px solid #ccc;
+            text-align: center;
+            position: relative;
+        }
+        .color-swatch span {
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.7);
+            font-size: 12px;
+            padding: 2px;
+        }
+
+        /*------------------------------------*\
+          TYPOGRAPHY (No Change)
+        \*------------------------------------*/
+        h1, h2, h3.section-subheading, h4, h5, h6 { /* Adjusted h3 selector */
+            font-family: var(--font-heading);
+            font-weight: 700;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            line-height: 1.2;
+        }
+
+        h1 { font-size: 2.5rem; color: var(--primary-red); text-transform: uppercase; font-weight: 700; }
+        h2 { font-size: 1.8rem; color: var(--primary-blue); text-transform: uppercase; font-weight: 700; }
+        h3.section-subheading { font-size: 1.4rem; color: var(--dark-gray); font-weight: 600; } /* For major subheadings like "Why Partner" */
+        h4 { font-size: 1.1rem; color: var(--primary-blue); font-weight: 600; }
+        p { margin-bottom: 1em; font-size: 1rem; }
+        strong, b { font-weight: 600; }
+        a { color: var(--primary-blue); text-decoration: none; font-weight: 600; }
+        a:hover { color: var(--primary-red); text-decoration: underline; }
+        .text-highlight-red { color: var(--primary-red); font-weight: 600; }
+        .subtle-text { font-size: 0.9rem; color: var(--medium-gray); }
+
+
+        /*------------------------------------*\
+          BUTTONS (No Change)
+        \*------------------------------------*/
+        .btn { display: inline-block; padding: 10px 25px; border: none; border-radius: var(--border-radius-sm); font-family: var(--font-body); font-size: 0.95rem; font-weight: 600; text-align: center; text-decoration: none; cursor: pointer; transition: background-color 0.3s ease, color 0.3s ease; }
+        .btn-red { background-color: var(--primary-red); color: var(--neutral-white); }
+        .btn-red:hover { background-color: #a01f22; color: var(--neutral-white); }
+        .btn-blue { background-color: var(--primary-blue); color: var(--neutral-white); }
+        .btn-blue:hover { background-color: #003e6b; color: var(--neutral-white); }
+
+
+        /*------------------------------------*\
+          LAYOUT ELEMENTS (Cards/Blocks - No Change)
+        \*------------------------------------*/
+        .info-block { padding: 20px; margin-bottom: 15px; border-radius: var(--border-radius-sm); border: 1px solid transparent; }
+        .block-white { background-color: var(--neutral-white); color: var(--dark-gray); border-color: #ddd; }
+        .block-orange { background-color: var(--accent-orange); color: var(--neutral-white); }
+        .block-yellow { background-color: var(--accent-yellow); color: var(--dark-gray); }
+        .block-blue { background-color: var(--primary-blue); color: var(--neutral-white); }
+        .block-teal { background-color: var(--accent-teal); color: var(--neutral-white); }
+        .block-red { background-color: var(--primary-red); color: var(--neutral-white); }
+        .bordered-section { border: 1px solid var(--medium-gray); padding: 20px; margin-bottom: 20px; border-radius: var(--border-radius-sm); }
+
+
+        /*------------------------------------*\
+          GRAPHICAL ELEMENTS & PLACEHOLDERS (Partially Updated)
+        \*------------------------------------*/
+        .logo-placeholder { display: inline-block; padding: 10px 20px; border: 1px dashed var(--medium-gray); background-color: var(--light-gray-bg); color: var(--medium-gray); font-style: italic; margin-bottom: 10px; }
+        .image-placeholder { display: block; width: 150px; height: 150px; background-color: var(--light-gray-bg); border: 1px solid #ccc; display: flex; align-items: center; justify-content: center; color: var(--medium-gray); margin-bottom: 10px; text-align: center; }
+        .image-placeholder.portrait { /* Keep portrait styling simple for example */ width: 100px; height: 100px; }
+        .qr-code-placeholder { width: 100px; height: 100px; border: 1px solid var(--dark-gray); background-image: repeating-conic-gradient(var(--dark-gray) 0% 25%, var(--neutral-white) 0% 50%); background-size: 10px 10px; margin-bottom: 10px; }
+
+        /* --- NEW GRAPHICAL ELEMENTS --- */
+
+        /* 1. Color Block Accents (Checkerboard/Stacked Squares) */
+        .color-block-accent {
+            display: grid;
+            /* Adjust grid columns/rows based on the specific pattern needed */
+            /* Example: 2x2 grid */
+            grid-template-columns: repeat(2, 30px); /* Size of squares */
+            grid-template-rows: repeat(2, 30px);
+            gap: 0; /* No gap between squares */
+            width: fit-content; /* Adjust size to content */
+            margin-bottom: 15px;
+        }
+        .color-block-accent .block {
+            /* Individual block styles are set inline or with specific classes */
+        }
+        /* Example Color Classes */
+        .bg-primary-red { background-color: var(--primary-red); }
+        .bg-primary-blue { background-color: var(--primary-blue); }
+        .bg-accent-orange { background-color: var(--accent-orange); }
+        .bg-accent-yellow { background-color: var(--accent-yellow); }
+        .bg-accent-teal { background-color: var(--accent-teal); }
+        .bg-neutral-white { background-color: var(--neutral-white); }
+
+
+        /* 2. Tag Element */
+        .tag {
+            display: inline-block;
+            padding: 3px 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border-radius: var(--border-radius-sm);
+            color: var(--neutral-white);
+            text-transform: uppercase;
+            text-align: center;
+        }
+        .tag-red { background-color: var(--primary-red); }
+        .tag-orange { background-color: var(--accent-orange); } /* Example */
+        .tag-gray { background-color: var(--medium-gray); color: var(--neutral-white); }
+
+
+        /* 3. Map Placeholder with Markers */
+        .map-placeholder {
+            position: relative;
+            width: 100%;
+            max-width: 400px; /* Limit size */
+            height: 250px;
+            background-color: var(--light-gray);
+            border: 1px solid var(--medium-gray);
+            margin: 20px auto; /* Center it */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--medium-gray);
+            font-style: italic;
+        }
+        .location-marker {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: var(--accent-teal); /* Color from map */
+            border: 1px solid var(--neutral-white);
+            border-radius: 50% 50% 50% 0; /* Teardrop shape */
+            transform: rotate(-45deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: white;
+            /* Position using top/left */
+        }
+        .location-marker span { transform: rotate(45deg); } /* Counter-rotate text */
+
+
+        /* 4. Speech Bubble Shape */
+        .speech-bubble {
+            position: relative;
+            background: var(--primary-red);
+            color: var(--neutral-white);
+            padding: 20px;
+            border-radius: var(--border-radius-md);
+            margin-bottom: 30px; /* Space for the tail */
+            width: fit-content; /* Adjust to content */
+        }
+        .speech-bubble::after { /* The triangular tail */
+            content: '';
+            position: absolute;
+            bottom: -15px; /* Position below the bubble */
+            left: 30px; /* Adjust horizontal position */
+            width: 0;
+            height: 0;
+            border: 15px solid transparent;
+            border-top-color: var(--primary-red); /* Pointing down */
+            border-bottom: 0;
+        }
+        .speech-bubble h3 { /* Style heading inside bubble */
+            color: var(--neutral-white);
+            margin: 0;
+            font-size: 2rem;
+            border: none; /* Override default border */
+        }
+
+
+        /* --- NEW UI COMPONENTS --- */
+
+        /* 5. Profile Card (for Dedicated Team) */
+        .profile-card {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        .profile-card .image-placeholder.portrait { /* Reference existing class */
+            margin-right: 15px;
+            flex-shrink: 0; /* Prevent image from shrinking */
+        }
+        .profile-card-info h5 {
+            margin: 0 0 2px 0;
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            color: var(--dark-gray);
+            font-weight: 600;
+        }
+        .profile-card-info p {
+            margin: 0;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            color: var(--medium-gray);
+        }
+
+
+        /* 6. Process Step Card (for Audit Process) */
+        .process-step-card {
+            display: flex;
+            align-items: flex-start; /* Align items to top */
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        .process-step-card:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        .process-step-number {
+            font-family: var(--font-heading);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--medium-gray);
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        .process-step-content {
+            flex-grow: 1;
+        }
+        .process-step-content h5 {
+            margin: 0 0 5px 0;
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            color: var(--primary-blue);
+            font-weight: 600;
+        }
+        .process-step-content p {
+            margin: 0 0 5px 0;
+        }
+        .process-step-metadata {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .process-step-metadata .subtle-text {
+            font-style: italic;
+        }
+
+
+        /* 7. Feature Item (for Why Partner With Us?) */
+        .feature-item {
+            margin-bottom: 15px;
+        }
+        .feature-item h4 { /* Use H4 for the title */
+            margin-bottom: 3px;
+            font-size: 1.1rem; /* Adjust if needed */
+        }
+        .feature-item p {
+            margin-top: 0;
+        }
+
+    </style>
+</head>
+<body>
+
+<h1>Style Guide: Holmes Murphy Flyer - Enhanced</h1>
+<p>Based on the Jack Link's partnership flyer, including more specific UI components.</p>
+
+<!-- Color Palette Section (No Change) -->
+<section class="styleguide-section">
+    <h2>Color Palette</h2>
+    <div class="color-swatch" style="background-color: var(--primary-red);"><span>Primary Red<br>#C02427</span></div>
+    <div class="color-swatch" style="background-color: var(--primary-blue);"><span>Primary Blue<br>#005587</span></div>
+    <div class="color-swatch" style="background-color: var(--accent-orange);"><span>Accent Orange<br>#F37321</span></div>
+    <div class="color-swatch" style="background-color: var(--accent-yellow);"><span>Accent Yellow<br>#FFC72C</span></div>
+    <div class="color-swatch" style="background-color: var(--accent-teal);"><span>Accent Teal<br>#00838A</span></div>
+    <div class="color-swatch" style="background-color: var(--dark-gray);"><span>Dark Gray<br>#333333</span></div>
+    <div class="color-swatch" style="background-color: var(--medium-gray);"><span>Medium Gray<br>#666666</span></div>
+    <div class="color-swatch" style="background-color: var(--light-gray-bg); border-color: #ddd;"><span>Light Gray BG<br>#f8f8f8</span></div>
+    <div class="color-swatch" style="background-color: var(--neutral-white); border-color: #ddd;"><span>Neutral White<br>#FFFFFF</span></div>
+</section>
+
+<!-- Typography Section (No Change) -->
+<section class="styleguide-section">
+    <h2>Typography</h2>
+    <p>Heading Font: 'Montserrat', sans-serif | Body Font: 'Open Sans', sans-serif</p>
+    <hr>
+    <h1>H1 Heading Example (Linking Insurance)</h1>
+    <h2>H2 Heading Example (Beef Up Your Benefit Strategy)</h2>
+    <h3 class="section-subheading">H3 Subheading Example (Why Partner With Us?)</h3>
+    <h4>H4 Heading Example (Expert Insights:)</h4>
+    <p>This is a paragraph of body text using Open Sans. It should be clean and readable. We believe real value comes in finding ways to positively impact change. This starts with investing time to understand who you are, not just what you do. <strong>This text is strong/bold.</strong></p>
+    <p>This is another paragraph. <a href="#">This is a hyperlink</a> using the primary blue color.</p>
+    <p class="text-highlight-red">This text uses the .text-highlight-red class (like 'Your Culture, Your Business...').</p>
+    <p class="subtle-text">This is subtle text, often used for secondary info like (Employer & Holmes Murphy).</p>
+</section>
+
+<!-- Buttons Section (No Change) -->
+<section class="styleguide-section">
+    <h2>Buttons</h2>
+    <button class="btn btn-red">Red Button (Check out this video!)</button>
+    <button class="btn btn-blue">Blue Button (Example)</button>
+</section>
+
+<!-- Layout Elements Section (No Change) -->
+<section class="styleguide-section">
+    <h2>Layout Elements (Blocks/Cards)</h2>
+    <div class="info-block block-orange"><h4>Block Orange Title</h4><p>Content...</p></div>
+    <div class="info-block block-white"><h4>Block White Title</h4><p>Content...</p></div>
+    <div class="info-block block-yellow"><h4>Block Yellow Title</h4><p>Content...</p></div>
+    <div class="info-block block-blue"><h4>Block Blue Title</h4><p>Content...</p></div>
+    <div class="info-block block-teal"><h4>Block Teal Title</h4><p>Content...</p></div>
+    <div class="info-block block-red"><h4>Block Red Title</h4><p>Content...</p></div>
+    <div class="bordered-section"><h3>Bordered Section</h3><p>Content within a bordered container.</p></div>
+</section>
+
+<!-- Graphical Elements & Placeholders Section (Updated) -->
+<section class="styleguide-section">
+    <h2>Graphical Elements & Placeholders</h2>
+
+    <h3>Logo & Image Placeholders</h3>
+    <div class="logo-placeholder">Logo Placeholder</div>
+    <div class="image-placeholder">Generic Image Placeholder</div>
+    <div class="qr-code-placeholder"></div>
+
+    <h3>Color Block Accents (e.g., Top/Bottom Right Corners)</h3>
+    <p>Example 2x2 Grid:</p>
+    <div class="color-block-accent">
+        <div class="block bg-primary-blue"></div>
+        <div class="block bg-accent-teal"></div>
+        <div class="block bg-primary-red"></div>
+        <div class="block bg-accent-orange"></div>
+    </div>
+    <p>Example Horizontal Strip:</p>
+    <div class="color-block-accent" style="grid-template-columns: repeat(5, 20px); grid-template-rows: 20px;">
+        <div class="block bg-primary-blue"></div>
+        <div class="block bg-accent-teal"></div>
+        <div class="block bg-primary-red"></div>
+        <div class="block bg-accent-orange"></div>
+        <div class="block bg-accent-yellow"></div>
+    </div>
+
+    <h3>Tag Element (e.g., Audit Process Duration)</h3>
+    <span class="tag tag-red">1 Week</span>
+    <span class="tag tag-red">15 Min.</span>
+    <span class="tag tag-gray">Example Tag</span>
+
+    <h3>Map Placeholder with Markers</h3>
+    <div class="map-placeholder">
+        Map Area Placeholder
+        <div class="location-marker" style="top: 30%; left: 40%;"><span>A</span></div>
+        <div class="location-marker" style="top: 50%; left: 60%;"><span>B</span></div>
+        <div class="location-marker" style="top: 70%; left: 25%;"><span>C</span></div>
+    </div>
+
+    <h3>Speech Bubble Shape (e.g., Innovate.Fully)</h3>
+    <div class="speech-bubble">
+        <h3>Innovate.Fully</h3>
+    </div>
+
+</section>
+
+<!-- UI Components Section -->
+<section class="styleguide-section">
+    <h2>UI Components</h2>
+
+    <h3>Profile Card (Dedicated Team Member)</h3>
+    <div class="profile-card">
+        <div class="image-placeholder portrait">Portrait</div>
+        <div class="profile-card-info">
+            <h5>Brooks Deibele</h5>
+            <p>Sr. Vice President<br>612.322.6019<br>BDeibele@holmesmurphy.com</p>
+        </div>
+    </div>
+    <div class="profile-card">
+        <div class="image-placeholder portrait">Portrait</div>
+        <div class="profile-card-info">
+            <h5>Paul Crowley</h5>
+            <p>VP Sales Leader<br>612.322.6079<br>PCrowley@holmesmurphy.com</p>
+        </div>
+    </div>
+
+
+    <h3>Process Step Card (Audit Process)</h3>
+    <div class="process-step-card">
+        <div class="process-step-number">Step 1:</div>
+        <div class="process-step-content">
+            <div class="process-step-metadata">
+                <h5>Executive Introductory Meeting</h5>
+                <span class="tag tag-red">15 MIN.</span>
+            </div>
+            <p>Introductory meeting to describe the process</p>
+            <p class="subtle-text">(Employer & Holmes Murphy)</p>
+        </div>
+    </div>
+    <div class="process-step-card">
+        <div class="process-step-number">Step 2:</div>
+        <div class="process-step-content">
+            <div class="process-step-metadata">
+                <h5>Benefits Data Request</h5>
+                <span class="tag tag-red">1 WEEK</span>
+            </div>
+            <p>Employer will provide benefit data required above.</p>
+            <p class="subtle-text">(Employer & Holmes Murphy)</p>
+        </div>
+    </div>
+    <div class="process-step-card">
+        <div class="process-step-number">Step 3:</div>
+        <div class="process-step-content">
+            <div class="process-step-metadata">
+                <h5>Audit & Diagnostic Evaluation</h5>
+                <span class="tag tag-red">3 WEEKS</span>
+            </div>
+            <p>Perform contract optimization and audit of all agreements. Evaluate benefit data and perform comprehensive audit. Create risk analysis and assessment. Identify savings opportunities.</p>
+            <p class="subtle-text">(Holmes Murphy)</p>
+        </div>
+    </div>
+
+
+    <h3>Feature Item (Why Partner With Us?)</h3>
+    <div class="feature-item">
+        <h4>Expert Insights:</h4>
+        <p>Our team is supported by in-house experts who continuously monitor and analyze market trends ensuring we stay ahead of the curve.</p>
+    </div>
+    <div class="feature-item">
+        <h4>Dedicated Service:</h4>
+        <p>Benefit from a dedicated service team that acts as an extension of your HR department, providing personalized and seamless support.</p>
+    </div>
+    <div class="feature-item">
+        <h4>Exclusive Solutions:</h4>
+        <p>As a large, privately held broker, we offer proprietary solutions and special pricing with select carriers, helping you manage and reduce your overall costs effectively.</p>
+    </div>
+
+</section>
+
+</body>
+</html>

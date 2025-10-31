@@ -1,0 +1,28 @@
+[package]
+name = "actix-app"
+description = "An example for actix-web integration."
+version = "0.14.1"
+edition = { workspace = true }
+rust-version = { workspace = true }
+publish = { workspace = true }
+
+[dependencies]
+actix-web = { version = "4.10.2", default-features = false }
+serde = { workspace = true }
+tracing = { workspace = true }
+zino-core = { workspace = true, features = ["env-filter"] }
+zino-derive = { workspace = true }
+zino-model = { workspace = true }
+zino-orm = { workspace = true, features = ["orm-postgres"] }
+
+[dependencies.zino]
+workspace = true
+features = [
+    "actix",
+    "cookie",
+    "i18n",
+    "jwt",
+    "opa",
+    "orm",
+    "view",
+]

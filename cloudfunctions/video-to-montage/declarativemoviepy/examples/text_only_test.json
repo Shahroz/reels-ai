@@ -1,0 +1,12 @@
+{
+  "output_path": "text_only_test.mp4",
+  "size": [1920, 1080],
+  "fps": 30,
+  "clip": {
+    "type": "text",
+    "text": "Hello\nWorld",
+    "font_size": 80,
+    "color": "white",
+    "duration": 3
+  }
+}

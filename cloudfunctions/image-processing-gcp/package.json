@@ -1,0 +1,21 @@
+{
+  "name": "image-processing-gcp",
+  "description": "Image processing Google Cloud Function to convert images to PNG",
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {
+    "@google-cloud/storage": "^7.0.0",
+    "sharp": "^0.33.3"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.1"
+  },
+  "scripts": {
+    "lint": "./node_modules/.bin/eslint --max-warnings=0 .",
+    "test": "echo \"No tests specified\" && exit 0",
+    "deploy": "gcloud functions deploy processImage --runtime nodejs20 --trigger-http --allow-unauthenticated --source . --entry-point processImage --memory 2GB --timeout 540s --set-env-vars API_TOKEN=${API_TOKEN}"
+  },
+  "engines": {
+    "node": "20"
+  }
+}

@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["CandidateSelectMode","ParsePolicy","ReadabilityError","TextMode"],"fn":["is_probably_readable"],"struct":["Article","Config","Metadata","Readability"]};

@@ -1,0 +1,40 @@
+[package]
+name = "zino-openapi"
+description = "OpenAPI support for zino."
+version = "0.5.0"
+categories = ["asynchronous", "network-programming", "web-programming"]
+keywords = ["http", "web", "framework"]
+readme = "README.md"
+documentation = "https://docs.rs/zino-openapi"
+homepage = { workspace = true }
+repository = { workspace = true }
+edition = { workspace = true }
+rust-version = { workspace = true }
+license = { workspace = true }
+
+[features]
+debug = [
+    "utoipa/preserve_order",
+    "utoipa/preserve_path_order",
+    "zino-core/debug",
+]
+
+[dependencies]
+ahash = { workspace = true }
+convert_case = { workspace = true }
+serde_json = { workspace = true }
+toml = { workspace = true }
+tracing = { workspace = true }
+zino-core = { workspace = true }
+
+[dependencies.utoipa]
+version = "5.3.1"
+features = [
+    "non_strict_integers",
+    "ulid",
+    "url",
+    "uuid",
+]
+
+[lints]
+workspace = true

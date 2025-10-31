@@ -1,0 +1,246 @@
+{
+  "video_analysis": [
+    {
+      "timestamp": "00:00",
+      "description": "The video starts with an exterior shot of the house, showing the front yard with some landscaping and a parked truck. The camera then moves towards the side of the house."
+    },
+    {
+      "timestamp": "00:04",
+      "description": "The camera walks down a narrow concrete pathway along the side of the house, showing the wall on the left and some plants/hedges on the right. There's a gate visible at the end of the pathway."
+    },
+    {
+      "timestamp": "00:13",
+      "description": "The camera approaches the front door of the house, which is olive green with a digital lock. A 'hello' doormat and a small statue are visible."
+    },
+    {
+      "timestamp": "00:18",
+      "description": "The camera enters the house, revealing a dining room directly ahead with a wooden table and black chairs. The room has light-colored tile flooring and a window with blinds. The kitchen is visible beyond the dining room."
+    },
+    {
+      "timestamp": "00:21",
+      "speech": "All right. So as soon as you walk in, you have a dining room, off from the kitchen. You have a bedroom over there, hall down that way, but we will go through the kitchen first."
+    },
+    {
+      "timestamp": "00:38",
+      "description": "The camera moves into the kitchen area. It features granite countertops, dark wood cabinets, stainless steel appliances (refrigerator and gas range), and a large island with a bar stool. A double oven is also visible."
+    },
+    {
+      "timestamp": "00:41",
+      "speech": "Kitchen, granite countertops, stainless and black appliances."
+    },
+    {
+      "timestamp": "00:50",
+      "description": "The kitchen seamlessly transitions into the living room, which is furnished with light-colored couches and a TV. A sliding glass door leads to the backyard."
+    },
+    {
+      "timestamp": "00:52",
+      "speech": "Overlooking the living room."
+    },
+    {
+      "timestamp": "01:02",
+      "speech": "Take a gander outside now, shall we?"
+    },
+    {
+      "timestamp": "01:03",
+      "description": "The camera moves out to the backyard through the sliding glass door. The backyard features a paved patio area, artificial turf, and various desert-friendly plants and trees, enclosed by a block wall."
+    },
+    {
+      "timestamp": "01:09",
+      "speech": "Nice little cozy backyard."
+    },
+    {
+      "timestamp": "01:16",
+      "speech": "Turn."
+    },
+    {
+      "timestamp": "01:32",
+      "description": "The camera re-enters the living room from the backyard, providing another view of the open-concept kitchen and dining area."
+    },
+    {
+      "timestamp": "01:46",
+      "speech": "All right."
+    },
+    {
+      "timestamp": "01:47",
+      "speech": "We are about to enter into the primary bedroom, right off of everything."
+    },
+    {
+      "timestamp": "01:50",
+      "description": "The camera enters the primary bedroom, which is carpeted and furnished with a bed, nightstands, and a dresser. The room has white walls and a window with blinds."
+    },
+    {
+      "timestamp": "01:56",
+      "speech": "Cool."
+    },
+    {
+      "timestamp": "02:00",
+      "description": "The camera moves into the primary bathroom, showcasing dual sinks with a large mirror, a large soaking tub with a shower enclosure, and a separate toilet area. There's also a walk-in closet."
+    },
+    {
+      "timestamp": "02:01",
+      "speech": "Uh right there, a walk-in closet and the marriage saver, aka water closet."
+    },
+    {
+      "timestamp": "02:22",
+      "description": "The camera exits the primary bedroom and walks down the main hallway. On the right, a laundry room with a washer and dryer is visible."
+    },
+    {
+      "timestamp": "02:24",
+      "speech": "Down the hallway here."
+    },
+    {
+      "timestamp": "02:27",
+      "speech": "You have the laundry room off to the right."
+    },
+    {
+      "timestamp": "02:35",
+      "description": "The camera enters the second bedroom, which is currently set up as an office space with two desks. It has carpeted flooring and a window."
+    },
+    {
+      "timestamp": "02:37",
+      "speech": "Secondary bedroom with the closet."
+    },
+    {
+      "timestamp": "02:50",
+      "description": "The camera moves past a decorative cabinet in the hallway."
+    },
+    {
+      "timestamp": "02:56",
+      "description": "The camera enters the secondary bathroom, which has a single sink vanity, a toilet, and a bathtub with a shower curtain."
+    },
+    {
+      "timestamp": "02:57",
+      "speech": "Secondary bathroom."
+    },
+    {
+      "timestamp": "03:05",
+      "description": "The camera enters the third bedroom, which is empty, carpeted, and has a window with blinds. A sliding closet door is visible."
+    },
+    {
+      "timestamp": "03:07",
+      "speech": "And the third bedroom."
+    },
+    {
+      "timestamp": "03:18",
+      "description": "The video ends with a shot looking back down the hallway towards the living area."
+    }
+  ],
+  "promo_segments": [
+    {
+      "start_timestamp": "00:18",
+      "end_timestamp": "00:28",
+      "description": "Smooth entrance showing the spacious dining area and glimpse of the kitchen."
+    },
+    {
+      "start_timestamp": "00:38",
+      "end_timestamp": "00:50",
+      "description": "Detailed view of the kitchen, highlighting countertops and appliances, with a fluid transition to the living room."
+    },
+    {
+      "start_timestamp": "00:50",
+      "end_timestamp": "00:59",
+      "description": "Panoramic view of the living room, showing its size and connection to the kitchen/backyard."
+    },
+    {
+      "start_timestamp": "01:03",
+      "end_timestamp": "01:16",
+      "description": "Showcase of the cozy and well-maintained backyard with artificial turf and patio."
+    },
+    {
+      "start_timestamp": "01:50",
+      "end_timestamp": "01:59",
+      "description": "Brief but inviting shot of the primary bedroom, showing its layout and furniture."
+    },
+    {
+      "start_timestamp": "02:00",
+      "end_timestamp": "02:13",
+      "description": "Highlights the primary bathroom's key features: dual sinks, tub, shower, and walk-in closet."
+    }
+  ],
+  "photo_opportunities": [
+    {
+      "timestamp": "00:00",
+      "description": "Front exterior of the two-story beige stucco house with a green truck in the driveway, showing desert landscaping and the front walkway.",
+      "arrangement_options": [
+        {
+          "title": "Curb Appeal Boost",
+          "prompt": "Using the existing photo as a base, remove the green truck from the driveway. Enhance the green of the tree and shrubs to make them look more vibrant. Make the sky a clearer, more saturated blue with a few soft, white clouds. Add colorful flowering plants, like yellow marigolds and purple lantana, to the garden beds to increase curb appeal."
+        },
+        {
+          "title": "Twilight Charm",
+          "prompt": "Transform the scene to a twilight setting. Remove the truck. Deepen the sky to a rich indigo blue. Turn on the exterior lights by the garage and front door, and add a warm, inviting glow from the windows as if the interior is lit. The overall mood should be cozy and high-end."
+        }
+      ]
+    },
+    {
+      "timestamp": "00:42",
+      "description": "A wide view of the kitchen, focusing on the large granite island. The background includes dark wood cabinets, a stainless steel refrigerator, and a gas cooktop.",
+      "arrangement_options": [
+        {
+          "title": "Gourmet Chef's Kitchen",
+          "prompt": "Virtually stage the kitchen. On the granite island, place a wooden cutting board with freshly chopped colorful bell peppers, a glass bowl of lemons, and a bottle of artisan olive oil. On the back counter, add a high-end stand mixer in a vibrant red color. The scene should feel like a chef's workspace."
+        },
+        {
+          "title": "Modern & Sleek",
+          "prompt": "Update the kitchen's look. Change the cabinet hardware to long, sleek, matte black handles. Remove the current decor from the island and replace it with a single, large modern white orchid in a black pot. Add two contemporary bar stools with black metal legs and light wood seats at the island."
+        }
+      ]
+    },
+    {
+      "timestamp": "00:57",
+      "description": "A wide view of the living room featuring two white sofas and a TV on a small stand, showing the open space and tile flooring.",
+      "arrangement_options": [
+        {
+          "title": "Cozy Family Movie Night",
+          "prompt": "Virtually furnish the living room. Replace the current sofas with a large, comfortable L-shaped sectional in a neutral gray fabric. Add plush throw pillows in shades of navy blue and cream, and a chunky knit blanket. Place a large, soft area rug with a subtle geometric pattern. Mount the TV on the wall and place a sleek, modern, low-profile media console below it."
+        },
+        {
+          "title": "Bright & Airy Living",
+          "prompt": "Create a bright, minimalist living space. Remove all existing furniture. Add a light-colored linen sofa, two stylish accent chairs in a textured fabric, and a round coffee table made of light wood. Place a large, vibrant area rug with a modern abstract design on the floor. Add a tall fiddle-leaf fig plant in the corner near the window."
+        }
+      ]
+    },
+    {
+      "timestamp": "01:08",
+      "description": "A wide view of the backyard, showcasing the artificial turf patch, paved patio, desert landscaping, trees, and surrounding block wall.",
+      "arrangement_options": [
+        {
+          "title": "Outdoor Oasis",
+          "prompt": "Enhance the backyard for entertaining. On the paved patio, add an outdoor seating set including a small wicker sofa, two matching chairs with comfortable cushions, and a coffee table. Drape a string of warm Edison bulb lights from the covered patio overhead. Add a modern, smokeless fire pit in the gravel area."
+        },
+        {
+          "title": "Garden Paradise",
+          "prompt": "Make the backyard greener. Enhance the existing plants and trees to appear fuller and more lush. Add vibrant flowering bushes, like bright pink bougainvillea, climbing the back wall. Make the artificial turf look even greener and more pristine, and add a few colorful potted plants on the patio."
+        }
+      ]
+    },
+    {
+      "timestamp": "01:55",
+      "description": "A wide shot of the primary bedroom with a queen-sized bed, white linens, a dark wood dresser, and a nightstand on a carpeted floor.",
+      "arrangement_options": [
+        {
+          "title": "Serene & Luxurious Retreat",
+          "prompt": "Upgrade the primary bedroom. Change the bed to a king-size with a tall, upholstered headboard in a light grey fabric. Dress the bed with high-end, layered white linens, a duvet, accent pillows in muted earth tones, and a textured throw blanket. Replace the nightstands and dresser with a matching, modern light-wood set. Add a large, plush area rug under the bed."
+        },
+        {
+          "title": "Boho Chic Bedroom",
+          "prompt": "Give the bedroom a bohemian feel. Add a large macrame wall hanging above the bed. Change the bedding to include a patterned duvet cover and textured pillows. Add a rattan accent chair in the corner and more potted plants, like a snake plant on the dresser and a hanging plant near the window."
+        }
+      ]
+    },
+    {
+      "timestamp": "02:04",
+      "description": "View of the primary bathroom, showing the double vanity with wood cabinets, a large soaking tub, and the entrance to the closet. The filmer's reflection is visible in the mirror.",
+      "arrangement_options": [
+        {
+          "title": "Spa-like Sanctuary",
+          "prompt": "Create a spa-like bathroom. First, remove the person's reflection from the mirror. Change the cabinet color to a clean, modern white. Replace the faucets with sleek, brushed nickel fixtures. Neatly place folded white towels, a high-end soap dispenser set, and a small orchid on the vanity. Add a wooden bath tray with a book and a candle across the soaking tub."
+        },
+        {
+          "title": "Bold & Modern Update",
+          "prompt": "Give the bathroom a modern, bold look. Remove the person's reflection from the mirror. Paint the vanity cabinets a deep navy blue. Replace the hardware and faucets with modern brushed gold fixtures. Add a decorative runner rug with a black and white pattern in front of the vanity."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+[package]
+name = "axum-app"
+description = "An example for axum integration."
+version = "0.21.1"
+edition = { workspace = true }
+rust-version = { workspace = true }
+publish = { workspace = true }
+
+[dependencies]
+axum = { version = "0.8.3", default-features = false }
+serde = { workspace = true }
+tracing = { workspace = true }
+zino-core = { workspace = true, features = ["env-filter", "validator-email"] }
+zino-derive = { workspace = true }
+zino-model = { workspace = true }
+zino-orm = { workspace = true, features = ["orm-mysql"] }
+
+[dependencies.zino]
+workspace = true
+features = [
+    "axum",
+    "cookie",
+    "i18n",
+    "inertia",
+    "jwt",
+    "orm",
+    "view",
+]

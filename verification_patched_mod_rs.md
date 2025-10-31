@@ -1,0 +1,1 @@
+Attempted to patch `crates/narrativ/backend/src/services/mod.rs` due to GcsStorage related error. Review `__cargo_check_output.txt` for the original error and the applied patch to confirm resolution. If this was the only GcsStorage-related issue, the removal is likely successful pending confirmation of the patch.

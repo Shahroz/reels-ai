@@ -1,0 +1,10 @@
+{
+  "assets": [
+    {"type": "video", "gcs_uri": "gs://your-bucket/path/to/video.mp4"},
+    {"type": "photo", "gcs_uri": "gs://your-bucket/path/to/image.jpg"}
+  ],
+  "output_gcs_uri": "gs://your-bucket/outputs/montage.json",
+  "prompt": "Create a fast-paced, energetic promo.",
+  "length": 30,
+  "resolution": [1920, 1080]
+}

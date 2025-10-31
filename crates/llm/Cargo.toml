@@ -1,0 +1,43 @@
+[package]
+name = "llm"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "1.0"
+base64 = "0.22.1"
+chrono = { version = "0.4", features = ["serde"] }
+dotenvy = "0.15" # For API keys, especially in examples/tests if kept
+futures = "0.3"
+jsonschema = "0.12"
+log = "0.4" # Added for potential logging within the crate
+reqwest = { version = "0.11", features = ["json", "blocking", "default-tls", "stream"] }
+schemars = { version = "1.0.0-alpha.15", features = ["chrono04", "uuid1", "preserve_order", "url2"]}
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+serde_with = "3.7.0"
+serde_yaml = "0.9"
+toml = "0.8.8"
+strum = "0.26"
+strum_macros = "0.26"
+thiserror = "1.0"
+tiktoken-rs = "0.5"
+tokio = { version = "1", features = ["full"] } # For async operations
+async-sse = "5.1.0"
+futures-util = "0.3.31"
+async-trait = "0.1.86"
+gcp-bigquery-client = "0.24.1"
+google-cloud-auth = "0.13.0"
+google-cloud-storage = "0.22.1"
+google-cloud-token = "0.1.2"
+gcp_auth = "0.10"
+
+[dev-dependencies]
+dotenvy = "0.15" # For loading .env file in integration tests
+mockall = "0.12"
+
+# Add dev dependencies if tests are kept/added within this crate
+# approx = "0.5"
+# mockall = "~0.12"
+
+regex = "1" # Used by broken_json_loads_2 for pattern properties

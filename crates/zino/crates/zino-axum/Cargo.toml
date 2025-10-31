@@ -1,0 +1,60 @@
+[package]
+name = "zino-axum"
+description = "Integrations with axum for zino."
+version = "0.8.0"
+categories = ["asynchronous", "network-programming", "web-programming"]
+keywords = ["http", "web", "framework"]
+readme = "README.md"
+documentation = "https://docs.rs/zino-axum"
+homepage = { workspace = true }
+repository = { workspace = true }
+edition = { workspace = true }
+rust-version = { workspace = true }
+license = { workspace = true }
+
+[features]
+orm = ["zino-orm", "zino-orm/openapi"]
+
+[dependencies]
+futures = { workspace = true }
+http = { workspace = true }
+tokio = { workspace = true }
+tracing = { workspace = true }
+zino-core = { workspace = true, features = ["runtime-tokio"] }
+zino-http = { workspace = true }
+zino-orm = { workspace = true, optional = true }
+zino-openapi = { workspace = true }
+
+[dependencies.axum]
+version = "0.8.3"
+default-features = false
+features = [
+    "http1",
+    "matched-path",
+    "original-uri",
+    "tokio",
+]
+
+[dependencies.tower]
+version = "0.5.2"
+features = ["timeout"]
+
+[dependencies.tower-http]
+version = "0.6.2"
+features = [
+    "add-extension",
+    "catch-panic",
+    "compression-gzip",
+    "cors",
+    "decompression-gzip",
+    "fs",
+    "set-header",
+    "trace",
+]
+
+[dependencies.utoipa-rapidoc]
+version = "6.0.0"
+features = ["axum"]
+
+[lints]
+workspace = true

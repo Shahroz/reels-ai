@@ -1,0 +1,106 @@
+[package]
+name = "zino-http"
+description = "HTTP requests and responses for zino."
+version = "0.6.0"
+categories = ["asynchronous", "network-programming", "web-programming"]
+keywords = ["http", "web", "framework"]
+readme = "README.md"
+documentation = "https://docs.rs/zino-http"
+homepage = { workspace = true }
+repository = { workspace = true }
+edition = { workspace = true }
+rust-version = { workspace = true }
+license = { workspace = true }
+
+[package.metadata.docs.rs]
+features = [
+    "auth",
+    "cookie",
+    "i18n",
+    "inertia",
+    "jwt",
+    "metrics",
+    "view",
+]
+cargo-args = ["-Zunstable-options", "-Zrustdoc-scrape-examples"]
+rustdoc-args = ["--cfg", "docsrs"]
+
+[features]
+auth = ["zino-auth"]
+cookie = ["dep:cookie", "reqwest/cookies", "zino-core/cookie"]
+debug = [
+    "minijinja?/debug",
+    "minijinja?/preserve_order",
+    "serde_json/preserve_order",
+    "tera?/preserve_order",
+    "toml/preserve_order",
+    "zino-core/debug",
+]
+i18n = ["dep:fluent", "dep:intl-memoizer", "dep:unic-langid"]
+inertia = []
+http02 = ["dep:http02"]
+jwt = ["dep:jwt-simple", "auth", "zino-auth/jwt"]
+metrics = ["dep:metrics", "zino-core/metrics"]
+view = ["dep:convert_case", "dep:minijinja"]
+view-minijinja = ["view", "dep:minijinja"]
+view-tera = ["view", "dep:tera"]
+
+[dependencies]
+ryu = "1.0.20"
+bytes = { workspace = true }
+cfg-if = { workspace = true }
+convert_case = { workspace = true, optional = true }
+etag = { workspace = true }
+futures = { workspace = true }
+http = { workspace = true }
+jwt-simple = { workspace = true, optional = true }
+metrics = { workspace = true, optional = true }
+mime_guess = { workspace = true }
+multer = { workspace = true }
+percent-encoding = { workspace = true }
+regex = { workspace = true }
+reqwest = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+serde_qs = { workspace = true }
+smallvec = { workspace = true }
+toml = { workspace = true }
+tracing = { workspace = true }
+url = { workspace = true }
+zino-auth = { workspace = true, optional = true }
+zino-channel = { workspace = true }
+zino-core = { workspace = true, features = ["http-client"] }
+zino-storage = { workspace = true, features = ["http-client"] }
+
+[dependencies.cookie]
+version = "0.18.1"
+optional = true
+
+[dependencies.fluent]
+version = "0.16.1"
+optional = true
+
+[dependencies.http02]
+package = "http"
+version = "0.2.12"
+optional = true
+
+[dependencies.intl-memoizer]
+version = "0.5.2"
+optional = true
+
+[dependencies.minijinja]
+version = "2.9.0"
+optional = true
+features = ["loader"]
+
+[dependencies.tera]
+version = "1.20.0"
+optional = true
+
+[dependencies.unic-langid]
+version = "0.9.5"
+optional = true
+
+[lints]
+workspace = true

@@ -1,0 +1,1 @@
+Bounti.ai is an AI platform for automating complex software development tasks (coding, testing, refactoring) by coordinating AI agents. Key use cases include feature implementation, bug fixing, large-scale refactoring, integrating AI-generated code into existing projects, and potentially automating documentation generation (e.g., for CI/CD pipelines).

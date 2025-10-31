@@ -1,0 +1,10 @@
+interface DataTableToolbarProps<TData> {
+  table: Table<TData>
+  // Add filter props
+  styleId: string | null
+  setStyleId: (id: string | null) => void
+  researchIds: string[]
+  setResearchIds: (ids: string[]) => void
+  collectionId: string | null
+  setCollectionId: (id: string | null) => void
+}

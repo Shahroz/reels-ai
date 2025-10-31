@@ -1,0 +1,1 @@
+from .main import render_from_json_file

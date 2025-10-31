@@ -1,0 +1,6 @@
+*.mp4
+*.mov
+*.mp3
+__pycache__/
+declarativemoviepy/__pycache__/
+/declarativemoviepy/moviepy/

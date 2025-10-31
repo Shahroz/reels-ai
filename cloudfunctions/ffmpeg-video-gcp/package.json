@@ -1,0 +1,22 @@
+{
+  "name": "ffmpeg-extract-frames-gcp",
+  "description": "FFMPEG Extract Frames from Video Google Cloud Function",
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {
+    "@google-cloud/storage": "^7.0.0",
+    "ffmpeg-static": "^5.2.0",
+    "fluent-ffmpeg": "^2.1.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.1"
+  },
+  "scripts": {
+    "lint": "./node_modules/.bin/eslint --max-warnings=0 .",
+    "test": "echo \"No tests specified\" && exit 0",
+    "deploy": "gcloud functions deploy extractVideoFrames --runtime nodejs20 --trigger-http --allow-unauthenticated --source . --entry-point extractVideoFrames --memory 2GB --timeout 540s --set-env-vars API_TOKEN=${API_TOKEN}"
+  },
+  "engines": {
+    "node": "20"
+  }
+}

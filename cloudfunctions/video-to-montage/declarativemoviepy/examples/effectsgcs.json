@@ -1,0 +1,27 @@
+{
+  "output_path": "effects.mp4",
+  "fps": 30,
+  "clip": {
+    "type": "video",
+    "source": "gs://real-estate-viddeos/test_videos/7b4435e5-d92c-40e1-b731-e7cae3fd1c50.mov",
+    "duration": 10,
+    "effects": [
+      {
+        "type": "fadein",
+        "duration": 1.5
+      },
+      {
+        "type": "fadeout",
+        "duration": 2.0
+      },
+      {
+        "type": "multiply_speed",
+        "factor": 2.0
+      },
+      {
+        "type": "multiply_volume",
+        "factor": 0.5
+      }
+    ]
+  }
+}

@@ -1,0 +1,109 @@
+{
+  "output_path": "real_estate_tour.mp4",
+  "size": [1080, 1920],
+  "fps": 30,
+  "audio": {
+    "type": "audio",
+    "source": "/Users/pawel/Bounti/common-rs/crates/declarativemoviepy/examples/A Stroll - The Grey Room _ Density & Time.mp3",
+    "effects": [
+      {"type": "multiply_volume", "factor": 0.3},
+      {"type": "audio_fadein", "duration": 2},
+      {"type": "audio_fadeout", "duration": 3}
+    ]
+  },
+  "clip": {
+    "type": "concatenate",
+    "clips": [
+      {
+        "type": "composite",
+        "duration": 32,
+        "clips": [
+          {
+            "type": "video",
+            "source": "/Users/pawel/Bounti/common-rs/cloudfunctions/video-to-panoramas/videos/7b4435e5-d92c-40e1-b731-e7cae3fd1c50.mov",
+            "effects": [
+              {
+                "type": "speed",
+                "factor": 1.2
+              }
+            ]
+          },
+          {
+            "type": "text",
+            "text": "Welcome to Your\nFuture Home",
+            "font_size": 90,
+            "color": "white",
+            "position": ["center", 300],
+            "start": 1,
+            "duration": 4,
+            "effects": [
+              { "type": "fadein", "duration": 1 },
+              { "type": "fadeout", "duration": 1 }
+            ]
+          },
+          {
+            "type": "text",
+            "text": "Spacious Living Area",
+            "font_size": 70,
+            "color": "white",
+            "position": ["center", "center"],
+            "start": 5,
+            "duration": 4,
+            "effects": [
+              { "type": "fadein", "duration": 1 },
+              { "type": "fadeout", "duration": 1 }
+            ]
+          },
+          {
+            "type": "text",
+            "text": "Modern Kitchen & Appliances",
+            "font_size": 70,
+            "color": "white",
+            "position": ["center", "center"],
+            "start": 10,
+            "duration": 4,
+            "effects": [
+              { "type": "fadein", "duration": 1 },
+              { "type": "fadeout", "duration": 1 }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "composite",
+        "duration": 5,
+        "size": [1080, 1920],
+        "clips": [
+          {
+            "type": "color",
+            "size": [1080, 1920],
+            "color": [25, 25, 40],
+            "duration": 5
+          },
+          {
+            "type": "text",
+            "text": "Contact us for a viewing!",
+            "font_size": 60,
+            "color": "white",
+            "width": 1800,
+            "align": "center",
+            "position": ["center", 400],
+            "start": 0.5,
+            "duration": 4
+          },
+          {
+            "type": "text",
+            "text": "Jane Doe\n(123) 456-7890\njane.doe@realestate.com",
+            "font_size": 40,
+            "color": "lightgray",
+            "width": 1800,
+            "align": "center",
+            "position": ["center", 550],
+            "start": 2.0,
+            "duration": 2.5
+          }
+        ]
+      }
+    ]
+  }
+}

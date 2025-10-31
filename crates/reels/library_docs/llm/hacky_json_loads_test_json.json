@@ -1,0 +1,25 @@
+```json
+{
+"reasoning": "The input provided outlines the capabilities and benefits of Bounti's AI tool for prospecting and outreach. The ads should focus on highlighting the AI efficiency, reduced outreach time, and the personalization capabilities offered by Bounti. Two versions of ads are constructed: one focusing on the overall efficiency and time-saving aspect, and the other on the personalized engagement features to engage different customer segments.",
+"collection": [
+{
+"headline": "Revolutionize Prospecting in Minutes",
+"description": [
+"Leverage autonomous AI to save 40% time on outreach.",
+"Empower your team with personalized engagement."
+],
+"displayUrl": "https://www.bounti.ai",
+"finalUrl": "https://www.bounti.ai"
+},
+{
+"headline1": "Deliver True Personalization",
+"headline2": "Enhanced Targeting with AI",
+"headline3": "Get Started Today",
+"description": "Streamline workflows with AI: research, prepare, and prospect instantly.",
+"path1": "personalization",
+"path2": "targeting",
+"finalUrl": "https://www.bounti.ai"
+}
+]
+}
+```

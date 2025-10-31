@@ -1,0 +1,65 @@
+[workspace]
+resolver = "2"
+members = [
+    "actix-app",
+    "amis-app",
+    "axum-app",
+    "dioxus-desktop",
+    "minimal-app",
+    "ntex-app",
+]
+
+[workspace.package]
+edition = "2024"
+rust-version = "1.85"
+publish = false
+
+[workspace.dependencies]
+tracing = "0.1.41"
+
+[workspace.dependencies.serde]
+version = "1.0.219"
+features = ["derive"]
+
+[workspace.dependencies.zino]
+path = "../crates/zino"
+version = "0.34.0"
+
+[workspace.dependencies.zino-amis]
+path = "../crates/zino-amis"
+version = "0.6.0"
+
+[workspace.dependencies.zino-core]
+path = "../crates/zino-core"
+version = "0.34.0"
+
+[workspace.dependencies.zino-derive]
+path = "../crates/zino-derive"
+version = "0.32.2"
+
+[workspace.dependencies.zino-dioxus]
+path = "../crates/zino-dioxus"
+version = "0.15.2"
+
+[workspace.dependencies.zino-model]
+path = "../crates/zino-model"
+version = "0.32.1"
+
+[workspace.dependencies.zino-orm]
+path = "../crates/zino-orm"
+version = "0.6.1"
+
+[profile.release]
+lto = "thin"
+codegen-units = 1
+strip = true
+
+[profile.wasm-dev]
+inherits = "dev"
+opt-level = 1
+
+[profile.server-dev]
+inherits = "dev"
+
+[profile.android-dev]
+inherits = "dev"

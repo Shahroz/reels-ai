@@ -1,0 +1,45 @@
+[package]
+name = "zino-orm"
+description = "ORM for zino."
+version = "0.6.1"
+categories = ["asynchronous", "network-programming", "web-programming"]
+keywords = ["http", "web", "framework"]
+readme = "README.md"
+documentation = "https://docs.rs/zino-orm"
+homepage = { workspace = true }
+repository = { workspace = true }
+edition = { workspace = true }
+rust-version = { workspace = true }
+license = { workspace = true }
+
+[features]
+default = ["orm-sqlx"]
+openapi = ["zino-openapi"]
+orm = ["orm-sqlx"]
+orm-mariadb = ["orm-sqlx", "sqlx/mysql"]
+orm-mysql = ["orm-sqlx", "sqlx/mysql"]
+orm-postgres = ["orm-sqlx", "sqlx/postgres"]
+orm-sqlite = ["orm-sqlx", "sqlx/sqlite"]
+orm-sqlx = ["sqlx", "sqlx/sqlite", "zino-core/sqlx"]
+orm-tidb = ["orm-sqlx", "sqlx/mysql"]
+
+[dependencies]
+apache-avro = { workspace = true }
+cfg-if = { workspace = true }
+chrono = { workspace = true }
+convert_case = { workspace = true }
+http = { workspace = true }
+futures = { workspace = true }
+regex = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+smallvec = { workspace = true }
+sqlx = { workspace = true, optional = true }
+toml = { workspace = true }
+tracing = { workspace = true }
+url = { workspace = true }
+zino-core = { workspace = true }
+zino-openapi = { workspace = true, optional = true }
+
+[lints]
+workspace = true

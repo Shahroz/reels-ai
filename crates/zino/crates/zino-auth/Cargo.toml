@@ -1,0 +1,74 @@
+[package]
+name = "zino-auth"
+description = "Authentication and authorization for zino."
+version = "0.6.0"
+categories = ["asynchronous", "network-programming", "web-programming"]
+keywords = ["http", "web", "framework"]
+readme = "README.md"
+documentation = "https://docs.rs/zino-auth"
+homepage = { workspace = true }
+repository = { workspace = true }
+edition = { workspace = true }
+rust-version = { workspace = true }
+license = { workspace = true }
+
+[package.metadata.docs.rs]
+features = [
+    "jwt",
+    "oidc",
+    "opa",
+    "sqids",
+]
+cargo-args = ["-Zunstable-options", "-Zrustdoc-scrape-examples"]
+rustdoc-args = ["--cfg", "docsrs"]
+
+[features]
+crypto-sm = ["dep:sm3", "zino-core/crypto-sm"]
+jwt = ["dep:jwt-simple"]
+oidc = ["dep:rauthy-client"]
+opa = ["regorus"]
+sqids = ["dep:sqids"]
+
+[dependencies]
+cfg-if = { workspace = true }
+hmac = { workspace = true }
+http = { workspace = true }
+jwt-simple = { workspace = true, optional = true }
+parking_lot = { workspace = true }
+rand = { workspace = true }
+serde = { workspace = true }
+sm3 = { workspace = true, optional = true }
+toml = { workspace = true }
+tracing = { workspace = true }
+zino-core = { workspace = true }
+
+[dependencies.rauthy-client]
+version = "0.6.1"
+optional = true
+
+[dependencies.regorus]
+version = "0.4.0"
+optional = true
+default-features = false
+features = [
+    "arc",
+    "base64",
+    "base64url",
+    "crypto",
+    "glob",
+    "hex",
+    "http",
+    "jsonschema",
+    "regex",
+    "semver",
+    "time",
+    "urlquery",
+    "uuid",
+]
+
+[dependencies.sqids]
+version = "0.4.2"
+optional = true
+
+[lints]
+workspace = true

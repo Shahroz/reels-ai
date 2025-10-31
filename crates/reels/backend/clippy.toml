@@ -1,0 +1,6 @@
+# clippy.toml
+#warn = ["clippy::all"]
+disallowed-methods = [
+    { path = "sqlx::query_as", reason = "use the compile-time checked `query_as!` macro instead" },
+    { path = "sqlx::query_as_with", reason = "use the compile-time checked `query_as!` macro instead" },
+]

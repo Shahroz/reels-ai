@@ -1,0 +1,36 @@
+{
+  "output_path": "text_on_color_test.mp4",
+  "size": [1920, 1080],
+  "fps": 30,
+  "clip": {
+    "type": "composite",
+    "duration": 5,
+    "size": [1920, 1080],
+    "clips": [
+      {
+        "type": "color",
+        "size": [1920, 1080],
+        "color": [25, 25, 40],
+        "duration": 5
+      },
+      {
+        "type": "text",
+        "text": "This Text\nShould Work!",
+        "font_size": 80,
+        "color": "white",
+        "position": ["center", 400],
+        "start": 0.5,
+        "duration": 4
+      },
+      {
+        "type": "text",
+        "text": "Second line of text",
+        "font_size": 50,
+        "color": "lightgray",
+        "position": ["center", 550],
+        "start": 1.0,
+        "duration": 3
+      }
+    ]
+  }
+}

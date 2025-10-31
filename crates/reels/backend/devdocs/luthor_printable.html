@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luthor AI for Christian | One-Page Overview</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Palatino+Linotype&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- BASE STYLES --- */
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #fff;
+            color: #333;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+            color: #1b5a57;
+            margin: 0 0 0.5em 0;
+            line-height: 1.2;
+        }
+
+        p {
+            margin: 0 0 1em 0;
+            font-size: 10pt;
+            color: #525252;
+        }
+
+        strong {
+            font-weight: 600;
+        }
+
+        /* --- ONE-PAGER LAYOUT --- */
+        .page-container {
+            max-width: 210mm; /* A4 width */
+            margin: 0 auto;
+            padding: 1in; /* Standard margin */
+            box-sizing: border-box; /* Include padding in width */
+            display: flex;
+            flex-direction: column;
+            min-height: 297mm; /* A4 height */
+        }
+
+        /* --- HEADER --- */
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #1b5a57;
+            padding-bottom: 20px;
+            margin-bottom: 25px;
+        }
+        .header img.logo {
+            max-height: 50px;
+            margin-bottom: 15px;
+        }
+        .header h1 {
+            font-size: 22pt;
+            margin: 0;
+        }
+        .header p {
+            font-size: 11pt;
+            color: #1b5a57;
+            max-width: 80%;
+            margin: 10px auto 0 auto;
+        }
+
+        /* --- MAIN CONTENT --- */
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            flex-grow: 1;
+        }
+
+        .column-left {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .column-right {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .section-box {
+            border: 1px solid #e5e5e5;
+            border-radius: 8px;
+            padding: 15px;
+            background-color: #fcfcfc;
+        }
+
+        .section-box h3 {
+            font-size: 14pt;
+            color: #1b5a57;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 8px;
+            margin-bottom: 12px;
+        }
+
+        .pain-points-list {
+            list-style: none;
+            padding-left: 0;
+            margin: 0;
+        }
+
+        .pain-points-list li {
+            padding-left: 1.8em;
+            position: relative;
+            margin-bottom: 0.8em;
+            font-size: 10pt;
+        }
+
+        .pain-points-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #297867;
+            font-weight: bold;
+            font-size: 1.2em;
+            top: -2px;
+        }
+
+        .feature h4 {
+            font-family: 'Inter', sans-serif;
+            font-size: 11pt;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.25em;
+        }
+        .feature p {
+            margin-bottom: 0.5em;
+        }
+
+
+        /* --- TESTIMONIAL & TRUST BADGE --- */
+        .testimonial-box {
+            background-color: #f0f5f4;
+            border: 1px solid #e0e9e8;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 5px; /* Spacing */
+        }
+        .testimonial-box p.quote {
+            font-style: italic;
+            margin: 0 0 10px 0;
+            font-size: 10pt;
+            quotes: "“" "”";
+        }
+        .testimonial-box p.quote::before { content: open-quote; }
+        .testimonial-box p.quote::after { content: close-quote; }
+
+        .testimonial-box .author {
+            font-style: normal;
+            font-weight: 500;
+            display: block;
+            text-align: right;
+            color: #1b5a57;
+            font-size: 10pt;
+        }
+        .trust-badge {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background-color: #fff;
+            border: 1px solid #e5e5e5;
+            border-radius: 8px;
+        }
+
+        .trust-badge img {
+            width: 35px;
+            height: 35px;
+        }
+
+        .trust-badge span {
+            font-size: 10pt;
+            font-weight: 500;
+            line-height: 1.3;
+        }
+
+
+        /* --- FOOTER --- */
+        .footer {
+            text-align: center;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 2px solid #1b5a57;
+        }
+        .footer h3 {
+            font-size: 15pt;
+            margin-bottom: 10px;
+        }
+        .footer p {
+            margin: 0 auto;
+            max-width: 80%;
+            font-size: 10pt;
+        }
+
+        /* --- PRINT STYLES --- */
+        @media print {
+            body {
+                background-color: #fff !important;
+                font-size: 10pt; /* Standard print size */
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            @page {
+                size: A4;
+                margin: 0.75in; /* Slightly smaller margin to fit content */
+            }
+
+            .page-container {
+                max-width: 100%;
+                padding: 0;
+                margin: 0;
+                box-shadow: none;
+                min-height: auto;
+            }
+
+            .section-box, .testimonial-box, .trust-badge {
+                break-inside: avoid;
+            }
+
+            .footer {
+                page-break-before: avoid;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="page-container">
+
+    <!-- Header Section -->
+    <header class="header">
+        <img src="https://storage.googleapis.com/bounti_prod_narrativ_public/fe4b8098-fbfe-4921-bf0c-a98d07911a0c/3302a0ca-7cdf-45dc-a3b4-a08f20e8664d.svg" alt="Luthor AI Logo" class="logo">
+        <h1>Fortify Your Firm's Compliance with Luthor AI</h1>
+        <p>A proactive AI solution for Chief Compliance Officers to mitigate risk, streamline approvals, and maintain a robust compliance posture with confidence.</p>
+    </header>
+
+    <!-- Main Content Grid -->
+    <main class="main-content">
+
+        <!-- Left Column -->
+        <div class="column-left">
+            <div class="section-box">
+                <h3>Why Luthor Matters to You, Christian</h3>
+                <p>As CCO, the weight of regulatory adherence and manual processes rests heavily. Luthor AI is engineered to alleviate these burdens, transforming compliance from a reactive chore into a proactive, confident operation. We solve for:</p>
+                <ul class="pain-points-list">
+                    <li>The overwhelming burden of manual compliance tasks and record-keeping.</li>
+                    <li>High risk of human error leading to potential fines and reputational damage.</li>
+                    <li>Difficulty keeping pace with evolving regulatory requirements (SEC, FINRA).</li>
+                    <li>Time and resources diverted from growth to handle compliance reviews.</li>
+                </ul>
+            </div>
+            <div class="section-box">
+                <h3>Trusted by Compliance Leaders</h3>
+                <div class="trust-badge">
+                    <img src="https://cdn.prod.website-files.com/6715291e268db1bfd3912383/67c9e451fe5f18b7f0f54462_LUT%20Shield.png" alt="Shield Icon">
+                    <span>Powering leading firms with a combined <strong>$5.7B+ in AUM</strong></span>
+                </div>
+                <div class="testimonial-box">
+                    <p class="quote">The dashboard keeps us honest — we see what’s done, what’s overdue, and who’s responsible. No more email chasing.</p>
+                    <span class="author">– Dana S., CCO, Mid-sized Firm</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="column-right">
+            <div class="section-box">
+                <h3>Luthor for CCOs: Key Advantages</h3>
+                <div class="feature">
+                    <h4>Automate & Accelerate Compliance</h4>
+                    <p>Luthor automates marketing content approval processes, ensuring strict adherence to regulations and leading to significant reductions in approval times and manual workload.</p>
+                </div>
+                <div class="feature">
+                    <h4>Proactive Risk Mitigation</h4>
+                    <p>Deploy specialized AI Compliance Agents to continuously monitor, analyze, and flag potential compliance breaches in real-time, <em>before</em> publication.</p>
+                </div>
+                <div class="feature">
+                    <h4>Enhanced Accuracy & Confidence</h4>
+                    <p>Improve accuracy in compliance reporting, lower the risk of penalties, and gain confidence in launching marketing campaigns quickly and safely within regulatory boundaries.</p>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Footer / CTA -->
+    <footer class="footer">
+        <h3>Ready to Transform Your Compliance Workflow?</h3>
+        <p>Let's schedule a brief chat to explore how Luthor can provide your firm with peace of mind.<br>
+            <strong>Contact us to schedule a demo: <a href="https://savvycal.com/luthor/demo">savvycal.com/luthor/demo</a></strong>
+        </p>
+    </footer>
+
+</div>
+
+</body>
+</html>

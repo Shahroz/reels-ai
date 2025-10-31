@@ -1,0 +1,160 @@
+{
+  "video_analysis": [
+    {
+      "timestamp": "00:00",
+      "description": "The video starts with an exterior shot of the house, showing the front yard with some landscaping and a parked truck. The camera then moves towards the side of the house."
+    },
+    {
+      "timestamp": "00:04",
+      "description": "The camera walks down a narrow concrete pathway along the side of the house, showing the wall on the left and some plants/hedges on the right. There's a gate visible at the end of the pathway."
+    },
+    {
+      "timestamp": "00:13",
+      "description": "The camera approaches the front door of the house, which is olive green with a digital lock. A 'hello' doormat and a small statue are visible."
+    },
+    {
+      "timestamp": "00:18",
+      "description": "The camera enters the house, revealing a dining room directly ahead with a wooden table and black chairs. The room has light-colored tile flooring and a window with blinds. The kitchen is visible beyond the dining room."
+    },
+    {
+      "timestamp": "00:21",
+      "speech": "All right. So as soon as you walk in, you have a dining room, off from the kitchen. You have a bedroom over there, hall down that way, but we will go through the kitchen first."
+    },
+    {
+      "timestamp": "00:38",
+      "description": "The camera moves into the kitchen area. It features granite countertops, dark wood cabinets, stainless steel appliances (refrigerator and gas range), and a large island with a bar stool. A double oven is also visible."
+    },
+    {
+      "timestamp": "00:41",
+      "speech": "Kitchen, granite countertops, stainless and black appliances."
+    },
+    {
+      "timestamp": "00:50",
+      "description": "The kitchen seamlessly transitions into the living room, which is furnished with light-colored couches and a TV. A sliding glass door leads to the backyard."
+    },
+    {
+      "timestamp": "00:52",
+      "speech": "Overlooking the living room."
+    },
+    {
+      "timestamp": "01:02",
+      "speech": "Take a gander outside now, shall we?"
+    },
+    {
+      "timestamp": "01:03",
+      "description": "The camera moves out to the backyard through the sliding glass door. The backyard features a paved patio area, artificial turf, and various desert-friendly plants and trees, enclosed by a block wall."
+    },
+    {
+      "timestamp": "01:09",
+      "speech": "Nice little cozy backyard."
+    },
+    {
+      "timestamp": "01:16",
+      "speech": "Turn."
+    },
+    {
+      "timestamp": "01:32",
+      "description": "The camera re-enters the living room from the backyard, providing another view of the open-concept kitchen and dining area."
+    },
+    {
+      "timestamp": "01:46",
+      "speech": "All right."
+    },
+    {
+      "timestamp": "01:47",
+      "speech": "We are about to enter into the primary bedroom, right off of everything."
+    },
+    {
+      "timestamp": "01:50",
+      "description": "The camera enters the primary bedroom, which is carpeted and furnished with a bed, nightstands, and a dresser. The room has white walls and a window with blinds."
+    },
+    {
+      "timestamp": "01:56",
+      "speech": "Cool."
+    },
+    {
+      "timestamp": "02:00",
+      "description": "The camera moves into the primary bathroom, showcasing dual sinks with a large mirror, a large soaking tub with a shower enclosure, and a separate toilet area. There's also a walk-in closet."
+    },
+    {
+      "timestamp": "02:01",
+      "speech": "Uh right there, a walk-in closet and the marriage saver, aka water closet."
+    },
+    {
+      "timestamp": "02:22",
+      "description": "The camera exits the primary bedroom and walks down the main hallway. On the right, a laundry room with a washer and dryer is visible."
+    },
+    {
+      "timestamp": "02:24",
+      "speech": "Down the hallway here."
+    },
+    {
+      "timestamp": "02:27",
+      "speech": "You have the laundry room off to the right."
+    },
+    {
+      "timestamp": "02:35",
+      "description": "The camera enters the second bedroom, which is currently set up as an office space with two desks. It has carpeted flooring and a window."
+    },
+    {
+      "timestamp": "02:37",
+      "speech": "Secondary bedroom with the closet."
+    },
+    {
+      "timestamp": "02:50",
+      "description": "The camera moves past a decorative cabinet in the hallway."
+    },
+    {
+      "timestamp": "02:56",
+      "description": "The camera enters the secondary bathroom, which has a single sink vanity, a toilet, and a bathtub with a shower curtain."
+    },
+    {
+      "timestamp": "02:57",
+      "speech": "Secondary bathroom."
+    },
+    {
+      "timestamp": "03:05",
+      "description": "The camera enters the third bedroom, which is empty, carpeted, and has a window with blinds. A sliding closet door is visible."
+    },
+    {
+      "timestamp": "03:07",
+      "speech": "And the third bedroom."
+    },
+    {
+      "timestamp": "03:18",
+      "description": "The video ends with a shot looking back down the hallway towards the living area."
+    }
+  ],
+  "promo_segments": [
+    {
+      "start_timestamp": "00:18",
+      "end_timestamp": "00:28",
+      "description": "Smooth entrance showing the spacious dining area and glimpse of the kitchen."
+    },
+    {
+      "start_timestamp": "00:38",
+      "end_timestamp": "00:50",
+      "description": "Detailed view of the kitchen, highlighting countertops and appliances, with a fluid transition to the living room."
+    },
+    {
+      "start_timestamp": "00:50",
+      "end_timestamp": "00:59",
+      "description": "Panoramic view of the living room, showing its size and connection to the kitchen/backyard."
+    },
+    {
+      "start_timestamp": "01:03",
+      "end_timestamp": "01:16",
+      "description": "Showcase of the cozy and well-maintained backyard with artificial turf and patio."
+    },
+    {
+      "start_timestamp": "01:50",
+      "end_timestamp": "01:59",
+      "description": "Brief but inviting shot of the primary bedroom, showing its layout and furniture."
+    },
+    {
+      "start_timestamp": "02:00",
+      "end_timestamp": "02:13",
+      "description": "Highlights the primary bathroom's key features: dual sinks, tub, shower, and walk-in closet."
+    }
+  ]
+}

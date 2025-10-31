@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block content %}
+<p>Hello {{ user_name }},</p>
+<p>Please verify your email using the following token: {{ verification_token }}.</p>
+<p>If you did not sign up, please ignore this email.</p>
+{% endblock %}

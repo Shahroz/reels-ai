@@ -1,0 +1,221 @@
+src/config/app_config.rs:8:    pub llm_config: crate::config::llm_config::LlmConfig, // Added to fix missing field error
+src/config/llm_config.rs:3://! This file contains the `LlmConfig` struct, which holds settings
+src/config/llm_config.rs:4://! related to the LLM provider, model selection, API keys (if applicable),
+src/config/llm_config.rs:8:// Note: `llm` crate path is specified in the workspace Cargo.toml or agentloop Cargo.toml.
+src/config/llm_config.rs:9:// Full paths like `llm::llm_typed_unified::VendorModel` are used as per guidelines.
+src/config/llm_config.rs:12:pub struct LlmConfig {
+src/config/llm_config.rs:19:    pub compaction_models: Vec<llm::llm_typed_unified::VendorModel>,
+src/config/llm_config.rs:20:    pub context_termination_models: Vec<llm::llm_typed_unified::VendorModel>,
+src/config/llm_config.rs:21:    pub tool_logic_models: Vec<llm::llm_typed_unified::VendorModel>,
+src/config/llm_config.rs:22:    pub conversation_models: Vec<llm::llm_typed_unified::VendorModel>,
+src/config/llm_config.rs:23:    pub check_termination_models: Vec<llm::llm_typed_unified::VendorModel>,
+src/config/llm_config.rs:26:impl std::default::Default for LlmConfig {
+src/config/llm_config.rs:28:        LlmConfig {
+src/config/llm_config.rs:34:            compaction_models: vec![llm::llm_typed_unified::VendorModel::Gemini(
+src/config/llm_config.rs:35:                llm::vendors::gemini::gemini_model::GeminiModel::Gemini20Flash,
+src/config/llm_config.rs:37:            check_termination_models: vec![llm::llm_typed_unified::VendorModel::Gemini(
+src/config/llm_config.rs:38:                llm::vendors::gemini::gemini_model::GeminiModel::Gemini20Flash, // Use a fast model for termination checks
+src/config/llm_config.rs:40:            context_termination_models: vec![llm::llm_typed_unified::VendorModel::Gemini(
+src/config/llm_config.rs:41:                llm::vendors::gemini::gemini_model::GeminiModel::Gemini20Flash,
+src/config/llm_config.rs:43:            tool_logic_models: vec![llm::llm_typed_unified::VendorModel::Gemini(
+src/config/llm_config.rs:44:                llm::vendors::gemini::gemini_model::GeminiModel::Gemini25ProPreview0325,
+src/config/llm_config.rs:46:            conversation_models: vec![llm::llm_typed_unified::VendorModel::Gemini(
+src/config/llm_config.rs:47:                llm::vendors::gemini::gemini_model::GeminiModel::Gemini25ProPreview0325,
+src/config/load_env_config.rs:77:    // LlmConfig would need its own loading logic, using default here.
+src/config/load_env_config.rs:83:        llm_config: crate::config::llm_config::LlmConfig::default(), // Placeholder
+src/config/load_env_config.rs:129:        // LlmConfig default check would go here if needed.
+src/config/load_env_config.rs:148:         // LlmConfig default check would go here if needed.
+src/config/mod.rs:4:pub mod llm_config;
+src/conversation/compaction/check_termination.rs:1://! Checks if the conversation should terminate based on history, goal, context, and an LLM evaluation.
+src/conversation/compaction/check_termination.rs:4://! and calls an LLM using the configured model pool to determine if termination
+src/conversation/compaction/check_termination.rs:5://! conditions are met. Returns the LLM's boolean decision.
+src/conversation/compaction/check_termination.rs:8:// Required imports for traits used by llm_typed_unified::llm_typed
+src/conversation/compaction/check_termination.rs:9:use llm::few_shots_traits::FewShotsOutput;
+src/conversation/compaction/check_termination.rs:12:/// Checks for conversation termination conditions using an LLM.
+src/conversation/compaction/check_termination.rs:17:/// * `app_state` - A reference to the application state, containing configuration (including LLM config).
+src/conversation/compaction/check_termination.rs:21:/// Returns `true` if the LLM determines termination is indicated, `false` otherwise.
+src/conversation/compaction/check_termination.rs:22:/// Defaults to `false` if the LLM call fails.
+src/conversation/compaction/check_termination.rs:25:    app_state: &crate::state::app_state::AppState, // Contains config including LlmConfig
+src/conversation/compaction/check_termination.rs:32:    // Construct the prompt for the LLM
+src/conversation/compaction/check_termination.rs:49:    // Call the typed LLM function using the dedicated model pool
+src/conversation/compaction/check_termination.rs:50:    let llm_result = llm::llm_typed_unified::llm_typed::<crate::types::llm_termination_decision::LlmTerminationDecision>(
+src/conversation/compaction/check_termination.rs:52:        app_state.config.llm_config.check_termination_models.clone(), // Use configured models
+src/conversation/compaction/check_termination.rs:54:        Some(llm::llm_typed_unified::OutputFormat::Json), // Expect JSON output
+src/conversation/compaction/check_termination.rs:59:    // Handle the LLM result
+src/conversation/compaction/check_termination.rs:60:    match llm_result {
+src/conversation/compaction/check_termination.rs:61:        std::result::Result::Ok(llm_response) => {
+src/conversation/compaction/check_termination.rs:63:                "Termination check LLM result: terminate={}, reasoning='{}'",
+src/conversation/compaction/check_termination.rs:64:                llm_response.should_terminate, llm_response.reasoning
+src/conversation/compaction/check_termination.rs:66:            llm_response.should_terminate
+src/conversation/compaction/check_termination.rs:69:            std::eprintln!("LLM termination check failed: {}. Defaulting to not terminating.", e);
+src/conversation/compaction/check_termination.rs:70:            // Default to false (continue conversation) if LLM fails
+src/conversation/compaction/check_termination.rs:80:    // because they would make real LLM calls without mocking.
+src/conversation/compaction/check_termination.rs:97:        // Uses default AppConfig, which now includes default LlmConfig
+src/conversation/compaction/check_termination.rs:141:    #[ignore] // Ignored: Makes real LLM call. Test structure remains for local/integration testing.
+src/conversation/compaction/check_termination.rs:142:    async fn test_check_termination_llm_integration() {
+src/conversation/compaction/check_termination.rs:155:        // Assertion depends heavily on the live LLM's interpretation.
+src/conversation/compaction/check_termination.rs:159:        std::println!("LLM Termination Check Result (Integration Test): {}", result);
+src/conversation/compaction/check_termination.rs:160:        // For a real test, you'd need mocking or specific assertions based on expected LLM behavior for this input.
+src/conversation/compaction/check_termination.rs:161:        // e.g., assert_eq!(result, true, "Expected LLM to detect termination keyword");
+src/conversation/compaction/check_termination.rs:165:    #[ignore] // Ignored: Makes real LLM call.
+src/conversation/compaction/check_termination.rs:166:    async fn test_check_termination_llm_ongoing_conversation() {
+src/conversation/compaction/check_termination.rs:179:         std::println!("LLM Termination Check Result (Ongoing Test): {}", result);
+src/conversation/compaction/check_termination.rs:180:         // Expect false, but cannot guarantee without controlling LLM.
+src/conversation/compaction/check_termination.rs:181:         // assert_eq!(result, false, "Expected LLM to see ongoing conversation");
+src/conversation/compaction/check_termination.rs:185:     #[ignore] // Ignored: Makes real LLM call. Tests error path default.
+src/conversation/compaction/check_termination.rs:186:     async fn test_check_termination_llm_error_defaults_to_false() {
+src/conversation/compaction/check_termination.rs:187:         // Setup state that might cause LLM error (e.g., invalid API key if config could be manipulated,
+src/conversation/compaction/check_termination.rs:191:         // Forcing an error reliably usually requires mocking the llm_typed call.
+src/conversation/compaction/check_termination.rs:202:         // If the LLM call *actually* failed during the test run, we expect false.
+src/conversation/compaction/check_termination.rs:203:         // If it succeeded, the assertion might fail depending on the LLM response.
+src/conversation/compaction/check_termination.rs:207:         std::println!("LLM Termination Check Result (Error Path Test): {}. If an error occurred, this should ideally be false.", result);
+src/conversation/compaction/check_termination.rs:208:         // Assuming an error occurred: assert_eq!(result, false, "Expected default to false on LLM error");
+src/conversation/compaction/evaluate_context.rs:1://! Evaluates the conversation context asynchronously using an LLM, returning feedback.
+src/conversation/compaction/evaluate_context.rs:3://! Analyzes the provided conversation history and application state via an LLM call
+src/conversation/compaction/evaluate_context.rs:8:// Required because the compiler needs these traits in scope at the call site of llm_typed.
+src/conversation/compaction/evaluate_context.rs:10:use llm::few_shots_traits::FewShotsOutput;
+src/conversation/compaction/evaluate_context.rs:16:// Assuming LlmContextEvaluation is defined in crate::types::llm_context_evaluation.
+src/conversation/compaction/evaluate_context.rs:17:// Assuming llm_typed is available at llm::llm_typed_unified::llm_typed.
+src/conversation/compaction/evaluate_context.rs:19:/// Evaluates conversation context asynchronously using an LLM.
+src/conversation/compaction/evaluate_context.rs:28:    // Construct the prompt for the LLM
+src/conversation/compaction/evaluate_context.rs:43:    // Call the typed LLM function
+src/conversation/compaction/evaluate_context.rs:44:    let llm_result = llm::llm_typed_unified::llm_typed::<crate::types::llm_context_evaluation::LlmContextEvaluation>(
+src/conversation/compaction/evaluate_context.rs:46:        std::vec![llm::llm_typed_unified::VendorModel::default()], // Use default model(s)
+src/conversation/compaction/evaluate_context.rs:48:        Some(llm::llm_typed_unified::OutputFormat::Json), // Expect JSON output
+src/conversation/compaction/evaluate_context.rs:52:    // Handle the LLM result
+src/conversation/compaction/evaluate_context.rs:53:    match llm_result {
+src/conversation/compaction/evaluate_context.rs:54:        std::result::Result::Ok(llm_response) => {
+src/conversation/compaction/evaluate_context.rs:55:            // Map LlmContextEvaluation to ContextEvaluatorFeedback
+src/conversation/compaction/evaluate_context.rs:58:                relevance_score: if llm_response.is_sufficient { 1.0 } else { 0.0 },
+src/conversation/compaction/evaluate_context.rs:60:                suggestions: llm_response.next_steps,
+src/conversation/compaction/evaluate_context.rs:62:                needs_update: !llm_response.is_sufficient,
+src/conversation/compaction/evaluate_context.rs:63:                // Note: missing_information from LLM is not directly mapped here,
+src/conversation/compaction/evaluate_context.rs:70:            std::result::Result::Err(format!("LLM context evaluation failed: {}", e))
+src/conversation/compaction/evaluate_context.rs:79:    // Without mocking `llm_typed`, they will make real LLM calls (if network/API keys configured)
+src/conversation/compaction/evaluate_context.rs:80:    // or fail if the LLM call fails.
+src/conversation/compaction/evaluate_context.rs:81:    // Assertions on the *content* of the feedback rely on hypothetical LLM behavior
+src/conversation/compaction/evaluate_context.rs:82:    // and are included to test the mapping logic *assuming* a specific LLM response.
+src/conversation/compaction/evaluate_context.rs:84:    // or live LLM testing is intended.
+src/conversation/compaction/evaluate_context.rs:111:    #[ignore] // Ignore because it makes a real LLM call without mocking.
+src/conversation/compaction/evaluate_context.rs:114:        // *assuming* the LLM hypothetically returns a specific 'sufficient' response.
+src/conversation/compaction/evaluate_context.rs:123:        // 2. Check mapping logic *if* Ok and *assuming* LLM returned 'sufficient'
+src/conversation/compaction/evaluate_context.rs:124:        //    (This part might fail if the actual LLM call returns Err or different content)
+src/conversation/compaction/evaluate_context.rs:126:            // Assertions based on the *hypothetical* LLM response:
+src/conversation/compaction/evaluate_context.rs:127:            // LlmContextEvaluation { is_sufficient: true, next_steps: vec!["Proceed".to_string()], missing_information: None }
+src/conversation/compaction/evaluate_context.rs:130:            // We cannot reliably assert feedback.suggestions without controlling the LLM response.
+src/conversation/compaction/evaluate_context.rs:135:             // Optionally fail the test if an error is unexpected even with live LLM
+src/conversation/compaction/evaluate_context.rs:141:    #[ignore] // Ignore because it makes a real LLM call without mocking.
+src/conversation/compaction/evaluate_context.rs:144:        // *assuming* the LLM hypothetically returns a specific 'insufficient' response.
+src/conversation/compaction/evaluate_context.rs:145:        let history = create_mock_history(); // Use same history, assume LLM finds it insufficient
+src/conversation/compaction/evaluate_context.rs:153:        // 2. Check mapping logic *if* Ok and *assuming* LLM returned 'insufficient'
+src/conversation/compaction/evaluate_context.rs:155:            // Assertions based on the *hypothetical* LLM response:
+src/conversation/compaction/evaluate_context.rs:156:            // LlmContextEvaluation { is_sufficient: false, next_steps: vec!["Ask for clarification".to_string()], missing_information: Some("Goal unclear".to_string()) }
+src/conversation/compaction/evaluate_context.rs:159:             // We cannot reliably assert feedback.suggestions without controlling the LLM response.
+src/conversation/compaction/evaluate_context.rs:170:    #[ignore] // Ignore because it depends on the LLM call potentially failing.
+src/conversation/compaction/evaluate_context.rs:173:        // It assumes conditions that might cause the LLM call to fail (e.g., invalid API key, network issue).
+src/conversation/compaction/evaluate_context.rs:181:            std::assert!(e.starts_with("LLM context evaluation failed:"), "Error message format is incorrect");
+src/conversation/compaction/evaluate_context.rs:184:             std::println!("Test (error) completed with Ok, LLM call succeeded unexpectedly.");
+src/conversation/compaction/evaluate_context.rs:185:             // This isn't necessarily a failure, just means the LLM call worked.
+src/conversation/compaction/summarize_entries.rs:1://! Provides the logic for summarizing a sequence of conversation entries using an LLM.
+src/conversation/compaction/summarize_entries.rs:4://! calls an LLM (specifically OpenAI's GPT models via `call_gpt`), and aims to
+src/conversation/compaction/summarize_entries.rs:8:/// Summarizes a slice of conversation entries using an LLM.
+src/conversation/compaction/summarize_entries.rs:41:    // 2. Construct the prompt for the LLM
+src/conversation/compaction/summarize_entries.rs:58:    //    NOTE: Accessing via llm_config now. Handles Option.
+src/conversation/compaction/summarize_entries.rs:59:    let api_key = app_state.config.llm_config.api_key.as_deref()
+src/conversation/compaction/summarize_entries.rs:60:        .ok_or_else(|| std::string::String::from("OpenAI API key not configured in LlmConfig"))?;
+src/conversation/compaction/summarize_entries.rs:63:    // 5. Call the LLM
+src/conversation/compaction/summarize_entries.rs:64:    let summary_result = llm::vendors::openai::call_gpt::call_gpt(model, api_key, messages).await;
+src/conversation/compaction/summarize_entries.rs:71:            std::eprintln!("LLM summarization failed: {}", e);
+src/conversation/compaction/summarize_entries.rs:88:            session_timeout_seconds: 300,            llm_config: crate::config::llm_config::LlmConfig {
+src/conversation/compaction/summarize_entries.rs:90:                 ..Default::default() // Assuming LlmConfig derives Default
+src/conversation/compaction/summarize_entries.rs:107:        // This test does NOT mock the LLM call and will likely fail if run
+src/conversation/compaction/summarize_entries.rs:155:        // depending on how the LLM handles an empty "conversation". Or it might error.
+src/conversation/prompt.rs:1://! Builds the LLM prompt from the session data.
+src/conversation/prompt.rs:3://! This function constructs a list of messages suitable for an LLM prompt,
+src/conversation/prompt.rs:10:/// Builds the LLM prompt from the session data.
+src/conversation/prompt.rs:15:pub fn build_llm_prompt(session_data: &crate::types::session_data::SessionData) -> Result<Vec<crate::types::Message>, anyhow::Error> {
+src/conversation/prompt.rs:40:    fn test_build_llm_prompt_basic() {
+src/conversation/prompt.rs:52:        let result = super::build_llm_prompt(&session_data);
+src/conversation/prompt.rs:64:    fn test_build_llm_prompt_no_system() {
+src/conversation/prompt.rs:75:        let result = super::build_llm_prompt(&session_data);
+src/conversation/prompt.rs:85:    fn test_build_llm_prompt_multiple_messages() {
+src/conversation/prompt.rs:98:        let result = super::build_llm_prompt(&session_data);
+src/conversation/prompt.rs:110:    fn test_build_llm_prompt_no_user_message() {
+src/conversation/prompt.rs:121:        let result = super::build_llm_prompt(&session_data);
+src/conversation/prompt.rs:131:    fn test_build_llm_prompt_empty_messages() {
+src/conversation/prompt.rs:140:        let result = super::build_llm_prompt(&session_data);
+src/conversation/stream.rs:1://! Provides a function to generate a conversation response using the unified LLM interface.
+src/conversation/stream.rs:4://! with the unified LLM client (`crate::llm::llm_typed_unified::llm`).
+src/conversation/stream.rs:5://! It builds the prompt using session data, calls the LLM API, and handles the response.
+src/conversation/stream.rs:23:use crate::conversation::prompt::build_llm_prompt; // Keep prompt building
+src/conversation/stream.rs:25:// Added imports for unified LLM
+src/conversation/stream.rs:26:use llm::llm_typed_unified::{VendorModel, find_model_by_alias};
+src/conversation/stream.rs:28:// use llm::vendors::openai::openai_chat_completion_request::OpenAIChatCompletionRequest;
+src/conversation/stream.rs:29:// use llm::vendors::openai::stream_chat_completion;
+src/conversation/stream.rs:41:/// Represents errors that can occur during processing. (Updated for unified LLM call)
+src/conversation/stream.rs:44:    #[error("LLM API error: {0}")]
+src/conversation/stream.rs:46:    #[error("Network error during LLM call: {0}")]
+src/conversation/stream.rs:48:    #[error("Failed to parse LLM response chunk: {0}")] // May become irrelevant
+src/conversation/stream.rs:50:    #[error("LLM stream processing error: {0}")] // May become irrelevant
+src/conversation/stream.rs:54:    #[error("Failed to build LLM prompt: {0}")]
+src/conversation/stream.rs:56:    #[error("Missing API key for LLM")] // Still relevant if config doesn't provide one implicitly
+src/conversation/stream.rs:60:    #[error("LLM call failed: {0}")] // General error from the unified llm call
+src/conversation/stream.rs:61:    LlmCallFailed(String),
+src/conversation/stream.rs:66:// Removed: impl From<llm::vendors::openai::stream_chat_completion::OpenAIStreamError> for StreamError
+src/conversation/stream.rs:67:// No direct mapping needed from OpenAI stream error anymore. Errors from unified `llm` are anyhow::Error.
+src/conversation/stream.rs:69:/// Calls the configured unified LLM client to get a response based on session data.
+src/conversation/stream.rs:71:/// Constructs a prompt based on session data and app state, calls the unified LLM API,
+src/conversation/stream.rs:79:    // 1. Build the LLM messages
+src/conversation/stream.rs:80:    let llm_messages = match build_llm_prompt(session_data) {
+src/conversation/stream.rs:94:    // 2. Concatenate messages into a single prompt string for the unified LLM
+src/conversation/stream.rs:96:    let prompt_string = llm_messages
+src/conversation/stream.rs:110:    let model_name = &config.llm_config.model;
+src/conversation/stream.rs:111:    let _api_key = config.llm_config.api_key.clone(); // Keep API key check if needed by unified llm internally
+src/conversation/stream.rs:113:    // Ensure API key exists if required (unified llm might handle this internally via env vars)
+src/conversation/stream.rs:133:    // 6. Call the unified LLM function (non-streaming)
+src/conversation/stream.rs:134:    //    NOTE: Assuming `llm` takes debug_prompt_enabled, prompt, models, retries
+src/conversation/stream.rs:135:    //    Adjust parameters if `llm` signature differs.
+src/conversation/stream.rs:136:    println!("Calling unified LLM with prompt (first 100 chars): {}...", prompt_string.chars().take(100).collect::<String>()); // Debug print
+src/conversation/stream.rs:137:    match llm::llm_typed_unified::llm(false, &prompt_string, models_to_try, retries).await {
+src/conversation/stream.rs:143:            println!("Unified LLM Response Received (first 100 chars): {}...", response.chars().take(100).collect::<String>()); // Placeholder action
+src/conversation/stream.rs:149:            // Map the anyhow::Error from llm to StreamError
+src/conversation/stream.rs:150:            eprintln!("Unified LLM call failed: {:?}", e); // Log the error
+src/conversation/stream.rs:151:            std::result::Result::Err(StreamError::LlmCallFailed(e.to_string()))
+src/conversation/stream.rs:163:    // potentially mock the unified `llm` call instead of the OpenAI stream.
+src/conversation/stream.rs:171:    use crate::config::llm_config::LlmConfig;
+src/conversation/stream.rs:180:         let dummy_llm_config = LlmConfig {
+src/conversation/stream.rs:192:             llm_config: dummy_llm_config,
+src/conversation/stream.rs:229:        // This now calls the unified `llm` function.
+src/conversation/stream.rs:233:        // TODO: THIS TEST REQUIRES MOCKING! Without mocking the unified `llm` call,
+src/conversation/stream.rs:239:        // Assert that *something* happened. A more robust test would mock the `llm` response.
+src/conversation/stream.rs:245:        //         StreamError::ConfigError(_) | StreamError::LlmCallFailed(_) => {
+src/conversation/stream.rs:249:        //             panic!("Expected ConfigError or LlmCallFailed without mocking, got {:?}", other_err);
+src/conversation/stream.rs:254:        // TODO: Implement proper mocking for `crate::llm::llm_typed_unified::llm`.
+src/conversation/stream.rs:261:    // - Test successful LLM call and Ok(()) return.
+src/conversation/stream.rs:262:    // - Test LLM call failure mapping to StreamError::LlmCallFailed.
+src/types/llm_context_evaluation.rs:1://! Holds the structured response from the LLM for context evaluation tasks.
+src/types/llm_context_evaluation.rs:3://! This struct defines the expected format for the LLM's assessment of whether
+src/types/llm_context_evaluation.rs:6://! for direct deserialization from the LLM output. It implements FewShotsOutput.
+src/types/llm_context_evaluation.rs:9:pub struct LlmContextEvaluation {
+src/types/llm_context_evaluation.rs:18:impl llm::few_shots_traits::FewShotsOutput<LlmContextEvaluation> for LlmContextEvaluation {
+src/types/llm_context_evaluation.rs:19:    fn few_shots() -> std::vec::Vec<LlmContextEvaluation> {
+src/types/llm_context_evaluation.rs:22:            LlmContextEvaluation {
+src/types/llm_context_evaluation.rs:33:            LlmContextEvaluation {
+src/types/llm_termination_decision.rs:1://! Defines the structured response from the LLM for conversation termination decisions.
+src/types/llm_termination_decision.rs:3://! This struct holds the LLM's judgment on whether a conversation should end,
+src/types/llm_termination_decision.rs:5://! traits for LLM interaction and serialization. Adheres to project guidelines.
+src/types/llm_termination_decision.rs:8:// `JsonSchema` derive requires `schemars`. `FewShotsOutput` requires `llm`.
+src/types/llm_termination_decision.rs:9:use llm::few_shots_traits::FewShotsOutput;
+src/types/llm_termination_decision.rs:12:/// Represents the LLM's decision on whether to terminate the conversation.
+src/types/llm_termination_decision.rs:14:pub struct LlmTerminationDecision {
+src/types/llm_termination_decision.rs:15:    /// The reasoning provided by the LLM for its decision.
+src/types/llm_termination_decision.rs:17:    /// True if the LLM determined the conversation should terminate, false otherwise.
+src/types/llm_termination_decision.rs:21:// Implement the FewShotsOutput trait for the LLM interaction.
+src/types/llm_termination_decision.rs:22:impl FewShotsOutput<LlmTerminationDecision> for LlmTerminationDecision {
+src/types/llm_termination_decision.rs:23:    fn few_shots() -> std::vec::Vec<LlmTerminationDecision> {
+src/types/llm_termination_decision.rs:26:            LlmTerminationDecision {
+src/types/llm_termination_decision.rs:33:            LlmTerminationDecision {
+src/types/llm_termination_decision.rs:40:            LlmTerminationDecision {
+src/types/llm_termination_decision.rs:47:            LlmTerminationDecision {
+src/types/mod.rs:19:pub mod llm_context_evaluation;
+src/types/mod.rs:20:pub mod llm_termination_decision;

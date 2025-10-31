@@ -1,0 +1,26 @@
+{
+  "output_path": "concatenation.mp4",
+  "clip": {
+    "type": "concatenate",
+    "clips": [
+      {
+        "type": "color",
+        "size": [640, 480],
+        "color": [255, 0, 0],
+        "duration": 1
+      },
+      {
+        "type": "color",
+        "size": [640, 480],
+        "color": [0, 255, 0],
+        "duration": 1
+      },
+      {
+        "type": "color",
+        "size": [640, 480],
+        "color": [0, 0, 255],
+        "duration": 1
+      }
+    ]
+  }
+}

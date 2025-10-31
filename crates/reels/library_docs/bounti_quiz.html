@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head style="">
+    <meta charset="utf-8" style="">
+    <title style="">Bounti.ai Knowledge Quiz</title>
+    <meta content="Test your knowledge about Bounti.ai and how it helps sales teams win." name="description" style="">
+    <meta content="Bounti.ai Knowledge Quiz" property="og:title" style="">
+    <meta content="Test your knowledge about Bounti.ai and how it helps sales teams win." property="og:description" style="">
+    <meta content="https://cdn.prod.website-files.com/65d7857995f0ac4fd0a67342/66e26911073caa871281fa4a_OG-New.png" property="og:image" style="">
+    <meta content="Bounti.ai Knowledge Quiz" property="twitter:title" style="">
+    <meta content="Test your knowledge about Bounti.ai and how it helps sales teams win." property="twitter:description" style="">
+    <meta content="https://cdn.prod.website-files.com/65d7857995f0ac4fd0a67342/66e26911073caa871281fa4a_OG-New.png" property="twitter:image" style="">
+    <meta property="og:type" content="website" style="">
+    <meta content="summary_large_image" name="twitter:card" style="">
+    <meta content="width=device-width, initial-scale=1" name="viewport" style="">
+    <link href="https://cdn.prod.website-files.com/65d7857995f0ac4fd0a67342/65d8a708e986dcc54f7bb5a4_favicon-32.png" rel="shortcut icon" type="image/x-icon" style="">
+    <link href="https://cdn.prod.website-files.com/65d7857995f0ac4fd0a67342/65d8a70eac1df153c6cd8636_favicon-256.png" rel="apple-touch-icon" style="">
+    <style>
+        body { margin: 0; font-family: sans-serif; }
+        .quiz-container button:hover { opacity: 0.8; }
+        .quiz-option { margin-bottom: 10px; display: block; width: 100%; box-sizing: border-box;}
+        .quiz-option.selected { border-color: rgb(13, 20, 7) !important; background-color: rgb(200, 215, 100) !important; }
+        .quiz-option.correct { background-color: #a0d6a4 !important; border-color: #5a9c5e !important; color: rgb(13, 20, 7) !important; }
+        .quiz-option.incorrect { background-color: #f8b4b4 !important; border-color: #d87070 !important; color: rgb(13, 20, 7) !important; }
+        .quiz-feedback { margin-top: 15px; font-weight: bold; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body style="background-color: rgb(255, 255, 255); color: rgb(13, 20, 7);">
+<div style="background-color: rgba(0, 0, 0, 0); color: rgb(13, 20, 7);">
+    <main style="background-color: rgba(0, 0, 0, 0); color: rgb(13, 20, 7);">
+        <header style="background-color: rgb(13, 20, 7); color: rgb(0, 0, 0); background-image: radial-gradient(circle at 0% 0%, rgb(34, 39, 2), rgba(34, 39, 2, 0) 34%); overflow: hidden; padding-bottom: 60px; perspective-origin: 952.5px 493.609px; position: relative;">
+            <div style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); align-items: center; display: flex; min-height: 72px; padding-left: 95.25px; padding-right: 95.25px; padding-top: 16px; position: relative; z-index: 1000;">
+                <div style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); align-items: center; display: flex; justify-content: space-between; width: 100%; max-width: 1714.5px; margin: 0 auto;">
+                    <a href="/" aria-label="home" style="background-color: rgba(0, 0, 0, 0); color: rgb(51, 51, 51); float: left; position: relative;">
+                        <img loading="lazy" src="https://cdn.prod.website-files.com/65d7857995f0ac4fd0a67342/65d792f3a3fa7be52792c6b2_bounti-logo.svg" alt="Bounti logo white" style="background-color: rgba(0, 0, 0, 0); color: rgb(51, 51, 51); max-height: 40px;">
+                    </a>
+                    <nav role="navigation" style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); align-items: center; display: flex; float: right;">
+                        <div style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0);">
+                            <a href="https://www.bounti.ai/product" style="background-color: rgba(0, 0, 0, 0); color: rgb(231, 248, 119); display: inline-block; font-size: 18px; padding: 8px 16px; position: relative; text-align: left; transition-duration: 0.3s; transition-property: color; vertical-align: top;">Product</a>
+                            <a href="https://www.bounti.ai/company" style="background-color: rgba(0, 0, 0, 0); color: rgb(231, 248, 119); display: inline-block; font-size: 18px; padding: 8px 16px; position: relative; text-align: left; transition-duration: 0.3s; transition-property: color; vertical-align: top;">Company</a>
+                            <a href="https://www.bounti.ai/blog" style="background-color: rgba(0, 0, 0, 0); color: rgb(231, 248, 119); display: inline-block; font-size: 18px; padding: 8px 16px; position: relative; text-align: left; transition-duration: 0.3s; transition-property: color; vertical-align: top;">Blog</a>
+                        </div>
+                        <div style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); align-items: center; gap: 16px; display: flex; margin-left: 16px;">
+                            <a href="https://app.bounti.ai/sign-in" style="background-color: rgba(0, 0, 0, 0); color: rgb(220, 245, 69); border-color: rgb(203, 233, 11); border-style: solid; border-width: 2px; border-radius: 100px; font-size: 18px; font-weight: 600; padding: 8px 24px; text-align: center; transition: color 0.3s, background-color 0.3s; text-decoration: none;">Log in</a>
+                            <a href="https://www.bounti.ai/custom-trial" style="background-color: rgb(180, 227, 228); color: rgb(13, 20, 7); align-items: center; border-color: rgb(180, 227, 228); border-style: solid; border-radius: 100px; gap: 8px; display: flex; font-size: 18px; font-weight: 600; justify-content: center; max-width: 100%; padding: 8px 24px; text-align: center; transition-duration: 0.3s; transition-property: background-color; text-decoration: none;">
+                                <div style="background-color: rgba(0, 0, 0, 0); color: rgb(13, 20, 7);">Get started</div>
+                                <div style="background-color: rgba(0, 0, 0, 0); color: rgb(13, 20, 7); align-items: center; display: flex; flex-direction: column; justify-content: center;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14" style="background-color: rgba(0, 0, 0, 0); color: rgb(13, 20, 7); width: 18px; height: 18px;">
+                                        <path fill="currentColor" fill-rule="evenodd" d="M9.8 10.4c-0.15151 0.1136 -0.35421 0.1319 -0.52361 0.0472C9.107 10.3625 9 10.1894 9 10V7.625H0.625C0.279822 7.625 0 7.34518 0 7s0.279822 -0.625 0.625 -0.625H9V4c0 -0.18938 0.107 -0.36251 0.27639 -0.44721 0.1694 -0.0847 0.3721 -0.06642 0.52361 0.04721l4 3c0.1259 0.09443 0.2 0.24262 0.2 0.4 0 0.15738 -0.0741 0.30558 -0.2 0.4l-4 3Z" clip-rule="evenodd" stroke-width="1" style="background-color: rgba(0, 0, 0, 0); color: rgb(13, 20, 7);"></path>
+                                    </svg>
+                                </div>
+                            </a>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+            <div style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); padding-left: 40px; padding-right: 40px;">
+                <div style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); margin: 0 auto; max-width: 1280px;">
+                    <div style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); padding-bottom: 80px; padding-top: 80px;">
+                        <div style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); position: relative; z-index: 1;">
+                            <div style="background-color: rgba(0, 0, 0, 0); color: rgb(0, 0, 0); text-align: center;">
+                                <div style="background-color: rgba(0, 0, 0, 0); color: rgb(249, 250, 245); max-width: 768px; margin: 0 auto;">
+                                    <h1 style="background-color: rgba(0, 0, 0, 0); color: rgb(249, 250, 245); font-size: 48px; margin-bottom: 16px;">Test Your Bounti.ai Knowledge!</h1>
+                                    <p style="background-color: rgba(0, 0, 0, 0); color: rgb(249, 250, 245); font-size: 21px; line-height: 29.4px;">See how much you know about the platform that helps you never prepare for a sales call again.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section style="background-color: rgb(249, 250, 245); color: rgb(13, 20, 7); padding: 80px 40px;">
+            <div style="max-width: 800px; margin: 0 auto; background-color: rgb(255, 255, 255); padding: 40px; border-radius: 16px; border: 1px solid rgb(220, 245, 69); box-shadow: rgba(220, 245, 69, 0.1) 0px 5px 15px 0px;" class="quiz-container">
+
+                <div id="quiz-area">
+                    <div id="question-container" style="margin-bottom: 20px;">
+                        <h2 id="question-text" style="color: rgb(13, 20, 7); font-size: 24px; margin-bottom: 20px; line-height: 1.4;">Question text goes here</h2>
+                        <div id="options-container">
+                        </div>
+                    </div>
+                    <div id="feedback-container" class="quiz-feedback hidden" style="color: rgb(13, 20, 7);">Feedback</div>
+                    <button id="next-button" style="background-color: rgb(180, 227, 228); color: rgb(13, 20, 7); border: none; border-radius: 100px; font-size: 18px; font-weight: 600; padding: 12px 32px; text-align: center; transition: background-color 0.3s; cursor: pointer; display: block; margin-top: 20px;">Next Question</button>
+                </div>
+
+                <div id="results-area" class="hidden" style="text-align: center;">
+                    <h2 style="color: rgb(13, 20, 7); font-size: 28px; margin-bottom: 16px;">Quiz Complete!</h2>
+                    <p id="score-text" style="font-size: 21px; color: rgb(13, 20, 7); margin-bottom: 24px;">Your score: X out of Y</p>
+                    <p id="result-message" style="font-size: 18px; color: rgb(13, 20, 7); margin-bottom: 32px;">Result message goes here.</p>
+                    <button id="restart-button" style="background-color: rgb(220, 245, 69); color: rgb(13, 20, 7); border: 2px solid rgb(203, 233, 11); border-radius: 100px; font-size: 18px; font-weight: 600; padding: 12px 32px; text-align: center; transition: background-color 0.3s; cursor: pointer;">Restart Quiz</button>
+                    <a href="https://www.bounti.ai/" style="background-color: rgb(180, 227, 228); color: rgb(13, 20, 7); border: none; border-radius: 100px; font-size: 18px; font-weight: 600; padding: 12px 32px; text-align: center; transition: background-color 0.3s; cursor: pointer; display: inline-block; margin-left: 16px; text-decoration: none;">Learn More</a>
+                </div>
+
+            </div>
+        </section>
+
+        <footer style="background-color: rgb(0, 0, 0); color: rgb(249, 250, 245); padding: 60px 40px;">
+            <div style="max-width: 1280px; margin: 0 auto;">
+                <div style="text-align: center; padding-bottom: 32px;">
+                    <a href="/" style="display: inline-block; margin-bottom: 24px;">
+                        <img loading="lazy" src="https://cdn.prod.website-files.com/65d7857995f0ac4fd0a67342/65d792f3a3fa7be52792c6b2_bounti-logo.svg" alt="Bounti logo white" style="max-height: 30px;">
+                    </a>
+                    <div style="gap: 0px 24px; display: flex; justify-content: center; flex-wrap: wrap;">
+                        <a href="https://www.bounti.ai/product" style="color: rgb(149, 150, 147); font-weight: 600; text-decoration: none; padding: 5px 0;">Product</a>
+                        <a href="https://www.bounti.ai/company" style="color: rgb(149, 150, 147); font-weight: 600; text-decoration: none; padding: 5px 0;">Company</a>
+                        <a href="https://www.bounti.ai/blog" style="color: rgb(149, 150, 147); font-weight: 600; text-decoration: none; padding: 5px 0;">Blog</a>
+                        <a href="https://www.bounti.ai/ai-in-sales" style="color: rgb(149, 150, 147); font-weight: 600; text-decoration: none; padding: 5px 0;">AI in sales</a>
+                    </div>
+                </div>
+                <div style="background-color: rgb(13, 20, 7); height: 1px; margin-bottom: 32px;"></div>
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+                    <div style="color: rgb(100, 100, 98); font-size: 14px;">Copyright © 2024, Bounti Labs</div>
+                    <div style="gap: 0px 24px; display: flex; justify-content: center;">
+                        <a href="https://www.bounti.ai/privacy-policy" style="color: rgb(100, 100, 98); font-size: 14px; text-decoration: none;">Privacy Policy</a>
+                        <a href="https://www.bounti.ai/terms-of-service" style="color: rgb(100, 100, 98); font-size: 14px; text-decoration: none;">Terms of Service</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </main>
+</div>
+
+<script>
+    const quizData = [
+        {
+            question: "What is the main goal of Bounti.ai?",
+            options: [
+                "To replace sales reps with AI",
+                "To help reps spend less time prepping and more time selling",
+                "To automate cold emailing only",
+                "To provide basic company directory information"
+            ],
+            correctAnswer: "To help reps spend less time prepping and more time selling",
+            feedback: "Correct! Bounti focuses on delivering strategic insights, pitches, and messaging to free up reps' time."
+        },
+        {
+            question: "Bounti blends AI precision with what other element?",
+            options: [
+                "Machine Learning exclusively",
+                "Blockchain verification",
+                "Human refinement",
+                "Crowdsourced data"
+            ],
+            correctAnswer: "Human refinement",
+            feedback: "That's right! Bounti uses AI verified and enriched by human experts for maximum impact."
+        },
+        {
+            question: "Which of these is NOT explicitly mentioned as something Bounti provides?",
+            options: [
+                "Company insights and buying committee contacts",
+                "Personalized pitches tied to business objectives",
+                "Tailored messaging for email and LinkedIn",
+                "Automated dialer integration"
+            ],
+            correctAnswer: "Automated dialer integration",
+            feedback: "Good eye! While Bounti focuses on prep and messaging, automated dialing isn't listed as a core feature on the homepage."
+        },
+        {
+            question: "According to the homepage statistics, prospects feel outreach is personal what percentage of the time when using scaled personalization?",
+            options: [
+                "50%",
+                "75%",
+                "85%",
+                "100%"
+            ],
+            correctAnswer: "85%",
+            feedback: "Correct! The site highlights that 85% of prospects feel the outreach is personal."
+        },
+        {
+            question: "What kind of content can Bounti help generate for team enablement?",
+            options: [
+                "Only email templates",
+                "Financial reports",
+                "First call decks and battle cards",
+                "Social media posts for marketing"
+            ],
+            correctAnswer: "First call decks and battle cards",
+            feedback: "Exactly! Bounti provides sales enablement content like call decks and battle cards to help teams win."
+        }
+    ];
+
+    const quizArea = document.getElementById('quiz-area');
+    const resultsArea = document.getElementById('results-area');
+    const questionText = document.getElementById('question-text');
+    const optionsContainer = document.getElementById('options-container');
+    const feedbackContainer = document.getElementById('feedback-container');
+    const nextButton = document.getElementById('next-button');
+    const restartButton = document.getElementById('restart-button');
+    const scoreText = document.getElementById('score-text');
+    const resultMessage = document.getElementById('result-message');
+
+    let currentQuestionIndex = 0;
+    let score = 0;
+    let answerSelected = false;
+    let selectedOptionElement = null;
+
+    function loadQuestion() {
+        answerSelected = false;
+        selectedOptionElement = null;
+        feedbackContainer.classList.add('hidden');
+        feedbackContainer.textContent = '';
+        nextButton.textContent = 'Next Question';
+        nextButton.disabled = true; // Disable until an answer is selected
+
+        const currentQuestion = quizData[currentQuestionIndex];
+        questionText.textContent = currentQuestion.question;
+        optionsContainer.innerHTML = ''; // Clear previous options
+
+        currentQuestion.options.forEach(option => {
+            const button = document.createElement('button');
+            button.textContent = option;
+            button.classList.add('quiz-option');
+            // Apply styles similar to buttons on the page
+            button.style.backgroundColor = 'rgb(255, 255, 255)';
+            button.style.color = 'rgb(13, 20, 7)';
+            button.style.border = '2px solid rgb(220, 245, 69)';
+            button.style.borderRadius = '100px';
+            button.style.padding = '12px 24px';
+            button.style.fontSize = '16px';
+            button.style.fontWeight = '500';
+            button.style.textAlign = 'left';
+            button.style.cursor = 'pointer';
+            button.style.transition = 'background-color 0.3s, border-color 0.3s';
+            button.onclick = () => selectAnswer(button, option, currentQuestion.correctAnswer, currentQuestion.feedback);
+            optionsContainer.appendChild(button);
+        });
+
+        if (currentQuestionIndex === quizData.length - 1) {
+            nextButton.textContent = 'Show Results';
+        }
+    }
+
+    function selectAnswer(button, selectedAnswer, correctAnswer, feedback) {
+        if (answerSelected) return; // Prevent changing answer after selection
+
+        answerSelected = true;
+        nextButton.disabled = false;
+        selectedOptionElement = button;
+
+        // Remove selected class from any other button (though ideally only one is selected)
+        Array.from(optionsContainer.children).forEach(btn => btn.classList.remove('selected'));
+        // Add selected class to the clicked button
+        button.classList.add('selected');
+
+        // Provide immediate feedback (optional, can show on next click)
+        // checkAnswer(selectedAnswer, correctAnswer, feedback);
+    }
+
+    function checkAnswer() {
+        if (!selectedOptionElement) return; // Should not happen if nextButton is enabled
+
+        const selectedAnswer = selectedOptionElement.textContent;
+        const correctAnswer = quizData[currentQuestionIndex].correctAnswer;
+        const feedback = quizData[currentQuestionIndex].feedback;
+
+        // Disable all options
+        Array.from(optionsContainer.children).forEach(btn => {
+            btn.disabled = true;
+            btn.style.cursor = 'default';
+            // Highlight correct and incorrect
+            if (btn.textContent === correctAnswer) {
+                btn.classList.add('correct');
+            } else if (btn === selectedOptionElement) {
+                btn.classList.add('incorrect');
+            }
+        });
+
+
+        if (selectedAnswer === correctAnswer) {
+            score++;
+            feedbackContainer.textContent = feedback || "Correct!";
+            feedbackContainer.style.color = 'rgb(4, 120, 87)'; // Greenish
+        } else {
+            feedbackContainer.textContent = `Incorrect. The correct answer is: ${correctAnswer}`;
+            feedbackContainer.style.color = 'rgb(185, 28, 28)'; // Reddish
+        }
+        feedbackContainer.classList.remove('hidden');
+    }
+
+
+    nextButton.addEventListener('click', () => {
+        if (!answerSelected) return; // Don't proceed if no answer is selected
+
+        checkAnswer(); // Show feedback for the current question
+
+        // Add a small delay before moving to the next question or results
+        setTimeout(() => {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < quizData.length) {
+                // Reset button states for the next question
+                Array.from(optionsContainer.children).forEach(btn => {
+                    btn.disabled = false;
+                    btn.style.cursor = 'pointer';
+                    btn.classList.remove('correct', 'incorrect', 'selected');
+                    btn.style.backgroundColor = 'rgb(255, 255, 255)';
+                    btn.style.color = 'rgb(13, 20, 7)';
+                    btn.style.border = '2px solid rgb(220, 245, 69)';
+                });
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }, 1500); // Wait 1.5 seconds to show feedback
+    });
+
+    restartButton.addEventListener('click', () => {
+        currentQuestionIndex = 0;
+        score = 0;
+        resultsArea.classList.add('hidden');
+        quizArea.classList.remove('hidden');
+        // Reset button states
+        Array.from(optionsContainer.children).forEach(btn => {
+            btn.disabled = false;
+            btn.style.cursor = 'pointer';
+            btn.classList.remove('correct', 'incorrect', 'selected');
+            btn.style.backgroundColor = 'rgb(255, 255, 255)';
+            btn.style.color = 'rgb(13, 20, 7)';
+            btn.style.border = '2px solid rgb(220, 245, 69)';
+        });
+        loadQuestion();
+    });
+
+    function showResults() {
+        quizArea.classList.add('hidden');
+        resultsArea.classList.remove('hidden');
+        scoreText.textContent = `Your score: ${score} out of ${quizData.length}`;
+
+        let message = "";
+        const percentage = (score / quizData.length) * 100;
+        if (percentage === 100) {
+            message = "Excellent! You know Bounti.ai inside out!";
+        } else if (percentage >= 75) {
+            message = "Great job! You have a solid understanding of Bounti.ai.";
+        } else if (percentage >= 50) {
+            message = "Good effort! You know the basics of Bounti.ai.";
+        } else {
+            message = "Looks like there's more to learn about Bounti.ai. Check out the site!";
+        }
+        resultMessage.textContent = message;
+    }
+
+    // Initial load
+    loadQuestion();
+</script>
+
+</body>
+</html>

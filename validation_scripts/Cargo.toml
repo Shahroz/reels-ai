@@ -1,0 +1,42 @@
+[package]
+name = "observability-validation"
+version = "0.1.0"
+edition = "2021"
+
+[workspace]
+
+[[bin]]
+name = "phase1_error_validation"
+path = "phase1_error_validation.rs"
+
+[[bin]]
+name = "phase2_database_validation"
+path = "phase2_database_validation.rs"
+
+[[bin]]
+name = "phase3_events_validation"
+path = "phase3_events_validation.rs"
+
+[[bin]]
+name = "continuous_validation"
+path = "continuous_validation.rs"
+
+[dependencies]
+# OpenTelemetry and tracing
+tracing = "0.1"
+tracing-subscriber = "0.3"
+
+# Actix-web for HTTP testing
+actix-web = "4.0"
+actix-rt = "2.0"
+
+# Utilities
+uuid = { version = "1.0", features = ["v4"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+tokio = { version = "1.0", features = ["full"] }
+chrono = { version = "0.4", features = ["serde"] }
+dotenvy = "0.15"
+
+[features]
+default = []

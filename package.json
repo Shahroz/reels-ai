@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "date-fns": "^4.1.0",
+    "react-markdown": "^10.1.0"
+  },
+  "devDependencies": {
+    "@types/lodash.debounce": "^4.0.9",
+    "lodash.debounce": "^4.0.8"
+  }
+}

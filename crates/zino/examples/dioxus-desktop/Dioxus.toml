@@ -1,0 +1,46 @@
+[application]
+name = "DataCube"
+default_platform = "desktop"
+out_dir = "dist"
+
+[web.app]
+title = "DataCube"
+
+[web.watcher]
+reload_html = true
+watch_path = ["src", "public"]
+index_on_404 = true
+
+[web.resource]
+style = [
+    "public/css/bulma.min.css",
+    "public/css/custom.css",
+]
+script = []
+
+[web.resource.dev]
+style = []
+script = []
+
+[bundle]
+identifier = "zino"
+publisher = "zino-rs"
+icon = [
+    "public/icons/32x32.png",
+    "public/icons/128x128.png",
+    "public/icons/128x128@2x.png",
+    "public/icons/icon.ico",
+]
+resources = ["./config", "./public"]
+
+[bundle.windows]
+tsp = true
+icon_path = "public/icons/icon.ico"
+webview_install_mode = "Skip"
+allow_downgrades = false
+
+[bundle.windows.nsis]
+installer_icon = "public/icons/icon.ico"
+install_mode = "CurrentUser"
+languages = ["SimpChinese", "TradChinese", "English"]
+display_language_selector = true

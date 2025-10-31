@@ -1,0 +1,193 @@
+**Gemini Tooling Structures: Analysis and Refactoring Recommendation**
+
+This report analyzes tool-related data structures in `crates/llm/src/vendors/gemini/` and `crates/narrativ/backend/src/agent_tools/gemini_tool_conversion/` to determine if the latter can be replaced by the former.
+
+**1. Struct Definitions in `crates/llm/src/vendors/gemini/` (Task 1)**
+
+The following definitions are extracted from `crates/llm/src/vendors/gemini/tool.rs` or inferred from its contents and test code.
+
+**1.A. From `crates/llm/src/vendors/gemini/tool.rs` (Provided Context):**
+
+```rust
+// From crates/llm/src/vendors/gemini/tool.rs
+
+/// Wrapper for Google Search tool configuration.
+#[derive(Debug, Clone, serde::Serialize, serde::Deserialize, PartialEq)]
+pub struct GoogleSearchToolWrapper {
+    /// Contains the Google Search configuration (currently an empty struct).
+    #[serde(rename = "googleSearch")]
+    pub google_search: crate::vendors::gemini::google_search::GoogleSearch,
+}
+
+/// Wrapper for Function Declarations tool configuration.
+#[derive(Debug, Clone, serde::Serialize, serde::Deserialize, PartialEq)]
+pub struct FunctionDeclarationsToolWrapper {
+    /// A list of function declarations.
+    #[serde(rename = "function_declarations")] // Ensures snake_case key as per API
+    pub function_declarations: Vec<crate::vendors::gemini::function_declaration::FunctionDeclaration>,
+}
+
+/// Represents a tool that the Gemini model can use.
+#[derive(Debug, Clone, serde::Serialize, serde::Deserialize, PartialEq)]
+#[serde(untagged)]
+pub enum Tool {
+    /// Represents a Google Search tool.
+    GoogleSearch(GoogleSearchToolWrapper),
+    /// Represents a set of function declarations for function calling.
+    FunctionDeclarations(FunctionDeclarationsToolWrapper),
+}
+```
+
+**1.B. Related Structs (Inferred from `tool.rs` tests - full definitions not in provided context):**
+
+Based on the test code within `crates/llm/src/vendors/gemini/tool.rs`, the following structures are likely defined in other files within `crates/llm/src/vendors/gemini/`:
+
+*   **`crate::vendors::gemini::google_search::GoogleSearch`**:
+    Likely an empty struct representing Google Search parameters.
+    ```rust
+    // Presumed structure for crate::vendors::gemini::google_search::GoogleSearch
+    // #[derive(Debug, Clone, serde::Serialize, serde::Deserialize, PartialEq)]
+    // pub struct GoogleSearch {}
+    ```
+
+*   **`crate::vendors::gemini::function_declaration::FunctionDeclaration`**:
+    Represents a single function the model can call.
+    ```rust
+    // Presumed structure for crate::vendors::gemini::function_declaration::FunctionDeclaration
+    // #[derive(Debug, Clone, serde::Serialize, serde::Deserialize, PartialEq)]
+    // pub struct FunctionDeclaration {
+    //     pub name: String,
+    //     pub description: String,
+    //     pub parameters: crate::vendors::gemini::function_parameters_schema::FunctionParametersSchema,
+    // }
+    ```
+
+*   **`crate::vendors::gemini::function_parameters_schema::FunctionParametersSchema`**:
+    Defines the schema for a function's parameters.
+    ```rust
+    // Presumed structure for crate::vendors::gemini::function_parameters_schema::FunctionParametersSchema
+    // #[derive(Debug, Clone, serde::Serialize, serde::Deserialize, PartialEq)]
+    // pub struct FunctionParametersSchema {
+    //     #[serde(rename = "type")] // or schema_type
+    //     pub schema_type: String, // e.g., "OBJECT"
+    //     pub properties: std::collections::HashMap<String, crate::vendors::gemini::property_definition::PropertyDefinition>,
+    //     #[serde(skip_serializing_if = "Option::is_none")]
+    //     pub required: Option<Vec<String>>,
+    // }
+    ```
+
+*   **`crate::vendors::gemini::property_definition::PropertyDefinition`**:
+    Defines a single property within a schema.
+    ```rust
+    // Presumed structure for crate::vendors::gemini::property_definition::PropertyDefinition
+    // #[derive(Debug, Clone, serde::Serialize, serde::Deserialize, PartialEq)]
+    // pub struct PropertyDefinition {
+    //     #[serde(rename = "type")]
+    //     pub r#type: String, // e.g., "string", "integer"
+    //     #[serde(skip_serializing_if = "Option::is_none")]
+    //     pub description: Option<String>,
+    // }
+    ```
+*Note: The exact definitions for these inferred structs were not available in the provided context files for `crates/llm/src/vendors/gemini/`. The structures above are estimations based on usage.*
+
+**2. Comparison with `crates/narrativ/backend/src/agent_tools/gemini_tool_conversion/` Structs (Task 1 & 3.b)**
+
+The following structs are defined in `crates/narrativ/backend/src/agent_tools/gemini_tool_conversion/`:
+
+*   **`GeminiFunctionDeclaration`** (from `gemini_function_declaration.rs`):
+    ```rust
+    // From crates/narrativ/backend/src/agent_tools/gemini_tool_conversion/gemini_function_declaration.rs
+    #[derive(serde::Serialize, serde::Deserialize, std::fmt::Debug, schemars::JsonSchema, std::clone::Clone)]
+    pub struct GeminiFunctionDeclaration {
+        pub name: std::string::String,
+        pub description: std::string::String,
+        pub parameters: crate::agent_tools::gemini_tool_conversion::gemini_schema::GeminiSchema,
+    }
+    ```
+
+*   **`GeminiSchema`** (from `gemini_schema.rs`):
+    ```rust
+    // From crates/narrativ/backend/src/agent_tools/gemini_tool_conversion/gemini_schema.rs
+    #[derive(serde::Serialize, serde::Deserialize, std::fmt::Debug, schemars::JsonSchema, std::clone::Clone)]
+    pub struct GeminiSchema {
+        #[serde(rename = "type")]
+        pub type_string: std::string::String,
+        pub properties: std::collections::BTreeMap<
+            std::string::String,
+            crate::agent_tools::gemini_tool_conversion::gemini_schema_property::GeminiSchemaProperty,
+        >,
+        #[serde(skip_serializing_if = "Vec::is_empty")]
+        pub required: std::vec::Vec<std::string::String>,
+    }
+    ```
+
+*   **`GeminiSchemaProperty`** (from `gemini_schema_property.rs`):
+    ```rust
+    // From crates/narrativ/backend/src/agent_tools/gemini_tool_conversion/gemini_schema_property.rs
+    #[derive(serde::Serialize, serde::Deserialize, std::fmt::Debug, schemars::JsonSchema, std::clone::Clone)]
+    pub struct GeminiSchemaProperty {
+        #[serde(rename = "type")]
+        pub type_string: std::string::String,
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub description: std::option::Option<std::string::String>,
+    }
+    ```
+*   **`GeminiTools`** (from `gemini_tools.rs`, definition not provided in context but listed in `mod.rs`): This is likely a wrapper struct or type alias for a collection of `GeminiFunctionDeclaration` instances, e.g., `pub struct GeminiTools { pub function_declarations: Vec<GeminiFunctionDeclaration> }`.
+
+**Functional Comparison:**
+
+*   **Function Declaration:**
+    *   `llm::FunctionDeclaration` (inferred) and `agent_tools::GeminiFunctionDeclaration` are functionally very similar, both holding `name`, `description`, and `parameters`.
+
+*   **Parameter Schema:**
+    *   `llm::FunctionParametersSchema` (inferred) and `agent_tools::GeminiSchema` are also functionally similar.
+    *   **Type field name:** `schema_type` (llm, presumed) vs. `type_string` (agent_tools). Both likely map to JSON `type`.
+    *   **Properties collection:** `std::collections::HashMap` (llm, presumed) vs. `std::collections::BTreeMap` (agent_tools). `BTreeMap` ensures ordered serialization of properties, which can be beneficial for testing and consistency, though JSON object key order is not guaranteed by the spec.
+    *   **Required properties:** `Option<Vec<String>>` (llm, presumed) vs. `Vec<String>` with `#[serde(skip_serializing_if = "Vec::is_empty")]` (agent_tools). These achieve similar JSON output (omitting `required` if empty).
+
+*   **Schema Property:**
+    *   `llm::PropertyDefinition` (inferred) and `agent_tools::GeminiSchemaProperty` are nearly identical.
+    *   **Type field name:** `r#type` (llm, presumed) vs. `type_string` (agent_tools). Both map to JSON `type`.
+
+**Key Structural Differences:**
+
+*   **Scope of `llm::Tool`:** The `llm` crate defines a higher-level `Tool` enum that can represent different kinds of tools (e.g., `GoogleSearch`, `FunctionDeclarations`). The `agent_tools` structures are primarily focused on the `FunctionDeclaration` aspect.
+*   **Tool Collection Wrappers:** `llm` uses `FunctionDeclarationsToolWrapper` to hold a `Vec<FunctionDeclaration>`. The `agent_tools` equivalent is likely the unprovided `GeminiTools` struct.
+*   **Purpose and Origin:**
+    *   The `agent_tools` structs are accompanied by conversion utilities like `json_schema_to_gemini_schema.rs` and `convert_narrativ_tools_to_gemini_format.rs` (existence implied by `mod.rs`). This strongly suggests they are part of a pipeline for transforming tool definitions from another format (e.g., generic JSON Schema generated by `schemars`, or an internal "Narrativ tool" format) into a Gemini-compatible structure.
+    *   The `llm` structs appear to be direct representations of the Gemini API's expected JSON structure for tools.
+
+**3. Status of `tools` field in `crates/llm/src/vendors/gemini/gemini_request.rs::GeminiRequest` (Task 2 & 3.c)**
+
+The `GeminiRequest` struct in `crates/llm/src/vendors/gemini/gemini_request.rs` contains the following field related to tools:
+
+```rust
+// From crates/llm/src/vendors/gemini/gemini_request.rs
+pub struct GeminiRequest {
+    // ... other fields ...
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub tools: Option<Vec<crate::vendors::gemini::tool::Tool>>, // Kept the field, but it will always be None now
+    // ... other fields ...
+}
+```
+The comment `// Kept the field, but it will always be None now` is critical.
+**Conclusion:** This comment explicitly states that the `tools` field, which would utilize the `crate::vendors::gemini::tool::Tool` enum and its associated structures, is **not currently functional for sending tool configurations** via this `GeminiRequest` struct. The `llm` crate's tool definitions, while present, appear to be unused in the context of this primary request object.
+
+**4. Recommendation (Task 3.d)**
+
+**Recommendation: Do Not Refactor.**
+
+**Reasoning:**
+
+1.  **`llm` Tool Structs Are Not Actively Used for Requests via `GeminiRequest`:** The most compelling reason is the comment in `GeminiRequest` indicating its `tools` field (and thus the `llm::tool::Tool` structures) "will always be None now." This means that replacing the `agent_tools` structs with the `llm` structs would involve swapping actively used components with ones that are currently non-operational within the main request pipeline of the `llm` crate's Gemini vendor.
+
+2.  **`agent_tools` Structs Serve an Active Conversion Role:** The `crates/narrativ/backend/src/agent_tools/gemini_tool_conversion/` directory contains active conversion logic (e.g., `json_schema_to_gemini_schema.rs` which converts `serde_json::Value` to `GeminiSchema`, and likely `convert_narrativ_tools_to_gemini_format.rs` which would convert some internal format to `GeminiFunctionDeclaration`). These utilities depend on the specific structure and field names of the `agent_tools` structs. Migrating to `llm` structs would necessitate a significant rewrite of this existing, functional conversion logic, even if the `llm` structs were active.
+
+3.  **Potential for Distinct Purpose:** The `agent_tools` structs, with features like `BTreeMap` for ordered properties (useful in `json_schema_to_gemini_schema.rs` for consistent test output or processing) and specific field naming (`type_string`), are tailored to their role in the conversion pipeline. The `llm` structs are designed as direct mappings of the Gemini API. While similar, they are not identical, and the differences could complicate the existing conversion logic.
+
+4.  **Unclear Alternative Path for `llm` Tools:** If the `llm::tool::Tool` definitions are not used via `GeminiRequest.tools`, it's unknown how else they might be intended for use within the `llm` crate for Gemini API calls. Without this clarity, adopting them is risky. The `agent_tools` system, in contrast, is demonstrably part of a pipeline that prepares tool data.
+
+**Summary:**
+The `agent_tools` data structures and their associated conversion utilities in `crates/narrativ/backend/` appear to be actively serving a necessary function in preparing tool definitions for the Gemini API. The equivalent structures in `crates/llm/` seem to be currently inactive in the primary `GeminiRequest` flow. Therefore, refactoring to replace `agent_tools` with `llm` tool structs is not recommended at this time as it would likely break existing functionality without clear benefit, given the current status of the `tools` field in `GeminiRequest`.
+
+It would be beneficial to understand how the output of the `agent_tools` conversion pipeline (presumably serialized `GeminiFunctionDeclaration` data) is actually integrated into API requests to Gemini, as this might further clarify the relationship or independence of these two sets of tool definitions.

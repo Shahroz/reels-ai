@@ -1,0 +1,346 @@
+src/app_setup.rs:13:/// 2. Uses the loaded configuration to call `crate::state::init_app_state::init_app_state`,
+src/app_setup.rs:19:    crate::state::app_state::AppState,
+src/app_setup.rs:28:    let app_state = crate::state::init_app_state::init_app_state(config).await?;
+src/app_setup.rs:32:    std::result::Result::Ok(app_state)
+src/app_setup.rs:36:// to other units (`load_env_config`, `init_app_state`) which should have their own tests.
+src/background/evaluation_cycle.rs:23:/// * `app_state` - Shared application state wrapped in `web::Data`.
+src/background/evaluation_cycle.rs:29:    app_state: &actix_web::web::Data<crate::state::app_state::AppState>,
+src/background/evaluation_cycle.rs:33:        let sessions_guard = app_state.sessions.lock().await;
+src/background/evaluation_cycle.rs:43:        let mut sessions_guard = app_state.sessions.lock().await;
+src/background/evaluation_cycle.rs:47:            // They can access config directly: app_state.config...
+src/background/evaluation_cycle.rs:49:            let app_state_ref: &crate::state::app_state::AppState = app_state.get_ref();
+src/background/evaluation_cycle.rs:52:            match crate::conversation::compaction::evaluate_context(&session.history, app_state_ref).await {
+src/background/evaluation_cycle.rs:66:            let terminate = crate::conversation::compaction::check_termination(session, app_state_ref);
+src/background/evaluation_cycle.rs:74:                let should_compact = crate::conversation::compaction::should_compact_history(&session.history, app_state_ref);
+src/background/evaluation_cycle.rs:79:                    match crate::conversation::compaction::compact_history(&mut session.history, app_state_ref).await {
+src/background/tasks.rs:17:pub async fn background_evaluator_task(app_state: actix_web::web::Data<crate::state::app_state::AppState>) {
+src/background/tasks.rs:21:        let sleep_duration = if app_state.config.evaluator_sleep_seconds > 0 {
+src/background/tasks.rs:22:            app_state.config.evaluator_sleep_seconds
+src/background/tasks.rs:34:            let sessions_guard = app_state.sessions.lock().await;
+src/background/tasks.rs:51:            let update_result = crate::session::manager::update_status(&app_state, &session_id, new_status).await;
+src/background/tasks.rs:59:                    // tokio::spawn(process_research_session(app_state.clone(), session_id));
+src/background/tasks.rs:80:pub async fn timeout_task(app_state: actix_web::web::Data<crate::state::app_state::AppState>) {
+src/bin/cli.rs:19:        Ok(_app_state) => {
+src/bin/cli.rs:22:            // Placeholder for future CLI logic using the app_state.
+src/conversation/compaction/check_termination.rs:17:/// * `app_state` - A reference to the application state, containing configuration (including LLM config).
+src/conversation/compaction/check_termination.rs:25:    app_state: &crate::state::app_state::AppState, // Contains config including LlmConfig
+src/conversation/compaction/check_termination.rs:52:        app_state.config.llm_config.check_termination_models.clone(), // Use configured models
+src/conversation/compaction/check_termination.rs:96:    fn create_test_app_state() -> crate::state::app_state::AppState {
+src/conversation/compaction/check_termination.rs:99:        crate::state::app_state::AppState::new(config) // Use the constructor
+src/conversation/compaction/check_termination.rs:143:        let app_state = create_test_app_state();
+src/conversation/compaction/check_termination.rs:153:        let result = super::check_termination(&session_data, &app_state).await;
+src/conversation/compaction/check_termination.rs:167:         let app_state = create_test_app_state();
+src/conversation/compaction/check_termination.rs:176:         let result = super::check_termination(&session_data, &app_state).await;
+src/conversation/compaction/check_termination.rs:189:         let mut app_state = create_test_app_state();
+src/conversation/compaction/check_termination.rs:200:         let result = super::check_termination(&session_data, &app_state).await;
+src/conversation/compaction/compact_history.rs:12:/// Compacts the conversation history based on the policy in `app_state`.
+src/conversation/compaction/compact_history.rs:17:/// * `app_state` - The shared application state, containing configuration.
+src/conversation/compaction/compact_history.rs:24:    app_state: &crate::state::app_state::AppState,                               // Assuming path
+src/conversation/compaction/compact_history.rs:28:    let policy = &app_state.config.compaction_policy; // Accessing the policy struct
+src/conversation/compaction/compact_history.rs:53:        app_state,
+src/conversation/compaction/compact_history.rs:100:    // Mimics crate::state::app_state::AppState
+src/conversation/compaction/compact_history.rs:157:    fn create_mock_app_state(policy: MockCompactionPolicy) -> MockAppState {
+src/conversation/compaction/compact_history.rs:181:            _app_state: &super::MockAppState,
+src/conversation/compaction/compact_history.rs:203:        let app_state = create_mock_app_state(policy);
+src/conversation/compaction/compact_history.rs:214:        let result = super::compact_history(&mut history, &app_state).await;
+src/conversation/compaction/compact_history.rs:244:        let app_state = create_mock_app_state(policy);
+src/conversation/compaction/compact_history.rs:246:        let result = super::compact_history(&mut history, &app_state).await;
+src/conversation/compaction/compact_history.rs:266:        let app_state = create_mock_app_state(policy);
+src/conversation/compaction/compact_history.rs:269:        let result = super::compact_history(&mut history, &app_state).await;
+src/conversation/compaction/compact_history.rs:291:        let app_state = create_mock_app_state(policy);
+src/conversation/compaction/compact_history.rs:293:        let result = super::compact_history(&mut history, &app_state).await;
+src/conversation/compaction/evaluate_context.rs:14:// Assuming AppState is defined in crate::state::app_state.
+src/conversation/compaction/evaluate_context.rs:22:    app_state: &crate::state::app_state::AppState, // _app_state currently unused, but kept for signature consistency
+src/conversation/compaction/evaluate_context.rs:46:        app_state.config.llm_config.context_evaluation_models.clone(), // Use default model(s)
+src/conversation/compaction/evaluate_context.rs:103:    fn create_mock_app_state() -> crate::state::app_state::AppState {
+src/conversation/compaction/evaluate_context.rs:104:        crate::state::app_state::AppState {
+src/conversation/compaction/evaluate_context.rs:116:        let app_state = create_mock_app_state();
+src/conversation/compaction/evaluate_context.rs:118:        let result = super::evaluate_context(&history, &app_state).await;
+src/conversation/compaction/evaluate_context.rs:146:        let app_state = create_mock_app_state();
+src/conversation/compaction/evaluate_context.rs:148:        let result = super::evaluate_context(&history, &app_state).await;
+src/conversation/compaction/evaluate_context.rs:175:        let app_state = create_mock_app_state();
+src/conversation/compaction/evaluate_context.rs:177:        let result = super::evaluate_context(&history, &app_state).await;
+src/conversation/compaction/should_compact_history.rs:15:/// specified in the `CompactionPolicy` found within `app_state.config`.
+src/conversation/compaction/should_compact_history.rs:19:/// * `app_state` - The shared application state containing configuration.
+src/conversation/compaction/should_compact_history.rs:22:/// `true` if `history.len()` is greater than `app_state.config.compaction_policy.keep_last`,
+src/conversation/compaction/should_compact_history.rs:26:/// - `app_state.config` contains a field `compaction_policy` of type `crate::types::compaction_policy::CompactionPolicy`.
+src/conversation/compaction/should_compact_history.rs:29:    app_state: &crate::state::app_state::AppState,
+src/conversation/compaction/should_compact_history.rs:33:    let policy = &app_state.config.compaction_policy; // Adjust field name if different in AppConfig
+src/conversation/compaction/should_compact_history.rs:44:    fn create_test_app_state(keep_last: usize, summary_length: usize) -> crate::state::app_state::AppState {
+src/conversation/compaction/should_compact_history.rs:68:        crate::state::app_state::AppState {
+src/conversation/compaction/should_compact_history.rs:87:        let app_state = create_test_app_state(keep_last, 500); // summary_length arbitrary here
+src/conversation/compaction/should_compact_history.rs:90:        let result = super::should_compact_history(&history, &app_state);
+src/conversation/compaction/should_compact_history.rs:100:        let app_state = create_test_app_state(keep_last, 500);
+src/conversation/compaction/should_compact_history.rs:103:        let result = super::should_compact_history(&history, &app_state);
+src/conversation/compaction/should_compact_history.rs:113:        let app_state = create_test_app_state(keep_last, 500);
+src/conversation/compaction/should_compact_history.rs:116:        let result = super::should_compact_history(&history, &app_state);
+src/conversation/compaction/should_compact_history.rs:126:        let app_state = create_test_app_state(keep_last, 500);
+src/conversation/compaction/should_compact_history.rs:129:        let result = super::should_compact_history(&history, &app_state);
+src/conversation/compaction/should_compact_history.rs:139:        let app_state = create_test_app_state(keep_last, 500);
+src/conversation/compaction/should_compact_history.rs:142:        let result = super::should_compact_history(&history, &app_state);
+src/conversation/compaction/summarize_entries.rs:18:/// * `app_state` - A reference to the application state, containing configuration (including LLM config).
+src/conversation/compaction/summarize_entries.rs:26:    app_state: &crate::state::app_state::AppState,
+src/conversation/compaction/summarize_entries.rs:47:    let config = &app_state.config;
+src/conversation/compaction/summarize_entries.rs:84:    fn create_test_app_state() -> crate::state::app_state::AppState {
+src/conversation/compaction/summarize_entries.rs:95:        crate::state::app_state::AppState::new(config) // Use constructor
+src/conversation/compaction/summarize_entries.rs:116:        let app_state = create_test_app_state();
+src/conversation/compaction/summarize_entries.rs:125:        let result = super::summarize_entries(&entries, &app_state).await;
+src/conversation/compaction/summarize_entries.rs:142:        let app_state = create_test_app_state();
+src/conversation/compaction/summarize_entries.rs:145:        let result = super::summarize_entries(&entries, &app_state).await;
+src/conversation/compaction/summarize_entries.rs:155:         let app_state = create_test_app_state();
+src/conversation/compaction/summarize_entries.rs:161:         let result = super::summarize_entries(&entries, &app_state).await;
+src/conversation/stream.rs:21:use crate::state::app_state::AppState;
+src/conversation/stream.rs:62:    app_state: &AppState,
+src/conversation/stream.rs:93:    let config = app_state.config.clone();
+src/conversation/stream.rs:144:    use crate::state::app_state::AppState;
+src/conversation/stream.rs:156:    fn create_dummy_app_state() -> AppState {
+src/conversation/stream.rs:205:        let app_state = create_dummy_app_state();
+src/conversation/stream.rs:211:        let result: Result<crate::types::llm_agent_response::LlmAgentResponse, StreamError> = conversation_event_stream(&session_data, &app_state).await;
+src/evaluator/run_research_loop.rs:25:/// * `app_state` - Shared application state.
+src/evaluator/run_research_loop.rs:33:    app_state: &crate::state::app_state::AppState,
+src/evaluator/run_research_loop.rs:40:        app_state,
+src/evaluator/run_research_loop.rs:62:        let session_data = match crate::session::manager::get_session(app_state, &session_id).await {
+src/evaluator/run_research_loop.rs:79:                    app_state,
+src/evaluator/run_research_loop.rs:98:                app_state,
+src/evaluator/run_research_loop.rs:111:        let should_terminate = crate::conversation::compaction::check_termination::check_termination(&session_data, app_state).await;
+src/evaluator/run_research_loop.rs:115:                app_state,
+src/evaluator/run_research_loop.rs:147:        // Pass history clone and app_state to should_compact_history
+src/evaluator/run_research_loop.rs:148:        if crate::conversation::compaction::should_compact_history::should_compact_history(&session_data.history, app_state) {
+src/evaluator/run_research_loop.rs:152:            // likely by taking app_state and session_id, locking the session, and modifying history.
+src/evaluator/run_research_loop.rs:157:                 app_state
+src/evaluator/run_research_loop.rs:175:        match crate::conversation::stream::conversation_event_stream(&session_data, app_state).await
+src/evaluator/run_research_loop.rs:193:                match crate::session::manager::add_conversation_entry(app_state, &session_id, agent_entry).await {
+src/evaluator/run_research_loop.rs:218:                            // Pass Arc clone of app_state to dispatch_tools
+src/evaluator/run_research_loop.rs:219:                            app_state.clone(),
+src/evaluator/run_research_loop.rs:239:                                match crate::session::manager::add_conversation_entry(app_state, &session_id, tool_result_entry).await {
+src/evaluator/run_research_loop.rs:261:                                match crate::session::manager::add_conversation_entry(app_state, &session_id, tool_error_entry).await {
+src/evaluator/run_research_loop.rs:281:                     app_state,
+src/handlers/conversation_stream.rs:20:    app_state: actix_web::web::Data<crate::state::app_state::AppState>, // Access AppState via Data
+src/handlers/conversation_stream.rs:29:        app_state, // Pass the AppState Data wrapper directly
+src/handlers/get_status.rs:18:    app_state: actix_web::web::Data<crate::state::app_state::AppState>,
+src/handlers/get_status.rs:24:    let sessions = app_state.sessions.lock().await;
+src/handlers/get_status.rs:30:            let timeout_duration = std::time::Duration::from_secs(app_state.config.session_timeout_seconds);
+src/handlers/post_message.rs:17:    app_state: actix_web::web::Data<crate::state::app_state::AppState>,
+src/handlers/post_message.rs:21:    let app_state_ref = app_state.get_ref(); // Get a reference from Data
+src/handlers/post_message.rs:25:    let mut sessions = app_state_ref.sessions.lock().await;
+src/handlers/post_message.rs:92:    fn create_mock_app_state(session_id: Option<crate::types::session_id::SessionId>, session_data: Option<MockSessionData>) -> MockAppState {
+src/handlers/post_message.rs:121:        let app_state = std::sync::Arc::new(create_mock_app_state(Some(test_session_id.clone()), Some(initial_session_data.clone())));
+src/handlers/post_message.rs:126:        let app_state_data = actix_web::web::Data::from(app_state.clone());
+src/handlers/post_message.rs:129:        let response = post_message(session_id_path, message_payload, app_state_data).await;
+src/handlers/post_message.rs:136:        let sessions_guard = app_state.sessions.lock().await.expect("Failed to lock sessions mutex");
+src/handlers/post_message.rs:157:        let app_state = std::sync::Arc::new(create_mock_app_state(None, None));
+src/handlers/post_message.rs:162:        let app_state_data = actix_web::web::Data::from(app_state.clone());
+src/handlers/post_message.rs:165:        let response = post_message(session_id_path, message_payload, app_state_data).await;
+src/handlers/post_message.rs:172:        let sessions_guard = app_state.sessions.lock().await.expect("Failed to lock sessions mutex");
+src/handlers/start_research.rs:21:/// * `app_state` - Shared application state containing session storage.
+src/handlers/start_research.rs:30:    app_state: actix_web::web::Data<crate::state::app_state::AppState>, // Use web::Data for shared state
+src/handlers/start_research.rs:37:        time_limit: std::time::Duration::from_secs(app_state.config.session_timeout_seconds),
+src/handlers/start_research.rs:43:    let session_id = crate::session::manager::create_session(app_state.get_ref(), session_config).await;
+src/handlers/start_research.rs:54:    match crate::session::manager::add_conversation_entry(app_state.get_ref(), &session_id, initial_entry).await {
+src/handlers/start_research.rs:57:            let cloned_app_state = app_state.clone(); // Clone Arc<AppState> for the task
+src/handlers/start_research.rs:66:                 match crate::evaluator::run_research_loop::run_research_loop(cloned_app_state.get_ref(), cloned_session_id).await {
+src/handlers/start_research.rs:95:     fn create_test_app_state() -> crate::state::app_state::AppState {
+src/handlers/start_research.rs:102:         crate::state::app_state::AppState::new(config)
+src/handlers/start_research.rs:111:        let app_state = web::Data::new(create_test_app_state());
+src/handlers/start_research.rs:114:                .app_data(app_state.clone()) // Provide AppState
+src/handlers/start_research.rs:143:        let state = app_state.get_ref();
+src/handlers/start_research.rs:158:        let app_state = web::Data::new(create_test_app_state());
+src/handlers/start_research.rs:161:                .app_data(app_state.clone())
+src/handlers/terminate_session.rs:18:    app_state: actix_web::web::Data<crate::state::app_state::AppState>,
+src/handlers/terminate_session.rs:24:    let mut sessions = app_state.sessions.lock().await;
+src/handlers/terminate_session.rs:37:    let mut ws_connections = app_state.ws_connections.lock().await;
+src/handlers/terminate_session.rs:65:    fn create_test_app_state() -> crate::state::app_state::AppState {
+src/handlers/terminate_session.rs:72:        crate::state::app_state::AppState::new(dummy_config)
+src/handlers/terminate_session.rs:100:        let app_state = create_test_app_state();
+src/handlers/terminate_session.rs:106:            let mut sessions = app_state.sessions.lock().await;
+src/handlers/terminate_session.rs:112:            let sessions = app_state.sessions.lock().await;
+src/handlers/terminate_session.rs:118:        let data = actix_web::web::Data::new(app_state.clone()); // Clone AppState for Data
+src/handlers/terminate_session.rs:125:            let sessions = app_state.sessions.lock().await;
+src/handlers/terminate_session.rs:132:        let app_state = create_test_app_state();
+src/handlers/terminate_session.rs:139:            let mut ws_connections = app_state.ws_connections.lock().await;
+src/handlers/terminate_session.rs:146:            let ws_connections = app_state.ws_connections.lock().await;
+src/handlers/terminate_session.rs:152:        let data = actix_web::web::Data::new(app_state.clone());
+src/handlers/terminate_session.rs:159:            let ws_connections = app_state.ws_connections.lock().await;
+src/handlers/terminate_session.rs:167:        let app_state = create_test_app_state();
+src/handlers/terminate_session.rs:172:            let sessions = app_state.sessions.lock().await;
+src/handlers/terminate_session.rs:174:            let ws_connections = app_state.ws_connections.lock().await;
+src/handlers/terminate_session.rs:180:        let data = actix_web::web::Data::new(app_state.clone());
+src/handlers/terminate_session.rs:193:            let sessions = app_state.sessions.lock().await;
+src/handlers/terminate_session.rs:195:            let ws_connections = app_state.ws_connections.lock().await;
+src/main.rs:47:    let app_state = match crate::state::init_app_state::init_app_state(config.clone()).await {
+src/main.rs:58:    let app_state_mutex = Mutex::new(app_state);
+src/main.rs:61:    let app_data = actix_web::web::Data::new(app_state_mutex);
+src/session/manager.rs:19:    app_state: &crate::state::app_state::AppState,
+src/session/manager.rs:39:    let mut sessions_guard = app_state.sessions.lock().await;
+src/session/manager.rs:49:    app_state: &crate::state::app_state::AppState,
+src/session/manager.rs:52:    let sessions_guard = app_state.sessions.lock().await;
+src/session/manager.rs:60:    app_state: &crate::state::app_state::AppState,
+src/session/manager.rs:64:    let mut sessions_guard = app_state.sessions.lock().await;
+src/session/manager.rs:77:    app_state: &crate::state::app_state::AppState,
+src/session/manager.rs:81:    let mut sessions_guard = app_state.sessions.lock().await;
+src/session/manager.rs:94:    app_state: &crate::state::app_state::AppState,
+src/session/manager.rs:98:    let mut sessions_guard = app_state.sessions.lock().await;
+src/session/manager.rs:116:    fn create_async_test_app_state() -> crate::state::app_state::AppState {
+src/session/manager.rs:117:         crate::state::app_state::AppState {
+src/session/manager.rs:141:        let app_state = create_async_test_app_state();
+src/session/manager.rs:145:        let session_id = super::create_session(&app_state, config.clone()).await;
+src/session/manager.rs:148:        let sessions_guard = app_state.sessions.lock().await;
+src/session/manager.rs:153:        let session_opt = super::get_session(&app_state, &session_id).await;
+src/session/manager.rs:168:        let app_state = create_async_test_app_state();
+src/session/manager.rs:170:        let session_id = super::create_session(&app_state, config).await;
+src/session/manager.rs:174:        let update_result = super::update_status(&app_state, &session_id, new_status.clone()).await;
+src/session/manager.rs:178:        let session = super::get_session(&app_state, &session_id).await.unwrap();
+src/session/manager.rs:184:        let update_result_fail = super::update_status(&app_state, &fake_id, crate::types::session_status::SessionStatus::Error).await;
+src/session/manager.rs:191:         let app_state = create_async_test_app_state();
+src/session/manager.rs:193:         let session_id = super::create_session(&app_state, config).await;
+src/session/manager.rs:204:         let add_result = super::add_conversation_entry(&app_state, &session_id, entry.clone()).await;
+src/session/manager.rs:208:         let session = super::get_session(&app_state, &session_id).await.unwrap();
+src/session/manager.rs:215:         let add_result_fail = super::add_conversation_entry(&app_state, &fake_id, entry).await;
+src/session/manager.rs:222:         let app_state = create_async_test_app_state();
+src/session/manager.rs:224:         let session_id = super::create_session(&app_state, config).await;
+src/session/manager.rs:233:         let add_result = super::add_context_entry(&app_state, &session_id, entry.clone()).await;
+src/session/manager.rs:237:         let session = super::get_session(&app_state, &session_id).await.unwrap();
+src/session/manager.rs:244:         let add_result_fail = super::add_context_entry(&app_state, &fake_id, entry).await;
+src/state/get_session_ids.rs:8:// Note: This function assumes that `crate::state::app_state::AppState` has a field named `sessions`
+src/state/get_session_ids.rs:11:pub fn get_session_ids(app_state: &crate::state::app_state::AppState) -> std::vec::Vec<crate::types::SessionId> {
+src/state/get_session_ids.rs:13:    app_state.sessions.keys().cloned().collect::<std::vec::Vec<_>>()
+src/state/get_session_ids.rs:47:        let app_state = TestAppState { sessions };
+src/state/get_session_ids.rs:51:        let mut actual_ids: std::vec::Vec<TestSessionId> = app_state.sessions.keys().cloned().collect();
+src/state/get_session_ids.rs:64:        let app_state = TestAppState { sessions };
+src/state/get_session_ids.rs:67:        let actual_ids: std::vec::Vec<TestSessionId> = app_state.sessions.keys().cloned().collect();
+src/state/get_session_ids.rs:75:    // `crate::state::app_state::AppState` instance for testing is complex due to dependencies
+src/state/init_app_state.rs:1://! Placeholder for init_app_state function.
+src/state/init_app_state.rs:2:pub async fn init_app_state(
+src/state/init_app_state.rs:4:) -> std::result::Result<crate::state::app_state::AppState, anyhow::Error> {
+src/state/init_app_state.rs:9:    std::result::Result::Ok(crate::state::app_state::AppState { config, sessions: dummy_sessions, ws_connections: dummy_ws_connections })
+src/state/mod.rs:1:pub mod app_state;
+src/state/mod.rs:2:pub mod init_app_state;
+src/tools/dispatch_tools.rs:19:/// * `app_state` - The shared application state (`std::sync::Arc<tokio::sync::Mutex<crate::state::app_state::AppState>>`).
+src/tools/dispatch_tools.rs:29:    app_state: std::sync::Arc<tokio::sync::Mutex<crate::state::app_state::AppState>>,
+src/tools/dispatch_tools.rs:35:            handler(tool_choice.parameters, app_state, session_id).await // Pass ToolParameters
+src/tools/dispatch_tools.rs:49:        _app_state: std::sync::Arc<tokio::sync::Mutex<crate::state::app_state::AppState>>,
+src/tools/dispatch_tools.rs:66:        let dummy_state = std::sync::Arc::new(tokio::sync::Mutex::new(crate::state::app_state::AppState::default())); // Assuming default() is available
+src/tools/dispatch_tools.rs:92:        let dummy_state = std::sync::Arc::new(tokio::sync::Mutex::new(crate::state::app_state::AppState::default()));
+src/tools/dispatch_tools.rs:109:            _app_state: std::sync::Arc<tokio::sync::Mutex<crate::state::app_state::AppState>>,
+src/tools/dispatch_tools.rs:131:        let dummy_state = std::sync::Arc::new(tokio::sync::Mutex::new(crate::state::app_state::AppState::default()));
+src/tools/handle_browse.rs:20:    _app_state: std::sync::Arc<tokio::sync::Mutex<crate::state::app_state::AppState>>,
+src/tools/handle_browse.rs:50:            crate::state::app_state::AppState::new() // Assuming a simple constructor exists
+src/tools/handle_browse.rs:69:            crate::state::app_state::AppState::new()
+src/tools/handle_save_context.rs:16:    app_state: std::sync::Arc<tokio::sync::Mutex<crate::state::app_state::AppState>>,
+src/tools/handle_save_context.rs:29:            let state_guard = app_state.lock().await;
+src/tools/handle_save_context.rs:76:    async fn setup_test_app_state_with_session(session_id: crate::types::session_id::SessionId) -> std::sync::Arc<tokio::sync::Mutex<crate::state::app_state::AppState>> {
+src/tools/handle_save_context.rs:87:        let app_state_content = crate::state::app_state::AppState {
+src/tools/handle_save_context.rs:92:        std::sync::Arc::new(tokio::sync::Mutex::new(app_state_content))
+src/tools/handle_save_context.rs:104:        let app_state = setup_test_app_state_with_session(dummy_session_id).await;
+src/tools/handle_save_context.rs:107:        let result = super::handle_save_context(parameters, app_state.clone(), dummy_session_id).await;
+src/tools/handle_save_context.rs:113:        let state_guard = app_state.lock().await;
+src/tools/handle_save_context.rs:130:        let app_state_content = crate::state::app_state::AppState {
+src/tools/handle_save_context.rs:135:        let app_state = std::sync::Arc::new(tokio::sync::Mutex::new(app_state_content));
+src/tools/handle_save_context.rs:137:        let result = super::handle_save_context(parameters, app_state, non_existent_session_id).await;
+src/tools/handle_save_context.rs:149:        let app_state = setup_test_app_state_with_session(dummy_session_id).await; // State needs the session to exist for this check
+src/tools/handle_save_context.rs:151:        let result = super::handle_save_context(parameters, app_state, dummy_session_id).await;
+src/tools/handle_search.rs:16:    _app_state: std::sync::Arc<tokio::sync::Mutex<crate::state::app_state::AppState>>,
+src/tools/register_tools.rs:22:    state: std::sync::Arc<tokio::sync::Mutex<crate::state::app_state::AppState>>,
+src/tools/register_tools.rs:29:    state: std::sync::Arc<tokio::sync::Mutex<crate::state::app_state::AppState>>,
+src/tools/register_tools.rs:36:    state: std::sync::Arc<tokio::sync::Mutex<crate::state::app_state::AppState>>,
+src/tools/tool_handler.rs:18:    app_state: std::sync::Arc<tokio::sync::Mutex<crate::state::app_state::AppState>>,
+src/websocket/handler.rs:37:    app_state: actix_web::web::Data<crate::state::app_state::AppState>,
+src/websocket/handler.rs:45:        app_state: actix_web::web::Data<crate::state::app_state::AppState>,
+src/websocket/handler.rs:50:            app_state,
+src/websocket/handler.rs:75:        app_state: actix_web::web::Data<crate::state::app_state::AppState>,
+src/websocket/handler.rs:79:        let mut ws_connections = app_state.ws_connections.lock().await;
+src/websocket/handler.rs:90:        app_state: actix_web::web::Data<crate::state::app_state::AppState>,
+src/websocket/handler.rs:96:        let mut ws_connections = app_state.ws_connections.lock().await;
+src/websocket/handler.rs:114:        app_state: actix_web::web::Data<crate::state::app_state::AppState>,
+src/websocket/handler.rs:130:                let mut sessions = app_state.sessions.lock().await;
+src/websocket/handler.rs:161:                let mut sessions = app_state.sessions.lock().await;
+src/websocket/handler.rs:199:        let app_state = self.app_state.clone();
+src/websocket/handler.rs:205:            Self::register_recipient(app_state, session_id, recipient)
+src/websocket/handler.rs:220:        let app_state = self.app_state.clone();
+src/websocket/handler.rs:226:             Self::unregister_recipient(app_state, session_id /*, addr */)
+src/websocket/handler.rs:254:                        let app_state = self.app_state.clone();
+src/websocket/handler.rs:260:                            Self::process_websocket_request_async(app_state, session_id, request, actor_addr)
+src/websocket/manager.rs:21:    state: &std::sync::Arc<std::sync::Mutex<crate::state::app_state::AppState>>,
+src/websocket/manager.rs:41:    state: &std::sync::Arc<std::sync::Mutex<crate::state::app_state::AppState>>,
+src/websocket/manager.rs:71:            crate::state::app_state::AppState::default(),
+src/websocket/manager.rs:101:            crate::state::app_state::AppState::default(),
+src/websocket/manager.rs:115:            crate::state::app_state::AppState::default(),
+src/websocket/ws_handler.rs:21:    app_state: actix_web::web::Data<crate::state::app_state::AppState>, // Changed: Removed Mutex wrapper
+src/websocket/ws_handler.rs:32:        app_state.clone(), // Clone the Data<AppState>
+ui_dioxus/app.rs:13:    let app_state = dioxus::prelude::use_signal(cx, crate::ui::state::app_state::AppState::default);
+ui_dioxus/app.rs:15:    let state_read = app_state.read(); // Read state for conditional rendering
+ui_dioxus/app.rs:22:            crate::ui::components::server_input::ServerInput { app_state: app_state }
+ui_dioxus/app.rs:25:            crate::ui::components::research_starter::ResearchStarter { app_state: app_state }
+ui_dioxus/app.rs:40:            crate::ui::components::chat_interface::ChatInterface { app_state: app_state }
+ui_dioxus/components/chat_interface.rs:8:use crate::ui::state::app_state::{AppState, ChatMessage}; // Explicit imports
+ui_dioxus/components/chat_interface.rs:10:pub fn ChatInterface(cx: dioxus::prelude::Scope, app_state: dioxus::prelude::Signal<AppState>) -> dioxus::prelude::Element {
+ui_dioxus/components/chat_interface.rs:11:    let state_read = app_state.read();
+ui_dioxus/components/chat_interface.rs:20:        let mut state = app_state.write();
+ui_dioxus/components/chat_interface.rs:38:                    let app_state = app_state.clone();
+ui_dioxus/components/chat_interface.rs:50:                        let mut state_write = app_state.write();
+ui_dioxus/components/chat_interface.rs:70:             // app_state.write().error_message = Some("Cannot send message: No active research session.".to_string());
+ui_dioxus/components/chat_interface.rs:93:                        if !app_state.read().is_loading {
+ui_dioxus/components/chat_interface.rs:94:                            app_state.write().input_message = event.value.clone();
+ui_dioxus/components/research_starter.rs:10:use crate::ui::state::app_state::AppState; // Explicit import for clarity
+ui_dioxus/components/research_starter.rs:12:pub fn ResearchStarter(cx: dioxus::prelude::Scope, app_state: dioxus::prelude::Signal<AppState>) -> dioxus::prelude::Element {
+ui_dioxus/components/research_starter.rs:16:                disabled: app_state.read().is_loading || app_state.read().server_address.trim().is_empty(),
+ui_dioxus/components/research_starter.rs:18:                    let mut state_write = app_state.write();
+ui_dioxus/components/research_starter.rs:27:                        let app_state = app_state.clone(); // Clone signal for the async block
+ui_dioxus/components/research_starter.rs:39:                            let mut state_write = app_state.write();
+ui_dioxus/components/server_input.rs:9:// Other paths like crate::ui::state::app_state::AppState are fully qualified.
+ui_dioxus/components/server_input.rs:11:pub fn ServerInput(cx: dioxus::prelude::Scope, app_state: dioxus::prelude::Signal<crate::ui::state::app_state::AppState>) -> dioxus::prelude::Element {
+ui_dioxus/components/server_input.rs:23:                    value: "{app_state.read().server_address}",
+ui_dioxus/components/server_input.rs:26:                        app_state.write().server_address = event.value.clone();
+ui_dioxus/state/mod.rs:8:pub mod app_state;
+src/background/evaluation_cycle.rs:33:        let sessions_guard = app_state.lock().await.sessions.lock().await;
+src/background/evaluation_cycle.rs:43:        let mut sessions_guard = app_state.lock().await.sessions.lock().await;
+src/background/tasks.rs:21:        let sleep_duration = if app_state.lock().await.config.evaluator_sleep_seconds > 0 {
+src/background/tasks.rs:22:            app_state.lock().await.config.evaluator_sleep_seconds
+src/background/tasks.rs:34:            let app_state_guard = app_state.lock().await; // Lock outer AppState
+src/conversation/compaction/check_termination.rs:52:        app_state.lock().await.config.llm_config.check_termination_models.clone(), // Use configured models
+src/conversation/compaction/compact_history.rs:28:    let policy = &app_state.lock().await.config.compaction_policy; // Accessing the policy struct
+src/conversation/compaction/evaluate_context.rs:46:        app_state.lock().await.config.llm_config.context_evaluation_models.clone(), // Use default model(s)
+src/conversation/compaction/should_compact_history.rs:23:/// `true` if `history.len()` is greater than `app_state.lock().await.config.compaction_policy.keep_last`,
+src/conversation/compaction/should_compact_history.rs:35:    let policy = &app_state.lock().await.config.compaction_policy; // Adjust field name if different in AppConfig
+src/conversation/compaction/summarize_entries.rs:47:    let config = &app_state.lock().await.config;
+src/conversation/stream.rs:93:    let config = app_state.lock().await.config.clone();
+src/evaluator/run_research_loop.rs:155:            let state_guard = app_state.lock().await;
+src/handlers/get_status.rs:28:        let state_config_lock = app_state.lock().await;
+src/handlers/get_status.rs:34:    let state_sessions_lock = app_state.lock().await;
+src/handlers/post_message.rs:22:    let app_state_locked = app_state.lock().await; // Lock the outer Mutex<AppState>
+src/handlers/post_message.rs:25:    let mut sessions = app_state_locked.sessions.lock().await;
+src/handlers/post_message.rs:136:        let sessions_guard = app_state.lock().await.sessions.lock().await.expect("Failed to lock sessions mutex");
+src/handlers/post_message.rs:172:        let sessions_guard = app_state.lock().await.sessions.lock().await.expect("Failed to lock sessions mutex");
+src/handlers/start_research.rs:37:        time_limit: std::time::Duration::from_secs(app_state.lock().await.config.session_timeout_seconds),
+src/handlers/terminate_session.rs:24:    let app_state_locked = app_state.lock().await;
+src/handlers/terminate_session.rs:25:    let mut sessions = app_state_locked.sessions.lock().await;
+src/handlers/terminate_session.rs:38:    let app_state_locked = app_state.lock().await; // Re-lock as the previous guard went out of scope
+src/handlers/terminate_session.rs:39:    let mut ws_connections = app_state_locked.ws_connections.lock().await;
+src/handlers/terminate_session.rs:108:    let app_state_locked = app_state.lock().await;
+src/handlers/terminate_session.rs:109:    let mut sessions = app_state_locked.sessions.lock().await;
+src/handlers/terminate_session.rs:115:            let sessions = app_state.lock().await.sessions.lock().await;
+src/handlers/terminate_session.rs:128:            let sessions = app_state.lock().await.sessions.lock().await;
+src/handlers/terminate_session.rs:142:    let app_state_locked = app_state.lock().await; // Re-lock as the previous guard went out of scope
+src/handlers/terminate_session.rs:143:    let mut ws_connections = app_state_locked.ws_connections.lock().await;
+src/handlers/terminate_session.rs:150:            let ws_connections = app_state.lock().await.ws_connections.lock().await;
+src/handlers/terminate_session.rs:163:            let ws_connections = app_state.lock().await.ws_connections.lock().await;
+src/handlers/terminate_session.rs:176:            let sessions = app_state.lock().await.sessions.lock().await;
+src/handlers/terminate_session.rs:178:            let ws_connections = app_state.lock().await.ws_connections.lock().await;
+src/handlers/terminate_session.rs:197:            let sessions = app_state.lock().await.sessions.lock().await;
+src/handlers/terminate_session.rs:199:            let ws_connections = app_state.lock().await.ws_connections.lock().await;
+src/session/manager.rs:39:    let app_state_guard = app_state.lock().await;
+src/session/manager.rs:53:    let app_state_guard = app_state.lock().await;
+src/session/manager.rs:66:    let app_state_guard = app_state.lock().await;
+src/session/manager.rs:84:    let app_state_guard = app_state.lock().await;
+src/session/manager.rs:102:    let app_state_guard = app_state.lock().await;
+src/session/manager.rs:153:        let app_state_guard = app_state.lock().await;
+src/tools/handle_save_context.rs:29:            let state_guard = app_state.lock().await;
+src/tools/handle_save_context.rs:113:        let state_guard = app_state.lock().await;
+src/websocket/handler.rs:79:        let app_state_locked = app_state.lock().await; // Lock outer state
+src/websocket/handler.rs:80:        let mut ws_connections = app_state_locked.ws_connections.lock().await; // Lock inner map
+src/websocket/handler.rs:97:        let app_state_locked = app_state.lock().await; // Lock outer state
+src/websocket/handler.rs:98:        let mut ws_connections = app_state_locked.ws_connections.lock().await; // Lock inner map
+src/websocket/handler.rs:132:                let app_state_locked = app_state.lock().await; // Lock outer state
+src/websocket/handler.rs:133:                let mut sessions = app_state_locked.sessions.lock().await; // Lock inner map
+src/websocket/handler.rs:164:                let app_state_locked = app_state.lock().await; // Lock outer state
+src/websocket/handler.rs:165:                let mut sessions = app_state_locked.sessions.lock().await; // Lock inner map
