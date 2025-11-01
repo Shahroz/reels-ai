@@ -148,10 +148,10 @@ mod tests {
     use super::{conversation_event_stream, StreamError};
 
     // Helper to create a dummy AppState for testing (ensure conversation_models is populated)
-    fn create_dummy_app_state() -> actix_web::web::Data<tokio::sync::Mutex<AppState>> {
+    fn create_dummy_app_state() -> actix_web::web::Data<AppState> {
          let dummy_llm_config = LlmConfig {
              // Ensure conversation_models has at least one dummy model
-             conversation_models: vec![llm::llm_typed_unified::VendorModel::OpenAI(
+             conversation_models: vec![llm::llm_typed_unified::vendor_model::VendorModel::OpenAI(
                  llm::vendors::openai::openai_model::OpenAIModel::Gpto3Mini, // Example model
              )],
              // Provide other necessary fields if not covered by Default::default()
@@ -161,25 +161,20 @@ mod tests {
              ..Default::default() // Assumes LlmConfig derives Default
          };
          let dummy_config = AppConfig {
-             database_url: String::from("dummy_db_url"),
              server_address: String::from("dummy_server_addr"),
              evaluator_sleep_seconds: 60,
              session_timeout_seconds: 3600,
              llm_config: dummy_llm_config,
-             ..Default::default() // Assuming AppConfig derives Default
+             compaction_policy: crate::types::compaction_policy::CompactionPolicy::default(),
+             max_conversation_length: 100,
          };
-        actix_web::web::Data::new(tokio::sync::Mutex::new(AppState {
-            config: std::sync::Arc::new(dummy_config),
-            sessions: std::sync::Arc::new(tokio::sync::Mutex::new(std::collections::HashMap::new())),
-            ws_connections: std::sync::Arc::new(tokio::sync::Mutex::new(std::collections::HashMap::new())),
-        }))
+        actix_web::web::Data::new(AppState::new(dummy_config, None, None))
     }
 
     // Helper to create dummy SessionData (remains the same)
     fn create_dummy_session_data() -> SessionData {
          SessionData {
              session_id: SessionId::new_v4(),
-             user_id: Some("test_user".to_string()),
              history: std::vec![
                  ConversationEntry {
                      sender: Sender::User,

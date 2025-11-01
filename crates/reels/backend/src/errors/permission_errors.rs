@@ -7,10 +7,9 @@
 
 #[derive(thiserror::Error, Debug)]
 pub enum PermissionError {
-    #[error("Database error during permission check: {source}")]
+    #[error("Database error during permission check: {message}")]
     DatabaseError {
-        #[from]
-        source: sqlx::Error,
+        message: String,
     },
 
     #[error("Invalid batch size: {size}. Maximum allowed: {max_allowed}")]

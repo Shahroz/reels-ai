@@ -10,15 +10,11 @@ use serde::{Deserialize, Serialize}; // Use for derive macros is common.
 /// Payload to start a new research session.
 #[derive(schemars::JsonSchema, utoipa::ToSchema, Debug, Clone, Serialize, Deserialize)]
 pub struct ResearchRequest {
-    pub user_id: uuid::Uuid,
-    /// The user's instruction for the research task.
+    /// The instruction for the research task.
     pub instruction: std::string::String,
     /// Optional list of attachments provided with the research request.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub attachments: std::option::Option<std::vec::Vec<crate::types::attachment::Attachment>>,
-    /// Optional organization ID to use organization credits instead of user credits
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub organization_id: std::option::Option<uuid::Uuid>,
 }
 
 #[cfg(test)]
@@ -29,10 +25,8 @@ mod tests {
     #[test]
     fn test_research_request_serde_empty_attachments() {
         let req_no_attachments = super::ResearchRequest {
-            user_id: Default::default(),
             instruction: std::string::String::from("Test instruction with no attachments"),
             attachments: None,
-            organization_id: None,
         };
 
         let serialized = serde_json::to_string(&req_no_attachments).unwrap();
@@ -66,10 +60,8 @@ mod tests {
         };
 
         let req_with_attachments = super::ResearchRequest {
-            user_id: Default::default(),
             instruction: std::string::String::from("Test instruction with multiple attachments"),
             attachments: Some(std::vec![attachment1.clone(), attachment2.clone()]),
-            organization_id: None,
         };
 
         let serialized = serde_json::to_string(&req_with_attachments).unwrap();

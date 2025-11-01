@@ -77,12 +77,14 @@ mod tests {
     // Helper to create a basic AppState for testing
     fn create_test_app_state() -> crate::state::app_state::AppState {
         let dummy_config = crate::config::app_config::AppConfig {
-            database_url: String::from("dummy"),
             server_address: String::from("dummy"),
             evaluator_sleep_seconds: 60,
             session_timeout_seconds: 3600,
+            llm_config: crate::config::llm_config::LlmConfig::default(),
+            compaction_policy: crate::types::compaction_policy::CompactionPolicy::default(),
+            max_conversation_length: 100,
         };
-        crate::state::app_state::AppState::new(dummy_config)
+        crate::state::app_state::AppState::new(dummy_config, None, None)
     }
 
     // Helper to create a session ID

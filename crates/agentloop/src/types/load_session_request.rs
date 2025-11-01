@@ -12,9 +12,6 @@ use utoipa::ToSchema; // Import ToSchema for OpenAPI documentation
 /// a new session_id and timestamps upon loading.
 #[derive(std::fmt::Debug, std::clone::Clone, serde::Serialize, serde::Deserialize, ToSchema)]
 pub struct LoadSessionRequest {
-    pub user_id: uuid::Uuid,
-    /// Optional organization ID associated with this session (for organization credit context)
-    pub organization_id: std::option::Option<uuid::Uuid>,
     /// Current status of the session (e.g., Pending, InProgress).
     pub status: crate::types::session_status::SessionStatus,
     /// Configuration parameters applied to this session.

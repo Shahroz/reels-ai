@@ -31,13 +31,5 @@ pub struct GenerateReelParams {
     /// The reel will be generated to match this exact duration.
     #[schema(example = 30, minimum = 5, maximum = 120)]
     pub time_range_seconds: i32,
-
-    /// Optional user ID (injected by the system)
-    #[schemars(skip)]
-    pub user_id: std::option::Option<uuid::Uuid>,
-
-    /// Optional organization ID to deduct credits from organization instead of user
-    #[schemars(skip)]
-    pub organization_id: std::option::Option<uuid::Uuid>,
 }
 

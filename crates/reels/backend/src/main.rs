@@ -1,37 +1,23 @@
-mod auth;
 mod app_constants; // Added for constants module
-mod db;
-mod email_service;
 mod openapi; // Added for OpenAPI documentation
 mod routes;
-mod schemas; // Added for API schemas
 mod services;
-mod style_analysis;
-mod style_cloning;
 mod utils;
 mod zyte; // Corrected: Removed duplicate 'mod clone' // Added to declare the module
 mod webflow; // Added webflow module
 mod middleware; // Added middleware module
 // mod billing_service; // Removed - billing service is in services module
 
-use crate::routes::health;
+// use crate::routes::health; // Route folder deleted
 // Still needed if health_check registered directly
 pub mod app;
 pub mod gcp_auth;
-pub mod queries;
 pub mod agent_tools;
 pub mod llm_support;
 pub mod types;
-pub mod user_management;
-pub mod sql_utils;
 pub mod query_parser;
-pub mod gcp;
-pub mod db_pool;
 pub mod test_utils;
 use crate::services::gcs::gcs_client::GCSClient;
-use crate::services::dub::{DubService, DubServiceTrait};
-use crate::gcp::cloud_tasks::CloudTasksClient;
-use crate::services::imageboard_client::ImageboardClient;
 
 // OpenAPI imports
 use crate::openapi::ApiDoc;
@@ -55,64 +41,22 @@ use tracing::instrument;
 async fn setup_server() -> std::io::Result<()> {
    // Initialize dotenv to load .env file
    dotenv().ok();
-   // Create the database pool
-   let pool = crate::db::create_pool::create_pool()
-       .await
-       .expect("Failed to create database pool.");
+   // Database pool creation removed - db module deleted
+   // let pool = crate::db::create_pool::create_pool()
+   //     .await
+   //     .expect("Failed to create database pool.");
    // Instantiate GCS Client
    let gcs_client = GCSClient::new();
 
-    // Instantiate Cloud Tasks Client
-    let tasks_client = CloudTasksClient::new()
-        .await
-        .expect("Failed to create CloudTasksClient");
+    // Cloud Tasks Client removed - gcp module deleted
+    // let tasks_client = CloudTasksClient::new()
+    //     .await
+    //     .expect("Failed to create CloudTasksClient");
 
     // Instantiate Screenshot Service
     let screenshot_config = crate::services::screenshot::screenshot_config::ScreenshotConfig::from_env();
     let screenshot_service = crate::services::screenshot::service_factory::create_screenshot_service(&screenshot_config)
         .expect("Failed to create screenshot service");
-
-    // Instantiate Dub Service for lead attribution tracking
-    let dub_service = match DubService::from_env() {
-        Ok(service) => {
-            log::info!("Dub service initialized (enabled: {})", service.is_enabled());
-            service
-        }
-        Err(e) => {
-            log::warn!("Failed to initialize Dub service, using disabled mode: {}", e);
-            let disabled_config = crate::services::dub::dub_config::DubConfig::disabled();
-            DubService::new(disabled_config)
-                .expect("Failed to create disabled Dub service")
-        }
-    };
-
-    // Instantiate Imageboard client (base URL + optional API key via env)
-    let imageboard_base_url = env::var("IMAGEBOARD_BASE_URL").unwrap_or_else(|_| "http://localhost:3000".to_string());
-    let imageboard_client = match env::var("IMAGEBOARD_API_KEY") {
-        Ok(key) if !key.is_empty() => {
-            log::info!("Imageboard client initialized with base URL: {} and API key (length: {})", imageboard_base_url, key.len());
-            ImageboardClient::new(&imageboard_base_url).with_api_key(key)
-        },
-        _ => {
-            log::warn!("Imageboard client initialized with base URL: {} but NO API key", imageboard_base_url);
-            ImageboardClient::new(&imageboard_base_url)
-        },
-    };
-
-    // Instantiate Postmark Email Client (singleton for performance)
-    log::info!("Initializing Postmark email client...");
-    let postmark_client = match crate::services::email_service::get_postmark_client() {
-        Ok(client) => {
-            log::info!("Postmark client initialized successfully");
-            std::sync::Arc::new(client)
-        }
-        Err(e) => {
-            log::warn!("Failed to initialize Postmark client: {}. Email sending will fail.", e);
-            log::warn!("Set POSTMARK_SERVER_TOKEN environment variable to enable email functionality.");
-            // Create a placeholder Arc that will cause email sends to fail gracefully
-            std::sync::Arc::new(postmark::reqwest::PostmarkClient::builder().server_token("").build())
-        }
-    };
 
     // --- Reels Custom Tools Configuration for AgentLoop ---
     // This now provides both definitions and handlers to AgentLoop.
@@ -181,13 +125,10 @@ async fn setup_server() -> std::io::Result<()> {
 
         {
             let app = App::new()
-                .app_data(web::Data::new(pool.clone()))
+                // .app_data(web::Data::new(pool.clone())) // Database pool removed - db module deleted
                 .app_data(web::Data::new(gcs_client.clone()))
-                .app_data(web::Data::new(tasks_client.clone()))
+                // .app_data(web::Data::new(tasks_client.clone())) // Cloud Tasks removed - gcp module deleted
                 .app_data(web::Data::new(screenshot_service.clone()))
-                .app_data(web::Data::new(imageboard_client.clone()))
-                .app_data(web::Data::new(postmark_client.clone()))
-                .app_data(web::Data::from(std::sync::Arc::new(dub_service.clone()) as std::sync::Arc<dyn DubServiceTrait>))
                 .app_data(agentloop_state.clone())
                 .app_data(web::Data::new(std::sync::Arc::new(gcs_client.clone()) as std::sync::Arc<dyn crate::services::gcs::gcs_operations::GCSOperations>))
                 .app_data(agentloop_state.clone()) // Add agentloop state
@@ -205,24 +146,24 @@ async fn setup_server() -> std::io::Result<()> {
 
             let app = app;
 
-            // Create session manager for custom events (still needed for vocal tours and other custom events)
-            let session_manager = std::sync::Arc::new(
-                crate::services::session_manager::HybridSessionManager::new(pool.clone())
-            );
+            // Session manager removed - db module deleted
+            // let session_manager = std::sync::Arc::new(
+            //     crate::services::session_manager::HybridSessionManager::new(pool.clone())
+            // );
             
-            // Start background cleanup task for expired sessions
-            crate::services::session_manager::HybridSessionManager::start_cleanup_task(session_manager.clone());
+            // Background cleanup task removed - session manager removed
+            // crate::services::session_manager::HybridSessionManager::start_cleanup_task(session_manager.clone());
 
             app
-                .app_data(web::Data::new(session_manager))
+                // .app_data(web::Data::new(session_manager)) // Session manager removed
                 // --- OpenAPI Swagger UI Service ---
                 .service(
                     SwaggerUi::new("/swagger-ui/{_:.*}").url("/api-docs/openapi.json", openapi.clone()),
                 )
                 // --- Well-Known Endpoints (must be FIRST, before catch-all) ---
-                .service(crate::routes::apple_app_site_association::apple_app_site_association)
+                // .service(crate::routes::apple_app_site_association::apple_app_site_association) // Route folder deleted
                 // --- API Routes Configuration ---
-                .service(health::health_check) // Register health check route directly
+                // .service(health::health_check) // Route folder deleted
                 .configure(crate::routes::config)
                 // Use the config function from the routes module
         }

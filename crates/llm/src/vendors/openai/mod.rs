@@ -19,6 +19,7 @@ pub mod string_or_array;
 pub mod tool;
 pub mod tool_choice;
 pub mod tool_type;
+pub mod sora_video_request;
 
 // pub mod stream_chat_completion;
 // Note: No `pub use` statements are included to strictly adhere to the guideline

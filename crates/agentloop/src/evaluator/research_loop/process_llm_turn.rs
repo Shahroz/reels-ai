@@ -61,6 +61,12 @@ pub async fn process_llm_turn(
                 &llm_response // Log reference to avoid move
             );
 
+            // Extract video URLs from response if video models were used
+            let video_attachments = extract_video_urls_from_response(
+                &llm_response.user_answer,
+                &app_state.config.llm_config.conversation_models,
+            );
+
            // Add Agent response to conversation history
            let agent_entry = crate::types::conversation_entry::ConversationEntry {
                 sender: crate::types::sender::Sender::Agent,
@@ -70,7 +76,7 @@ pub async fn process_llm_turn(
                 id: uuid::Uuid::new_v4(),
                 parent_id: None,
                 depth: 0,
-                attachments: std::vec::Vec::new(), // Agent responses typically don't have new attachments by default
+                attachments: video_attachments, // Include video URL attachments if found
                 tool_choice: None, // Agent's textual response is not a direct tool choice itself
                 tool_response: None, // This is an agent response, not a tool's response
             };
@@ -165,6 +171,64 @@ async fn broadcast_agent_answer(
          }
     }
     // No need for explicit drops here, the lock was handled earlier.
+}
+
+/// Extracts video URLs from LLM response text if video models were in the model list.
+/// Returns a vector of VideoUrlAttachment if video URLs are found.
+fn extract_video_urls_from_response(
+    response_text: &str,
+    models_used: &[llm::llm_typed_unified::vendor_model::VendorModel],
+) -> Vec<crate::types::attachment::Attachment> {
+    // Check if any video models were in the model list
+    let has_video_model = models_used.iter().any(|model| model.is_video_model());
+    
+    if !has_video_model {
+        return vec![];
+    }
+
+    // Extract URLs from the response text using a simple regex pattern
+    // This looks for URLs that might be video URLs (http/https URLs, GCS URLs, etc.)
+    let url_pattern = regex::Regex::new(r"(?i)(https?://[^\s\)]+|gs://[^\s\)]+)").unwrap_or_else(|_| {
+        // Fallback regex if compilation fails
+        regex::Regex::new(r"https?://[^\s\)]+").unwrap()
+    });
+
+    let mut video_attachments = vec![];
+    
+    for cap in url_pattern.captures_iter(response_text) {
+        if let Some(url_match) = cap.get(0) {
+            let url = url_match.as_str().trim().to_string();
+            
+            // Only include URLs that look like video URLs (contains video indicators or is a direct file URL)
+            // Common patterns: .mp4, .mov, .avi, video-related domains, or GCS URLs for videos
+            if url.contains(".mp4") || url.contains(".mov") || url.contains(".avi") || 
+               url.contains("video") || url.starts_with("gs://") || 
+               url.contains("youtube.com") || url.contains("vimeo.com") ||
+               // GCS bucket paths commonly used for video storage
+               url.contains("/reels/") || url.contains("/videos/") {
+                
+                let video_attachment = crate::types::attachment::Attachment {
+                    title: Some(format!("Generated video from {}", 
+                        if models_used.iter().any(|m| matches!(m, llm::llm_typed_unified::vendor_model::VendorModel::OpenAI(_))) {
+                            "Sora"
+                        } else if models_used.iter().any(|m| matches!(m, llm::llm_typed_unified::vendor_model::VendorModel::Gemini(_))) {
+                            "Veo3"
+                        } else {
+                            "AI video model"
+                        }
+                    )),
+                    kind: crate::types::attachment_type::AttachmentType::VideoUrl(
+                        crate::types::video_url_attachment::VideoUrlAttachment { url: url.clone() }
+                    ),
+                };
+                video_attachments.push(video_attachment);
+                
+                log::info!("Extracted video URL from response: {}", url);
+            }
+        }
+    }
+
+    video_attachments
 }
 
 #[cfg(test)]

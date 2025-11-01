@@ -5,14 +5,12 @@ This directory contains the route handlers and configuration for the backend API
 ## Guiding Principles (Refer to `CODING_GUIDELINES.md`)
 
 - Follow the general project guidelines outlined in `CODING_GUIDELINES.md`.
-- Use `sqlx` for database interactions.
 - Use `serde` for serialization/deserialization.
 - Use `utoipa` for OpenAPI documentation.
-- Apply `JwtMiddleware` for protected routes under `/api`.
 
 ## Organization
 
-Routes are organized into modules based on functional areas (e.g., `auth.rs`, `clone.rs`). Each module typically defines:
+Routes are organized into modules based on functional areas (e.g., `clone.rs`). Each module typically defines:
 
 1.  **Request/Response Structs:** Define data structures using `serde::{Deserialize, Serialize}` and `utoipa::ToSchema`.
 2.  **Route Handlers:** Asynchronous functions using Actix-web macros (`#[get]`, `#[post]`, etc.).
@@ -28,7 +26,6 @@ Handlers are `async` functions that take extractors (like `web::Json`, `web::Pat
 // backend/src/routes/example.rs (Illustrative Example)
 use actix_web::{get, post, web, HttpResponse, Responder};
 use serde::{Deserialize, Serialize};
-use sqlx::PgPool;
 use utoipa::ToSchema;
 use crate::auth::tokens::Claims; // For authenticated routes
 use uuid::Uuid;
@@ -43,11 +40,9 @@ pub struct CreateExampleRequest {
 
 #[derive(Serialize, ToSchema)]
 pub struct ExampleResponse {
-    pub id: i32,
+    pub id: Uuid,
     pub name: String,
     pub value: i32,
-    #[schema(value_type = String, example = "00000000-0000-0000-0000-000000000001")]
-    pub user_id: Uuid,
 }
 
 /// Get an example resource by ID.
@@ -56,29 +51,22 @@ pub struct ExampleResponse {
     path = "/api/example/{id}",
     tag = "Example",
     params(
-        ("id" = i32, Path, description = "ID of the example resource")
+        ("id" = Uuid, Path, description = "ID of the example resource")
     ),
     responses(
         (status = 200, description = "Example resource found", body = ExampleResponse),
-        (status = 401, description = "Unauthorized"),
         (status = 404, description = "Resource not found")
     ),
-    security(
-        ("user_auth" = []) // Requires JWT authentication
-    )
 )]
 #[get("/{id}")]
 async fn get_example(
-    pool: web::Data<PgPool>,
-    path: web::Path<i32>,
-    claims: web::ReqData<Claims>, // Extract user claims from JWT
+    path: web::Path<Uuid>,
 ) -> impl Responder {
     let example_id = path.into_inner();
-    let user_id = claims.user_id;
 
     // --- Database Interaction --- 
-    log::info!("Fetching example {} for user {}", example_id, user_id);
-    match fetch_example_from_db(&pool, example_id, user_id).await {
+    log::info!("Fetching example {}", example_id);
+    match fetch_example(example_id).await {
         Ok(Some(example_data)) => HttpResponse::Ok().json(example_data),
         Ok(None) => HttpResponse::NotFound().json(serde_json::json!({ "error": "Example not found"})),
         Err(e) => {
@@ -97,20 +85,12 @@ async fn get_example(
     responses(
         (status = 201, description = "Example resource created", body = ExampleResponse),
         (status = 400, description = "Invalid input"),
-        (status = 401, description = "Unauthorized")
     ),
-    security(
-        ("user_auth" = []) // Requires JWT authentication
-    )
 )]
 #[post("")]
 async fn create_example(
-    pool: web::Data<PgPool>,
     req: web::Json<CreateExampleRequest>,
-    claims: web::ReqData<Claims>, // Extract user claims
 ) -> impl Responder {
-    let user_id = claims.user_id;
-
     // --- Request Validation (Implicit via Serde) ---
     // If JSON parsing fails, Actix returns a 400 error automatically.
     // Add explicit validation if needed for business rules:
@@ -121,8 +101,7 @@ async fn create_example(
          return HttpResponse::BadRequest().json(serde_json::json!({ "error": "Value must be non-negative"}));
     }
 
-    // --- Database Interaction ---
-    match create_example_in_db(&pool, &req.name, req.value, user_id).await {
+    match create_example(&req.name, req.value).await {
         Ok(new_example) => HttpResponse::Created().json(new_example),
         Err(e) => {
             log::error!("Failed to create example: {}", e);

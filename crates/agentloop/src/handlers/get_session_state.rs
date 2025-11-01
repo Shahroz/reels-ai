@@ -77,8 +77,7 @@ mod tests {
         let config = default_session_config();
 
         // Create a session directly using the manager for testing setup.
-        let user_id = uuid::Uuid::new_v4();
-        let session_id = crate::session::manager::create_session(user_id, app_state.clone(), config, None).await;
+        let session_id = crate::session::manager::create_session(app_state.clone(), config).await;
         let session_id_str = session_id.to_string();
 
         // Update status to something specific for assertion

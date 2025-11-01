@@ -16,10 +16,8 @@
 
 // Function to create a new session asynchronously
 pub async fn create_session(
-    user_id: uuid::Uuid,
     app_state: actix_web::web::Data<crate::state::app_state::AppState>,
     config: crate::types::session_config::SessionConfig, // Correct path
-    organization_id: std::option::Option<uuid::Uuid>, // Optional organization ID for credit context
 ) -> crate::types::session_id::SessionId { // Correct path: Use type alias from module
     let session_id = uuid::Uuid::new_v4();
     let now = chrono::Utc::now();
@@ -29,8 +27,6 @@ pub async fn create_session(
 
     // Combine internal and external tool definitions for this session
     let session_data = crate::types::session_data::SessionData { // Correct path
-        user_id,
-        organization_id,
         session_id: session_id.to_string(),
         status: crate::types::session_status::SessionStatus::Pending,
         config, // Session specific config
@@ -120,14 +116,9 @@ mod tests {
 
     // Helper to create a default AppState for async tests.
     fn create_async_test_app_state() -> actix_web::web::Data<crate::state::app_state::AppState> {
-         crate::state::app_state::AppState {
-             // Assuming AppConfig has a sensible default or can be constructed easily.
-             // If AppConfig loading is complex, tests might need mock config.
-             config: crate::config::app_config::AppConfig::default(), // Placeholder
-             sessions: std::sync::Arc::new(tokio::sync::Mutex::new(std::collections::HashMap::new())),
-             // Assuming WebsocketEvent has a sensible default or construction.
-             ws_connections: std::sync::Arc::new(tokio::sync::Mutex::new(std::collections::HashMap::new())),
-         }
+         let config = crate::config::app_config::AppConfig::default();
+         let app_state = crate::state::app_state::AppState::new(config, None, None);
+         actix_web::web::Data::new(app_state)
     }
 
     // Helper for default SessionConfig, assuming it has a Default impl or simple constructor.
@@ -148,11 +139,10 @@ mod tests {
         let config = default_session_config();
 
         // Create session asynchronously.
-        let session_id = super::create_session(uuid::Uuid::new_v4(), app_state.clone(), config.clone(), None).await;
+        let session_id = super::create_session(app_state.clone(), config.clone()).await;
 
         // Verify session count within the lock.
-        let app_state_guard = app_state.lock().await;
-    let sessions_guard = app_state_guard.sessions.lock().await;
+        let sessions_guard = app_state.sessions.lock().await;
         std::assert_eq!(sessions_guard.len(), 1);
         drop(sessions_guard); // Explicitly drop guard before next await if needed, though usually implicit.
 

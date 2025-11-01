@@ -384,6 +384,7 @@ dependencies = [
  "llm",
  "log",
  "mime_guess",
+ "regex",
  "rust-embed",
  "schemars 1.0.4",
  "serde",

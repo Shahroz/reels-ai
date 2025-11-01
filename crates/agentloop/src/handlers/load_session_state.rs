@@ -35,8 +35,6 @@ pub async fn load_session_state(
 
     // Construct the full SessionData for storage
     let new_session_data = crate::types::session_data::SessionData {
-        organization_id: request_data.organization_id,
-        user_id: request_data.user_id,
         session_id: new_session_id.to_string(),
         status: request_data.status,
         config: request_data.config,
@@ -89,8 +87,6 @@ mod tests {
         let app_state = create_test_app_state();
 
         let load_request_payload = crate::types::load_session_request::LoadSessionRequest {
-            user_id: uuid::Uuid::new_v4(),
-            organization_id: Some(uuid::Uuid::new_v4()),
             status: crate::types::session_status::SessionStatus::Running { progress: Some("Loaded state".to_string()) },
             config: default_session_config(),
             history: std::vec![crate::types::conversation_entry::ConversationEntry {

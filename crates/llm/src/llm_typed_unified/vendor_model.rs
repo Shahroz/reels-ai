@@ -69,4 +69,41 @@ impl VendorModel {
             }
         }
     }
+
+    /// Returns true if this model is a video generation model (Sora or Veo3)
+    pub fn is_video_model(&self) -> bool {
+        match self {
+            VendorModel::OpenAI(model) => model.is_video_model(),
+            VendorModel::Gemini(model) => model.is_video_model(),
+            VendorModel::Claude(_) => false,
+            VendorModel::Replicate(_) => false,
+        }
+    }
+
+    /// Returns the model identifier string (e.g., "sora-1.0", "veo-3", "gpt-4o")
+    /// Uses the serde rename attribute for OpenAI models, and id() method for Gemini models
+    pub fn model_id(&self) -> String {
+        match self {
+            VendorModel::OpenAI(model) => {
+                // Use serde_json::to_string which respects #[serde(rename = "...")] attributes
+                serde_json::to_string(model)
+                    .unwrap_or_else(|_| format!("{:?}", model))
+                    .trim_matches('"')
+                    .to_string()
+            }
+            VendorModel::Gemini(model) => model.id().to_string(),
+            VendorModel::Claude(model) => {
+                serde_json::to_string(model)
+                    .unwrap_or_else(|_| format!("{:?}", model))
+                    .trim_matches('"')
+                    .to_string()
+            }
+            VendorModel::Replicate(model) => {
+                serde_json::to_string(model)
+                    .unwrap_or_else(|_| format!("{:?}", model))
+                    .trim_matches('"')
+                    .to_string()
+            }
+        }
+    }
 }

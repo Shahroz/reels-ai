@@ -12,5 +12,4 @@ pub mod jwt;
 pub mod sanitize_llm_html_output;
 pub mod minimize_large_html_content;
 
-pub mod string_patcher;
 pub mod password_validator;

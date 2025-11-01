@@ -35,12 +35,9 @@ pub async fn run_research_task(
     config.initial_instruction = std::option::Option::Some(request.instruction.clone());
 
     // b. Call `create_session` to get a new `session_id`.
-    // The user_id is passed from the request, as required by create_session.
     let session_id = crate::session::manager::create_session(
-        request.user_id,
         app_state.clone(),
         config,
-        request.organization_id,
     )
     .await;
 

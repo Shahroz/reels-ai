@@ -28,9 +28,6 @@
     post,
     path = "/loupe/research",
     request_body = crate::types::research_request::ResearchRequest,
-    params(
-        ("x-organization-id" = Option<String>, Header, description = "Optional organization ID to use organization credits instead of personal credits")
-    ),
     responses(
         (status = 200, description = "Research session started successfully", body = inline(serde_json::Value)), // Using inline schema for {"session_id": "..."}
         (status = 500, description = "Internal server error starting session or adding initial entry")
@@ -54,7 +51,7 @@ pub async fn start_research(
     };
 
    // Create the session using the session manager
-   let session_id = crate::session::manager::create_session(request_payload.user_id.clone(), app_state.clone(), session_config, request_payload.organization_id.clone()).await;
+   let session_id = crate::session::manager::create_session(app_state.clone(), session_config).await;
 
     // Construct the initial message content using the utility function
     let initial_message_content = crate::utils::message_formatter::format_message_with_attachments(
@@ -120,7 +117,6 @@ mod tests {
     // Helper to create a default AppState for async tests.
      fn create_test_app_state() -> crate::state::app_state::AppState {
          let config = crate::config::app_config::AppConfig {
-             database_url: std::string::String::from("test_db_url"),
              server_address: std::string::String::from("127.0.0.1:0"),
              evaluator_sleep_seconds: 30,
              llm_config: crate::config::llm_config::LlmConfig::default(),

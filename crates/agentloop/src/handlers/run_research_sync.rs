@@ -46,10 +46,8 @@ pub async fn run_research_sync(
 
     // Create the session
     let session_id = crate::session::manager::create_session(
-        request_payload.user_id.clone(),
         app_state.clone(),
         session_config,
-        request_payload.organization_id.clone(),
     )
     .await;
 

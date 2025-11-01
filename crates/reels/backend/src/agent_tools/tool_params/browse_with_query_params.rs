@@ -1,4 +1,4 @@
-//! Defines the parameters for the Narrativ 'browse_with_query' tool.
+//! Defines the parameters for the Reels 'browse_with_query' tool.
 //!
 //! This struct holds the URL to be browsed and a query to process the
 //! content. It's used for strong typing in the tool handler and for schema generation.

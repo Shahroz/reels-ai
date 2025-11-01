@@ -26,6 +26,8 @@ pub enum OpenAIModel {
     GptO4Mini20250416,
     #[serde(rename = "o3-2025-04-16")]
     GptO320250416,
+    #[serde(rename = "sora-1.0")]
+    Sora10,
 }
 
 impl OpenAIModel {
@@ -44,7 +46,8 @@ impl OpenAIModel {
             OpenAIModel::Gpt41Mini20250414 => vec!["gpt-4.1-mini-2025-04-14", "gpt-4.1-mini", "4.1m"],
             OpenAIModel::Gpt41Nano20250414 => vec!["gpt-4.1-nano-2025-04-14", "gpt-4.1-nano", "4.1n"],
             OpenAIModel::GptO4Mini20250416 => vec!["o4"],
-            OpenAIModel::GptO320250416 => vec!["o3"]
+            OpenAIModel::GptO320250416 => vec!["o3"],
+            OpenAIModel::Sora10 => vec!["sora-1.0", "sora", "sora1.0"]
         }
     }
 
@@ -58,6 +61,61 @@ impl OpenAIModel {
             OpenAIModel::Gpt41Nano20250414 => None,
             OpenAIModel::GptO4Mini20250416 => Some(ReasoningEffort::High),
             OpenAIModel::GptO320250416 => Some(ReasoningEffort::High),
+            OpenAIModel::Sora10 => None,
         }
     }
+
+    /// Returns true if this model is a video generation model (Sora)
+    pub fn is_video_model(&self) -> bool {
+        matches!(self, OpenAIModel::Sora10)
+    }
+
+    /// Returns the required video generation parameters for Sora models
+    /// Returns None if this is not a video model
+    pub fn video_params_info(&self) -> Option<SoraVideoParams> {
+        match self {
+            OpenAIModel::Sora10 => Some(SoraVideoParams {
+                supported_sizes: vec!["1280x720", "720x1280"],
+                supported_durations: vec!["4", "8", "12"],
+                default_duration: "4",
+            }),
+            _ => None,
+        }
+    }
+
+    /// Creates a Sora video request from this model if it's a video model
+    /// Returns an error if this is not a video model or if parameters are invalid
+    pub fn create_sora_request(
+        &self,
+        prompt: String,
+        size: String,
+        seconds: Option<String>,
+    ) -> Result<crate::vendors::openai::sora_video_request::SoraVideoRequest, String> {
+        if !self.is_video_model() {
+            return Err(format!("Model {:?} is not a video generation model", self));
+        }
+
+        let model_id = match self {
+            OpenAIModel::Sora10 => "sora-1.0",
+            _ => return Err("Invalid video model".to_string()),
+        };
+
+        let request = crate::vendors::openai::sora_video_request::SoraVideoRequest::new(
+            prompt,
+            model_id.to_string(),
+            size,
+            seconds,
+        );
+
+        request.validate()?;
+        Ok(request)
+    }
+}
+
+/// Video generation parameters for Sora models
+#[derive(Debug, Clone)]
+pub struct SoraVideoParams {
+    pub supported_sizes: Vec<&'static str>,
+    pub supported_durations: Vec<&'static str>,
+    pub default_duration: &'static str,
 }

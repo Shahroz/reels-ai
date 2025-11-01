@@ -1,13 +1,13 @@
 //! Loads application configuration from environment variables.
 //!
-//! Reads settings like database URL and server address, providing defaults
+//! Reads settings like server address, providing defaults
 //! for some values if they are not explicitly set in the environment.
+//! Note: AgentLoop uses in-memory storage - no database required.
 //! Conforms to the project's Rust coding standards.
 
 /// Loads configuration values from environment variables.
 ///
 /// Reads the following environment variables:
-/// - `DATABASE_URL`: The connection string for the database. Defaults to an empty string if not set.
 /// - `PORT`: The port for the HTTP server. Defaults to 8080 if not set or invalid.
     /// - `EVALUATOR_SLEEP_SECONDS`: Interval for the background evaluator. Defaults to 1 second.
 /// - `SESSION_TIMEOUT_SECONDS`: Timeout for user sessions. Defaults to 3600.
@@ -17,12 +17,6 @@
 /// Returns an `AppConfig` struct populated with these values or defaults.
 /// Uses `anyhow::Error` for flexible error handling during parsing.
 pub fn load_env_config() -> std::result::Result<crate::config::app_config::AppConfig, anyhow::Error> {
-    // Load DATABASE_URL, default to empty string if not set.
-    let database_url = std::env::var("DATABASE_URL").unwrap_or_else(|_| {
-        log::warn!("DATABASE_URL environment variable not set, defaulting to empty string.");
-        std::string::String::new()
-    });
-
     // Load PORT, default to 8080 if not set or invalid.
     let port = std::env::var("PORT")
         .ok()
@@ -84,11 +78,10 @@ pub fn load_env_config() -> std::result::Result<crate::config::app_config::AppCo
     // Construct the AppConfig with loaded values.
     // LlmConfig would need its own loading logic, using default here.
     let config = crate::config::app_config::AppConfig {
-        database_url,
         server_address,
         evaluator_sleep_seconds,
         session_timeout_seconds,
-        llm_config: crate::config::llm_config::LlmConfig::default(), // Placeholder
+        llm_config: crate::config::llm_config::LlmConfig::default(),
         compaction_policy,
         max_conversation_length,
     };
@@ -104,8 +97,7 @@ mod tests {
     // Consider using crates like `serial_test` or mutexes if needed.
 
     fn set_test_env() {
-        std::env::set_var("DATABASE_URL", "test_db_url");
-        std::env::set_var("PORT", "9000"); // Changed from SERVER_ADDRESS
+        std::env::set_var("PORT", "9000");
         std::env::set_var("EVALUATOR_SLEEP_SECONDS", "120");
         std::env::set_var("SESSION_TIMEOUT_SECONDS", "1800");
         std::env::set_var("MAX_CONVERSATION_LENGTH", "50");
@@ -113,8 +105,7 @@ mod tests {
     }
 
     fn clear_test_env() {
-        std::env::remove_var("DATABASE_URL");
-        std::env::remove_var("PORT"); // Changed from SERVER_ADDRESS
+        std::env::remove_var("PORT");
         std::env::remove_var("EVALUATOR_SLEEP_SECONDS");
         std::env::remove_var("SESSION_TIMEOUT_SECONDS");
         std::env::remove_var("MAX_CONVERSATION_LENGTH");
@@ -128,8 +119,7 @@ mod tests {
         assert!(config_result.is_ok());
         let config = config_result.unwrap();
 
-        assert_eq!(config.database_url, "test_db_url");
-        assert_eq!(config.server_address, "0.0.0.0:9000"); // Updated expected address
+        assert_eq!(config.server_address, "0.0.0.0:9000");
         assert_eq!(config.evaluator_sleep_seconds, 120);
         assert_eq!(config.session_timeout_seconds, 1800);
         assert_eq!(config.max_conversation_length, 50);
@@ -147,8 +137,7 @@ mod tests {
         assert!(config_result.is_ok());
         let config = config_result.unwrap();
 
-        assert_eq!(config.database_url, "");
-        assert_eq!(config.server_address, "0.0.0.0:8080"); // Updated expected default address
+        assert_eq!(config.server_address, "0.0.0.0:8080");
         assert_eq!(config.evaluator_sleep_seconds, 60);
         assert_eq!(config.session_timeout_seconds, 3600);
         assert_eq!(config.max_conversation_length, 100);

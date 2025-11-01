@@ -10,8 +10,4 @@ pub use helpers::{
     generate_test_jwt,
     Claims,
     create_jwt,
-
-    // Document and API key types
-    CreateDocumentRequest,
-    Document,
 };

@@ -52,13 +52,13 @@ mod tests {
 
     // Helper function to create a default AppConfig for tests
     fn default_app_config() -> crate::config::app_config::AppConfig {
-        // Provide sensible defaults or load from a test config if complex
         crate::config::app_config::AppConfig {
-            database_url: "".to_string(), // Placeholder
-            server_address: "127.0.0.1:8080".to_string(), // Placeholder
-            // Add other required fields based on AppConfig definition
-            evaluator_sleep_seconds: 30, // Example
-            session_timeout_seconds: 300, // Example
+            server_address: "127.0.0.1:8080".to_string(),
+            evaluator_sleep_seconds: 30,
+            session_timeout_seconds: 300,
+            llm_config: crate::config::llm_config::LlmConfig::default(),
+            compaction_policy: crate::types::compaction_policy::CompactionPolicy::default(),
+            max_conversation_length: 100,
         }
     }
 

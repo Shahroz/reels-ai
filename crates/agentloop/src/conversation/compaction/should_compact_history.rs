@@ -59,11 +59,12 @@ mod tests {
 
         // Construct a dummy AppConfig including the CompactionPolicy.
         let test_config = crate::config::app_config::AppConfig {
-            database_url: String::from("dummy_db_url"), // Placeholder value
-            server_address: String::from("dummy_server_addr"), // Placeholder value
-            evaluator_sleep_seconds: 60, // Placeholder value
-            session_timeout_seconds: 3600, // Placeholder value
-            compaction_policy: test_policy, // Include the policy
+            server_address: String::from("dummy_server_addr"),
+            evaluator_sleep_seconds: 60,
+            session_timeout_seconds: 3600,
+            llm_config: crate::config::llm_config::LlmConfig::default(),
+            compaction_policy: test_policy,
+            max_conversation_length: 100,
         };
 
         // Create dummy session storage.

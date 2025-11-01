@@ -78,7 +78,7 @@ use crate::{
     services::gcs::gcs_client::GCSClient,
     routes,
 };
-use sqlx::{PgPool, postgres::PgPoolOptions};
+// sqlx removed - no database interaction
 use dotenvy::dotenv;
 use std::env;
 use actix_cors::Cors;
@@ -88,37 +88,30 @@ use std::sync::Once as StdOnce;
 /// Ensures the test logger is only initialized once across all tests.
 pub static TEST_LOGGER_INIT: StdOnce = StdOnce::new();
 
-/// Sets up a test application factory and provides a fresh database pool.
+/// Sets up a test application factory.
 ///
-/// This is the primary setup function for integration tests needing database access.
-/// Each call creates fresh resources to avoid connection accumulation issues.
+/// Note: Database functionality removed - sqlx dependency removed.
+/// This function no longer provides a database pool.
 ///
 /// # Returns
-/// A tuple containing:
-/// - `App<impl ServiceFactory<...>>`: The configured Actix Web application factory.
-///                                     Pass this to `actix_web::test::init_service()`.
-/// - `PgPool`: A fresh database connection pool.
+/// `App<impl ServiceFactory<...>>`: The configured Actix Web application factory.
+///                                   Pass this to `actix_web::test::init_service()`.
 ///
 /// # Panics
-/// - If critical environment variables are missing (e.g., `DATABASE_URL`).
-/// - If the database URL safety checks fail.
 /// - If AgentLoop state initialization fails.
-pub async fn setup_test_app_and_pool() -> (
-    App<
-        impl ServiceFactory<
-            ServiceRequest,
-            Response = ServiceResponse<impl MessageBody>,
-            Config = (),
-            InitError = (),
-            Error = Error,
-        >,
+pub async fn setup_test_app_and_pool() -> App<
+    impl ServiceFactory<
+        ServiceRequest,
+        Response = ServiceResponse<impl MessageBody>,
+        Config = (),
+        InitError = (),
+        Error = Error,
     >,
-    PgPool,
-) {
+> {
     // Initialize logger (once per test suite run)
     TEST_LOGGER_INIT.call_once(|| {
         let default_log_filter = env::var("RUST_LOG")
-            .unwrap_or_else(|_| "backend=warn,test_utils=info,actix_web=info,sqlx=warn".to_string());
+            .unwrap_or_else(|_| "backend=warn,test_utils=info,actix_web=info".to_string());
         env_logger::Builder::from_env(env_logger::Env::default().default_filter_or(&default_log_filter))
             .is_test(true) // Ensures logs are captured by the test runner
             .try_init()
@@ -129,31 +122,7 @@ pub async fn setup_test_app_and_pool() -> (
     // Load environment variables
     dotenv().ok();
 
-    let database_url = env::var("DATABASE_URL")
-        .expect("FATAL: DATABASE_URL environment variable is not set. This is required for tests.");
-
-    // Safety checks for the database URL
-    let expected_test_port = env::var("POSTGRES_PORT").unwrap_or_else(|_| "5447".to_string());
-    let expected_test_db_name_part = "localdatabase"; // A common pattern for test DB names
-
-    if !database_url.contains(&format!(":{expected_test_port}")) ||
-       !database_url.contains(expected_test_db_name_part) {
-        panic!(
-            "FATAL: DATABASE_URL ('{database_url}') does not seem to be a safe test URL. It should connect to port '{expected_test_port}' and DB name containing '{expected_test_db_name_part}'."
-        );
-    }
-
-    // Create a fresh database pool for this test
-    let pool = PgPoolOptions::new()
-        .max_connections(20) // Reasonable limit for individual tests
-        .min_connections(1)
-        .acquire_timeout(std::time::Duration::from_secs(30))
-        .idle_timeout(Some(std::time::Duration::from_secs(60)))
-        .max_lifetime(Some(std::time::Duration::from_secs(300)))
-        .test_before_acquire(true)
-        .connect(&database_url)
-        .await
-        .expect("Failed to create test database pool.");
+    // Database functionality removed - sqlx dependency removed
 
     // Initialize other application dependencies
    let gcs_client = GCSClient::new(); // Assuming GCSClient::new() is relatively lightweight
@@ -176,10 +145,10 @@ pub async fn setup_test_app_and_pool() -> (
     let dub_service = crate::services::dub::DubService::from_env()
         .expect("Failed to create DubService for tests");
 
-    // Create session manager for tests (same as in main.rs)
-    let session_manager = std::sync::Arc::new(
-        crate::services::session_manager::HybridSessionManager::new(pool.clone())
-    );
+    // Session manager - database functionality removed
+    // let session_manager = std::sync::Arc::new(
+    //     crate::services::session_manager::HybridSessionManager::new(pool.clone())
+    // );
 
     // Create Postmark client for tests (will use empty token, emails won't actually send)
     let postmark_client = std::sync::Arc::new(
@@ -191,14 +160,13 @@ pub async fn setup_test_app_and_pool() -> (
     // Create the Actix Web application factory
     let app_factory = App::new()
         // Pass fresh resources as app_data
-        .app_data(web::Data::new(pool.clone()))
         .app_data(web::Data::new(gcs_client.clone()))
         .app_data(web::Data::new(std::sync::Arc::new(gcs_client.clone()) as std::sync::Arc<dyn crate::services::gcs::gcs_operations::GCSOperations>))
         .app_data(web::Data::new(screenshot_service.clone()))
         .app_data(web::Data::new(postmark_client.clone()))
         .app_data(web::Data::new(agentloop_state_inner))
         .app_data(web::Data::from(std::sync::Arc::new(dub_service.clone()) as std::sync::Arc<dyn crate::services::dub::DubServiceTrait>))
-        .app_data(web::Data::new(session_manager))
+        // Session manager removed - database functionality removed
         
         // Add JSON configuration for handling request bodies
         .app_data(JsonConfig::default().limit(4096)) // 4KB limit for test payloads
@@ -215,13 +183,13 @@ pub async fn setup_test_app_and_pool() -> (
         // Add request logging middleware
         .wrap(actix_middleware_log::Logger::default())
 
-        // Add health check endpoint
-        .service(routes::health::health_check)
+        // Add health check endpoint - route folder deleted
+        // .service(routes::health::health_check)
         
         // Configure all other application routes
         .configure(routes::config);
 
-    (app_factory, pool)
+    app_factory
 }
 
 /// Sets up a test application factory without a database pool.
@@ -239,6 +207,5 @@ pub async fn setup_test_app_service() -> App<
         Error = Error,
     >,
 > {
-    let (app_factory, _pool) = setup_test_app_and_pool().await;
-    app_factory
+    setup_test_app_and_pool().await
 }

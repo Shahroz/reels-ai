@@ -39,3 +39,4 @@ dotenvy = "0.15.7"
 utoipa = { version = "5.3.1", features = ["actix_extras", "uuid", "chrono"] }
 utoipa-swagger-ui = { version = "9.0.0", features = ["actix-web"] }
 mime_guess = "2.0.4" # Needed for serving static files correctly
+regex = "1.0" # For extracting video URLs from responses

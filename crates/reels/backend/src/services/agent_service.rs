@@ -12,11 +12,11 @@ use agentloop::tools::tools_schema::ToolsSchema;
 /// This function encapsulates the logic for setting up the tools and configuration
 /// required by the agentloop, moving it out of the main server setup.
 pub async fn create_agentloop_state() -> std::result::Result<actix_web::web::Data<agentloop::state::app_state::AppState>, std::string::String> {
-    let tools_schema = schemars::schema_for!(crate::agent_tools::narrativ_tool_parameters::NarrativToolParameters);
+    let tools_schema = schemars::schema_for!(crate::agent_tools::reels_tool_parameters::ReelsToolParameters);
     let tools_schema_value = ToolsSchema {
         schema: serde_json::to_value(tools_schema).map_err(|e| format!("Cannot convert schema to JSON value: {e}"))?,
     };
-    let tool_handler = crate::agent_tools::dispatch_narrativ_agent_tool::dispatch_narrativ_agent_tool;
+    let tool_handler = crate::agent_tools::dispatch_reels_agent_tool::dispatch_reels_agent_tool;
 
     match agentloop::app_setup::configure_app(Some(tools_schema_value), Some(tool_handler)).await {
         Ok(state) => {
@@ -41,7 +41,6 @@ pub async fn create_agentloop_state() -> std::result::Result<actix_web::web::Dat
 pub async fn run_and_log_research(
     request: agentloop::types::research_request::ResearchRequest,
     gcs_client: &crate::services::gcs::gcs_client::GCSClient,
-    pool: &sqlx::PgPool,
     execution_id: uuid::Uuid,
 ) -> std::result::Result<std::string::String, std::string::String> {
    // a. Call `create_agentloop_state()` to get a fresh `AppState` for the task.
@@ -56,34 +55,18 @@ pub async fn run_and_log_research(
         ..agentloop::types::session_config::SessionConfig::default()
     };
 
-    // Extract organization_id from request if present
-    let organization_id = request.organization_id;
-    
     let session_id = session_manager::create_session(
-        request.user_id,
         agentloop_state.clone(),
         session_config,
-        organization_id,
     )
     .await;
 
     // c. Construct the callback and call the synchronous research loop.
-    let captured_pool = pool.clone();
     let progress_callback: agentloop::types::progress_update::ProgressCallback =
         Box::new(move |update: agentloop::types::progress_update::ProgressUpdate| {
-            let pool = captured_pool.clone();
             Box::pin(async move {
-                let progress_json = serde_json::json!(update);
-                if let Err(e) =
-                    crate::queries::one_time_research::update_one_time_research_progress(
-                        &pool,
-                        execution_id,
-                        &progress_json,
-                    )
-                    .await
-                {
-                    log::error!("Failed to log progress for task {execution_id}: {e}");
-                }
+                // Progress logging removed - no database interaction
+                let _ = (execution_id, update);
             }) as std::pin::Pin<Box<dyn std::future::Future<Output = ()> + Send>>
         });
 
