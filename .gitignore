@@ -24,4 +24,7 @@ target
 storage/
 reels/
 *.mp4
+
+# macOS system files
+.DS_Store
 **/.DS_Store
