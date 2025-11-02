@@ -142,8 +142,9 @@ pub async fn setup_test_app_and_pool() -> App<
     };
 
     // Initialize DubService for tests (will use disabled mode if env vars not set)
-    let dub_service = crate::services::dub::DubService::from_env()
-        .expect("Failed to create DubService for tests");
+    // DubService removed - services::dub module deleted
+    // let dub_service = crate::services::dub::DubService::from_env()
+    //     .expect("Failed to create DubService for tests");
 
     // Session manager - database functionality removed
     // let session_manager = std::sync::Arc::new(
@@ -165,7 +166,8 @@ pub async fn setup_test_app_and_pool() -> App<
         .app_data(web::Data::new(screenshot_service.clone()))
         .app_data(web::Data::new(postmark_client.clone()))
         .app_data(web::Data::new(agentloop_state_inner))
-        .app_data(web::Data::from(std::sync::Arc::new(dub_service.clone()) as std::sync::Arc<dyn crate::services::dub::DubServiceTrait>))
+        // DubService removed - services::dub module deleted
+        // .app_data(web::Data::from(std::sync::Arc::new(dub_service.clone()) as std::sync::Arc<dyn crate::services::dub::DubServiceTrait>))
         // Session manager removed - database functionality removed
         
         // Add JSON configuration for handling request bodies

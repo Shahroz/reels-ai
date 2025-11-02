@@ -14,7 +14,6 @@ pub mod app;
 pub mod gcp_auth;
 pub mod agent_tools;
 pub mod llm_support;
-pub mod types;
 pub mod query_parser;
 pub mod test_utils;
 use crate::services::gcs::gcs_client::GCSClient;
@@ -35,8 +34,6 @@ use std::env;
 
 use utoipa_swagger_ui::SwaggerUi;
 // Added for environment variables
-
-use tracing::instrument;
 
 async fn setup_server() -> std::io::Result<()> {
    // Initialize dotenv to load .env file
@@ -78,7 +75,6 @@ async fn setup_server() -> std::io::Result<()> {
 
     // --- OpenAPI Documentation Setup ---
     let openapi = ApiDoc::openapi();
-
 
     // Determine APP_ENV (default to "production" if not set)
     let app_env = env::var("APP_ENV").unwrap_or_else(|_| "production".to_string());

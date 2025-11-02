@@ -8,6 +8,4 @@ pub use helpers::{
 
     // JWT helpers
     generate_test_jwt,
-    Claims,
-    create_jwt,
 };

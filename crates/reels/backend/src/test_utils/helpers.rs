@@ -9,6 +9,7 @@
 
 use uuid::Uuid;
 use chrono::{Utc, Duration as ChronoDuration};
+use serde::{Serialize, Deserialize};
 // sqlx removed - no database interaction
 
 /// A test user that provides clean resource management for integration tests.
@@ -77,21 +78,32 @@ impl Drop for TestUser {
     }
 }
 
+/// Test-only Claims structure for JWT tokens
+#[derive(Debug, Serialize, Deserialize, Default)]
+struct TestClaims {
+    user_id: Uuid,
+    is_admin: bool,
+    email: String,
+    exp: u64,
+}
+
 /// Generates a test JWT token for the given user ID and admin status.
 /// The token is valid for 1 hour and uses the JWT_SECRET environment variable.
 pub fn generate_test_jwt(user_id: Uuid, is_admin: bool) -> String {
+    use crate::utils::jwt::generate_jwt_token;
+    
     let now = Utc::now();
     let exp = (now + ChronoDuration::hours(1)).timestamp();
 
-    let claims = Claims {
+    let claims = TestClaims {
         user_id,
         is_admin,
         email: "test@example.com".to_string(),
         exp: exp as u64,
-        ..Default::default()
     };
 
-    create_jwt(&claims).expect("Failed to create test JWT")
+    let secret = std::env::var("JWT_SECRET").unwrap_or_else(|_| "test-secret".to_string());
+    generate_jwt_token(&secret, "1h", &claims).expect("Failed to create test JWT")
 }
 
 /// Cleanup organization and its members from the database.

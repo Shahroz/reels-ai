@@ -97,7 +97,61 @@ app-run: $(EMULATOR_DEPS)
 	@$(MAKE) kill-8081
 	cd backend && env $(EMULATOR_ENV) cargo run
 
-
+generate-api-client: $(EMULATOR_DEPS)
+	@$(MAKE) kill-8081
+	@echo "Attempting to generate API client..."
+	@PORT_TO_TRY="" && \
+	for port in 8081 8082 8083; do \
+		echo "Checking port $$port..."; \
+		if ! lsof -i:$$port > /dev/null; then \
+			echo "Port $$port is available."; \
+			PORT_TO_TRY=$$port; \
+			break; \
+		else \
+			echo "Port $$port is in use."; \
+		fi; \
+	done; \
+	if [ -z "$$PORT_TO_TRY" ]; then \
+		echo "Error: Could not find an available port (tried 8081-8083)."; \
+		exit 1; \
+	fi; \
+	echo "Starting backend server on port $$PORT_TO_TRY in background..."; \
+	cd backend && env $(EMULATOR_ENV) PORT=$$PORT_TO_TRY cargo run & SERVER_PID=$$!; \
+	echo "Backend server started (PID: $$SERVER_PID). Waiting for /health endpoint..."; \
+	MAX_WAIT=60; \
+	WAIT_COUNT=0; \
+	HEALTH_URL="http://127.0.0.1:$$PORT_TO_TRY/health"; \
+	while ! curl --output /dev/null --silent --fail $$HEALTH_URL; do \
+		if [ $$WAIT_COUNT -ge $$MAX_WAIT ]; then \
+			echo "Error: Timeout waiting for backend at $$HEALTH_URL."; \
+			echo "Stopping backend server (PID: $$SERVER_PID)..."; \
+			kill $$SERVER_PID || true; \
+			exit 1; \
+		fi; \
+		printf "."; \
+		sleep 1; \
+		WAIT_COUNT=$$(($$WAIT_COUNT + 1)); \
+	done; \
+	echo "\nBackend is healthy. Generating frontend API client..."; \
+	OPENAPI_URL="http://127.0.0.1:$$PORT_TO_TRY/api-docs/openapi.json"; \
+	GENERATION_SUCCESS=false; \
+	if cd frontend && \
+	   echo "Cleaning existing API client files..." && \
+	   rm -rf src/api/* && \
+	   echo "Generating full TypeScript client from $$OPENAPI_URL..." && \
+	   npx openapi-typescript-codegen --input $$OPENAPI_URL --output src/api --client fetch --useOptions; then \
+		echo "API client generation successful."; \
+		GENERATION_SUCCESS=true; \
+	else \
+		echo "API client generation failed."; \
+	fi; \
+	echo "Stopping backend server (PID: $$SERVER_PID)..."; \
+	kill $$SERVER_PID || true; \
+	echo "Backend server stopped."; \
+	if [ "$$GENERATION_SUCCESS" = false ]; then \
+		exit 1; \
+	fi; \
+	echo "Done."
 
 kill-8080:
 	@echo "Killing process on port 8080..."

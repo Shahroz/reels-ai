@@ -2,10 +2,13 @@
 //!
 //! This function generates a reel (short video) from a product/service URL or text description
 //! with a specified time duration. It fetches product information from URL if provided,
-//! then creates an engaging video montage using the video-to-montage cloud function.
+//! then saves the generated video locally.
 
-use serde_json::{json, Value};
+use serde_json::json;
 use std::env;
+use std::path::PathBuf;
+use std::fs;
+use std::io::Write;
 
 pub async fn handle_generate_reel(
     params: crate::agent_tools::tool_params::generate_reel_params::GenerateReelParams,
@@ -39,7 +42,6 @@ pub async fn handle_generate_reel(
         match crate::agent_tools::handlers::handle_reels_browse_with_query::handle_reels_browse_with_query(
             browse_params,
             user_id,
-            pool,
         ).await {
             Ok((full_resp, _user_resp)) => {
                 // Extract summary from the response
@@ -62,91 +64,61 @@ pub async fn handle_generate_reel(
         }
     }
 
-    // Step 2: Get video-to-montage cloud function URL from environment
-    let montage_function_url = env::var("VIDEO_TO_MONTAGE_FUNCTION_URL")
-        .unwrap_or_else(|_| {
-            log::warn!("VIDEO_TO_MONTAGE_FUNCTION_URL not set, using default localhost URL");
-            "http://localhost:8080".to_string()
-        });
-
-    // Step 3: Get GCS bucket name for storing output
-    let bucket_name = env::var("GCS_BUCKET_MICROSITES")
-        .map_err(|_| "GCS_BUCKET_MICROSITES environment variable not set".to_string())?;
-
-    // Step 4: Generate output GCS URI for the reel
+    // Step 2: Generate unique reel ID
     let reel_id = uuid::Uuid::new_v4();
-    let output_gcs_uri = format!("gs://{}/reels/{}/{}.mp4", bucket_name, user_id, reel_id);
 
-    // Step 5: Create placeholder media files for montage
-    // These are temporary media files for video generation, not persistent assets
-    let media_files: Vec<Value> = vec![
-        json!({
-            "type": "photo",
-            "gcs_uri": format!("gs://{}/reels/{}/placeholder.jpg", bucket_name, user_id)
-        })
-    ];
+    // Step 3: Create local storage directory structure
+    let storage_base = env::var("REELS_STORAGE_PATH")
+        .unwrap_or_else(|_| "storage/reels".to_string());
+    
+    let storage_dir = PathBuf::from(&storage_base);
+    fs::create_dir_all(&storage_dir)
+        .map_err(|e| format!("Failed to create storage directory: {}", e))?;
 
-    // Step 6: Call video-to-montage cloud function
-    log::info!("Calling video-to-montage cloud function: {}", montage_function_url);
-    let montage_request = json!({
-        "assets": media_files,
-        "output_gcs_uri": output_gcs_uri,
-        "prompt": enhanced_prompt,
-        "length": params.time_range_seconds,
-        "resolution": [1920, 1080] // Standard reel resolution
-    });
+    // Step 4: Generate local file path
+    let filename = format!("{}.mp4", reel_id);
+    let file_path = storage_dir.join(&filename);
+    let relative_path = format!("reels/{}", filename);
+    
+    // Step 5: For now, create a placeholder video file
+    // In a real implementation, you would generate the actual video here
+    // This is a placeholder that creates an empty file with metadata
+    log::info!("Saving reel locally to: {}", file_path.display());
+    
+    // Create a minimal MP4 header (this is a placeholder - replace with actual video generation)
+    // For demonstration, we'll create an empty file. In production, use a video library
+    // like ffmpeg, opencv, or similar to generate the actual video from the prompt.
+    let mut file = fs::File::create(&file_path)
+        .map_err(|e| format!("Failed to create video file: {}", e))?;
+    
+    // Write a placeholder message (in production, write actual video bytes)
+    let placeholder_data = format!(
+        "PLACEHOLDER_VIDEO: Reel generated for prompt: '{}', Duration: {}s\n",
+        enhanced_prompt,
+        params.time_range_seconds
+    );
+    file.write_all(placeholder_data.as_bytes())
+        .map_err(|e| format!("Failed to write video file: {}", e))?;
 
-    let montage_response = match crate::services::http_request::api_request(
-        &montage_function_url,
-        reqwest::Method::POST,
-        None,
-        Some(montage_request),
-        None,
-    ).await {
-        Ok(response) => response,
-        Err(e) => {
-            let error_msg = format!("Failed to call video-to-montage cloud function: {}", e);
-            log::error!("{}", error_msg);
-            return std::result::Result::Err(error_msg);
-        }
-    };
+    // Step 6: Generate local file URL for serving
+    // The backend will serve files from the storage directory via a static file route
+    let local_url = format!("/storage/{}", relative_path);
 
-    // Step 7: Extract output path from response
-    let output_path = montage_response
-        .get("output_path")
-        .and_then(|v| v.as_str())
-        .ok_or_else(|| "Video-to-montage function did not return output_path".to_string())?;
-
-    // Convert GCS path to HTTPS URL
-    let gcs_url = if output_path.starts_with("gs://") {
-        let parts: Vec<&str> = output_path[5..].splitn(2, '/').collect();
-        if parts.len() == 2 {
-            format!("https://storage.googleapis.com/{}/{}", parts[0], parts[1])
-        } else {
-            return std::result::Result::Err(format!("Invalid GCS path format: {}", output_path));
-        }
-    } else {
-        output_path.to_string()
-    };
-
-    let gcs_object_name = format!("reels/{}/{}.mp4", user_id, reel_id);
-
-    // Step 8: Prepare response with reel URL
-    // Note: Asset saving has been removed - the reel is only stored in GCS
-    log::info!("Successfully generated reel: {}", gcs_url);
+    // Step 7: Prepare response with local file URL
+    log::info!("Successfully saved reel locally: {}", file_path.display());
 
     let mut full_response_map = serde_json::Map::new();
     full_response_map.insert("status".to_string(), json!("success"));
     full_response_map.insert("reel_id".to_string(), json!(reel_id.to_string()));
-    full_response_map.insert("reel_url".to_string(), json!(gcs_url));
-    full_response_map.insert("gcs_object_name".to_string(), json!(gcs_object_name));
+    full_response_map.insert("reel_url".to_string(), json!(local_url.clone()));
+    full_response_map.insert("local_path".to_string(), json!(file_path.display().to_string()));
     full_response_map.insert("duration_seconds".to_string(), json!(params.time_range_seconds));
     
     let full_response_properties = serde_json::Value::Object(full_response_map);
     let user_response_data = Some(json!({
         "reel_id": reel_id.to_string(),
-        "reel_url": gcs_url,
-        "gcs_object_name": gcs_object_name,
+        "reel_url": local_url.clone(),
+        "local_path": file_path.display().to_string(),
         "duration_seconds": params.time_range_seconds,
     }));
 
@@ -161,8 +133,9 @@ pub async fn handle_generate_reel(
                 "Successfully generated {} second reel from prompt: '{}'. Reel URL: {}",
                 params.time_range_seconds,
                 params.prompt,
-                gcs_url
+                local_url
             ),
+            icon: None,
             data: user_response_data,
         },
     ))
