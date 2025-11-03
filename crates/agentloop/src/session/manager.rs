@@ -129,6 +129,9 @@ mod tests {
              time_limit: std::time::Duration::from_secs(300), // Example
              token_threshold: 1000, // Example
              preserve_exchanges: 5, // Example
+             initial_instruction: None,
+             compaction_policy: crate::types::compaction_policy::CompactionPolicy::default(),
+             evaluation_policy: crate::types::evaluation_policy::EvaluationPolicy::default(),
         }
     }
 
@@ -164,7 +167,7 @@ mod tests {
     async fn test_update_status_async() {
         let app_state = create_async_test_app_state();
         let config = default_session_config();
-        let session_id = super::create_session(uuid::Uuid::new_v4(), app_state.clone(), config.clone(), None).await;
+        let session_id = super::create_session(app_state.clone(), config.clone()).await;
 
         // Update status asynchronously using the new Running variant structure.
         let new_status = crate::types::session_status::SessionStatus::Running { progress: std::option::Option::Some(std::string::String::from("50%")) };
@@ -187,7 +190,7 @@ mod tests {
      async fn test_add_conversation_entry_async() {
          let app_state = create_async_test_app_state();
          let config = default_session_config();
-         let session_id = super::create_session(uuid::Uuid::new_v4(), app_state.clone(), config.clone(), None).await;
+         let session_id = super::create_session(app_state.clone(), config.clone()).await;
 
          let entry = crate::types::conversation_entry::ConversationEntry { // Correct path
              // Use fully qualified path for Sender enum
@@ -224,7 +227,7 @@ mod tests {
      async fn test_add_context_entry_async() {
          let app_state = create_async_test_app_state();
          let config = default_session_config();
-         let session_id = super::create_session(uuid::Uuid::new_v4(), app_state.clone(), config.clone(), None).await;
+         let session_id = super::create_session(app_state.clone(), config.clone()).await;
 
          let entry = crate::types::context_entry::ContextEntry { // Correct path
              content: std::string::String::from("Some context"),

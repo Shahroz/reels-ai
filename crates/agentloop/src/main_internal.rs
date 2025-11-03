@@ -112,7 +112,7 @@ async fn main() -> std::io::Result<()> {
             .wrap(actix_web::middleware::Logger::default())            // Add permissive CORS middleware (ALLOWS ALL ORIGINS - use carefully!)
             .wrap(actix_cors::Cors::permissive())
             // Apply custom authentication middleware.
-            .wrap(crate::auth::middleware::BearerAuth)
+            //.wrap(crate::auth::middleware::BearerAuth)
             // Configure routes using the dedicated function.
             // Configure API routes first.
             .configure(crate::config::routes::configure_routes)

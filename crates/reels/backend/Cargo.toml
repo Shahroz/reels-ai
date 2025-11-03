@@ -77,7 +77,6 @@ validator = { version = "0.20.0", features = ["derive"] }
 api_tools = { path = "../../api_clients" }
 once_cell = "1.19" # Added for global static pool in main.rs
 serial_test = "3.0.0"
-gennodes-client = { git = "https://github.com/bountihq/gennodes-client.git", branch = "main" }
 indexmap = "2.10.0"
 mp4 = "0.14.0" # For extracting MP4 video duration
 photon-rs = { version = "0.3.2", default-features = false }
