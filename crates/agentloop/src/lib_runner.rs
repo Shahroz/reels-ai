@@ -17,7 +17,7 @@
 /// # Arguments
 ///
 /// * `app_state` - The shared application state.
-/// * `request` - The research request containing the user ID and instruction.
+/// * `request` - The research request containing the instruction.
 ///
 /// # Returns
 ///

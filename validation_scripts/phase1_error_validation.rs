@@ -76,18 +76,16 @@ async fn test_http_client_error() -> std::result::Result<(), std::boxed::Box<dyn
     let _guard = span.enter();
     
     // Simulate a 404 error scenario
-    let context = create_test_request_context("GET", "/api/nonexistent", std::option::Option::Some("test-user-123"));
+    let context = create_test_request_context("GET", "/api/nonexistent");
     
     // Record error information as our middleware would
     span.record("error", true);
     span.record("error.type", "http_error");
     span.record("http.status_code", 404);
-    span.record("user.id", "test-user-123");
     
     tracing::error!(
         event_type = "http_error",
         http.status_code = 404,
-        user.id = "test-user-123",
         request.id = "test-404-001",
         error.message = "Resource not found",
         "HTTP client error scenario for validation"
@@ -114,12 +112,10 @@ async fn test_http_server_error() -> std::result::Result<(), std::boxed::Box<dyn
     span.record("error.type", "internal_error");
     span.record("error.severity", "high");
     span.record("http.status_code", 500);
-    span.record("user.id", "test-user-456");
     
     tracing::error!(
         event_type = "server_error",
         http.status_code = 500,
-        user.id = "test-user-456",
         request.id = "test-500-001",
         error.message = "Internal server error during processing",
         error.stack_trace = "simulated_stack_trace::validation_test",
@@ -143,7 +139,6 @@ async fn test_authenticated_user_error() -> std::result::Result<(), std::boxed::
     let _guard = span.enter();
     
     // Simulate authenticated user hitting an error
-    span.record("user.id", "auth-user-789");
     span.record("auth.method", "jwt");
     span.record("user.is_admin", false);
     span.record("error", true);
@@ -153,7 +148,6 @@ async fn test_authenticated_user_error() -> std::result::Result<(), std::boxed::
     tracing::warn!(
         event_type = "authorization_error",
         http.status_code = 403,
-        user.id = "auth-user-789",
         auth.method = "jwt",
         request.id = "test-auth-001",
         error.message = "User lacks permission for this operation",
@@ -206,12 +200,10 @@ async fn test_request_correlation() -> std::result::Result<(), std::boxed::Box<d
 fn create_test_request_context(
     method: &str,
     path: &str, 
-    user_id: std::option::Option<&str>,
 ) -> TestRequestContext {
     TestRequestContext {
         method: method.to_string(),
         path: path.to_string(),
-        user_id: user_id.map(|id| id.to_string()),
         request_id: uuid::Uuid::new_v4().to_string(),
         timestamp: std::time::SystemTime::now(),
     }
@@ -221,7 +213,6 @@ fn create_test_request_context(
 struct TestRequestContext {
     method: std::string::String,
     path: std::string::String,
-    user_id: std::option::Option<std::string::String>,
     request_id: std::string::String,
     timestamp: std::time::SystemTime,
 }
@@ -232,21 +223,19 @@ mod tests {
 
     #[test]
     fn test_create_test_request_context() {
-        let context = create_test_request_context("POST", "/api/test", std::option::Option::Some("user123"));
+        let context = create_test_request_context("POST", "/api/test");
         
         assert_eq!(context.method, "POST");
         assert_eq!(context.path, "/api/test");
-        assert_eq!(context.user_id, std::option::Option::Some("user123".to_string()));
         assert!(!context.request_id.is_empty());
     }
 
     #[test]
     fn test_create_test_request_context_no_user() {
-        let context = create_test_request_context("GET", "/health", std::option::Option::None);
+        let context = create_test_request_context("GET", "/health");
         
         assert_eq!(context.method, "GET");
         assert_eq!(context.path, "/health");
-        assert_eq!(context.user_id, std::option::Option::None);
         assert!(!context.request_id.is_empty());
     }
 }

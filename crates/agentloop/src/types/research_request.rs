@@ -8,7 +8,6 @@
 use serde::{Deserialize, Serialize}; // Use for derive macros is common.
 
 /// Payload to start a new research session.
-/// Unknown fields (such as user_id which has been removed) are ignored during deserialization.
 #[derive(schemars::JsonSchema, utoipa::ToSchema, Debug, Clone, Serialize, Deserialize)]
 pub struct ResearchRequest {
     /// The instruction for the research task.
@@ -95,18 +94,4 @@ mod tests {
         }
     }
 
-    #[test]
-    fn test_research_request_ignores_user_id_field() {
-        // Test that user_id field (which has been removed) is properly ignored during deserialization
-        let json_with_user_id = r#"{"instruction": "Test instruction", "user_id": "some-uuid", "attachments": null}"#;
-        let deserialized: super::ResearchRequest = serde_json::from_str(json_with_user_id).expect("Should deserialize successfully even with user_id field");
-        std::assert_eq!(deserialized.instruction, "Test instruction");
-        std::assert!(deserialized.attachments.is_none());
-
-        // Test without user_id - should also work
-        let json_without_user_id = r#"{"instruction": "Test instruction", "attachments": null}"#;
-        let deserialized2: super::ResearchRequest = serde_json::from_str(json_without_user_id).expect("Should deserialize successfully without user_id");
-        std::assert_eq!(deserialized2.instruction, "Test instruction");
-        std::assert!(deserialized2.attachments.is_none());
-    }
 }
