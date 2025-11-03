@@ -62,10 +62,10 @@ pub fn configure_routes(
         "/session/{session_id}/state", // Get session state
         actix_web::web::get().to(crate::handlers::get_session_state::get_session_state),
     );
-    cfg.route(
-        "/session/load", // Load session state
-        actix_web::web::post().to(crate::handlers::load_session_state::load_session_state),
-    );
+   cfg.route(
+       "/session/load", // Load session state
+       actix_web::web::post().to(crate::handlers::load_session_state::load_session_state),
+   );
 }
 
 pub fn configure_internal(
