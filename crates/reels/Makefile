@@ -190,7 +190,7 @@ dev:
 	@echo "Starting local development environment..."
 	@$(MAKE) kill-8080
 	@echo "Starting backend..."
-	(cd backend && env DATABASE_URL=$(DATABASE_URL) APP_ENV=dev cargo run &) && sleep 5
+	cd backend && env APP_ENV=dev && cargo build --workspace --bin backend && cargo run --bin backend
 
 
 ########################################
