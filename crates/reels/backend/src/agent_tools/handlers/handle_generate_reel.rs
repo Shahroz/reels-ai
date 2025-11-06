@@ -2,18 +2,18 @@
 //!
 //! This function generates a reel (short video) from a product/service URL or text description
 //! with a specified time duration. It fetches product information from URL if provided,
-//! then saves the generated video locally.
+//! then generates a video using Gemini Veo 3 API and saves it locally.
+//! Uses the llm crate's video generation function which follows the same patterns
+//! as other Gemini API calls in the codebase.
 
 use serde_json::json;
 use std::env;
 use std::path::PathBuf;
 use std::fs;
-use std::io::Write;
 
 pub async fn handle_generate_reel(
     params: crate::agent_tools::tool_params::generate_reel_params::GenerateReelParams,
     _gcs_client: &crate::services::gcs::gcs_client::GCSClient, // GCS client not used directly
-    user_id: uuid::Uuid, // Placeholder user_id for GCS path generation
 ) -> std::result::Result<
     (
         agentloop::types::full_tool_response::FullToolResponse,
@@ -41,7 +41,6 @@ pub async fn handle_generate_reel(
         
         match crate::agent_tools::handlers::handle_reels_browse_with_query::handle_reels_browse_with_query(
             browse_params,
-            user_id,
         ).await {
             Ok((full_resp, _user_resp)) => {
                 // Extract summary from the response
@@ -80,25 +79,24 @@ pub async fn handle_generate_reel(
     let file_path = storage_dir.join(&filename);
     let relative_path = format!("reels/{}", filename);
     
-    // Step 5: For now, create a placeholder video file
-    // In a real implementation, you would generate the actual video here
-    // This is a placeholder that creates an empty file with metadata
-    log::info!("Saving reel locally to: {}", file_path.display());
+    // Step 5: Generate video using Gemini Veo 3 API
+    log::info!("Generating video with Veo 3 API for prompt: '{}'", enhanced_prompt);
     
-    // Create a minimal MP4 header (this is a placeholder - replace with actual video generation)
-    // For demonstration, we'll create an empty file. In production, use a video library
-    // like ffmpeg, opencv, or similar to generate the actual video from the prompt.
-    let mut file = fs::File::create(&file_path)
-        .map_err(|e| format!("Failed to create video file: {}", e))?;
-    
-    // Write a placeholder message (in production, write actual video bytes)
-    let placeholder_data = format!(
-        "PLACEHOLDER_VIDEO: Reel generated for prompt: '{}', Duration: {}s\n",
+    // Use the llm crate's video generation function which handles API calls,
+    // retries, polling, and downloading following the same patterns as other Gemini API calls
+    let video_bytes = llm::vendors::gemini::veo3_video_generation::generate_veo3_video(
         enhanced_prompt,
-        params.time_range_seconds
-    );
-    file.write_all(placeholder_data.as_bytes())
+        Some("veo-3.1-generate-preview".to_string()),
+    )
+    .await
+    .map_err(|e| format!("Video generation failed: {}", e))?;
+    
+    // Step 5a: Save video to local file
+    log::info!("Saving video to: {}", file_path.display());
+    fs::write(&file_path, &video_bytes)
         .map_err(|e| format!("Failed to write video file: {}", e))?;
+    
+    log::info!("Successfully saved video ({} bytes) to: {}", video_bytes.len(), file_path.display());
 
     // Step 6: Generate local file URL for serving
     // The backend will serve files from the storage directory via a static file route
@@ -140,4 +138,3 @@ pub async fn handle_generate_reel(
         },
     ))
 }
-

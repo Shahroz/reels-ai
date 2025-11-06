@@ -28,6 +28,7 @@ pub mod function_result_part;
 pub mod property_definition;
 pub mod video_metadata;
 pub mod veo3_video_request;
+pub mod veo3_video_generation;
 pub mod gcp_auth;
 // Video metadata for uploaded video files
 

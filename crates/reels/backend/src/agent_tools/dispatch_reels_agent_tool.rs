@@ -40,18 +40,14 @@ pub fn dispatch_reels_agent_tool(
                 // Now, dispatch to the correct handler based on the enum variant.
                 // Only reel generation related tools are handled.
                 match parsed_tool_params {
-                  crate::agent_tools::reels_tool_parameters::ReelsToolParameters::BrowseWithQuery(p) => {
-                    // Generate a placeholder UUID for user_id parameter (kept for API compatibility)
-                    let placeholder_user_id = uuid::Uuid::new_v4();
-                    crate::agent_tools::handlers::handle_reels_browse_with_query::handle_reels_browse_with_query(p, placeholder_user_id).await
-                  }
-                crate::agent_tools::reels_tool_parameters::ReelsToolParameters::GenerateReel(params) => {
-                    let gcs_client = crate::services::gcs::gcs_client::GCSClient::new();
-                    // Generate a placeholder UUID for user_id (used for GCS path generation)
-                    let placeholder_user_id = uuid::Uuid::new_v4();
-                    crate::agent_tools::handlers::handle_generate_reel::handle_generate_reel(params, &gcs_client, placeholder_user_id).await
+                    crate::agent_tools::reels_tool_parameters::ReelsToolParameters::BrowseWithQuery(p) => {
+                        crate::agent_tools::handlers::handle_reels_browse_with_query::handle_reels_browse_with_query(p).await
+                    }
+                    crate::agent_tools::reels_tool_parameters::ReelsToolParameters::GenerateReel(params) => {
+                        let gcs_client = crate::services::gcs::gcs_client::GCSClient::new();
+                        crate::agent_tools::handlers::handle_generate_reel::handle_generate_reel(params, &gcs_client).await
+                    }
                 }
-               }
             }
             std::result::Result::Err(e) => {
                 // Failed to deserialize parameters for a known tool.
@@ -104,4 +100,3 @@ mod tests {
         agentloop::types::tool_choice::ToolChoice { parameters: params }
     }
 }
-

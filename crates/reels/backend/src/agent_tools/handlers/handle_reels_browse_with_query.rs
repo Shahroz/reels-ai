@@ -14,7 +14,6 @@ use llm::vendors::gemini::gemini_model::GeminiModel;
 
 pub async fn handle_reels_browse_with_query(
     params: crate::agent_tools::tool_params::browse_with_query_params::BrowseWithQueryParams,
-    user_id: uuid::Uuid,
 ) -> Result<(agentloop::types::full_tool_response::FullToolResponse, agentloop::types::user_tool_response::UserToolResponse), String> {
     let tool_name = "reels_browse_with_query".to_string();
     
