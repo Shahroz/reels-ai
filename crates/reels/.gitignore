@@ -4,7 +4,6 @@
 .env
 pgdata/
 
-
 # Environment variables and secrets
 .env
 .env-docker
