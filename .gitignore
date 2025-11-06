@@ -22,8 +22,12 @@ target
 
 # Local storage for generated reels
 storage/
-reels/
+/reels/
 *.mp4
+
+# Allow frontend source files (exception to reels/ ignore)
+!crates/reels/frontend/
+!crates/reels/frontend/**
 
 # macOS system files
 **/**/*.DS_Store
