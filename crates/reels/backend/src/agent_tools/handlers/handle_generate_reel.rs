@@ -80,13 +80,25 @@ pub async fn handle_generate_reel(
     let relative_path = format!("reels/{}", filename);
     
     // Step 5: Generate video using Gemini Veo 3 API
-    log::info!("Generating video with Veo 3 API for prompt: '{}'", enhanced_prompt);
+    log::info!(
+        "Generating video with Veo 3 API for prompt: '{}' with duration: {}s",
+        enhanced_prompt,
+        params.time_range_seconds
+    );
     
     // Use the llm crate's video generation function which handles API calls,
     // retries, polling, and downloading following the same patterns as other Gemini API calls
+    // Convert i32 to u32 for duration (time_range_seconds should be positive)
+    let duration_seconds = if params.time_range_seconds > 0 {
+        Some(params.time_range_seconds as u32)
+    } else {
+        None
+    };
+    
     let video_bytes = llm::vendors::gemini::veo3_video_generation::generate_veo3_video(
         enhanced_prompt,
         Some("veo-3.1-generate-preview".to_string()),
+        duration_seconds,
     )
     .await
     .map_err(|e| format!("Video generation failed: {}", e))?;

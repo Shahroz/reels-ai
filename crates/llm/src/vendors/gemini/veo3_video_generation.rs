@@ -15,6 +15,7 @@ use std::time::Duration;
 pub async fn generate_veo3_video(
     prompt: String,
     model: Option<String>,
+    duration_seconds: Option<u32>,
 ) -> std::result::Result<Vec<u8>, std::boxed::Box<dyn std::error::Error>> {
     // Create an HTTP client with extended timeout for long-running operations
     let client = reqwest::Client::builder()
@@ -40,11 +41,25 @@ pub async fn generate_veo3_video(
     let generate_url = format!("{}/models/{}:predictLongRunning", base_url, model_id);
 
     // Build request body
-    let request_body = serde_json::json!({
-        "instances": [{
-            "prompt": prompt
-        }]
+    // The Veo 3.1 API expects:
+    // - instances: array with prompt
+    // - parameters: object with durationSeconds and other optional params
+    let instance_obj = serde_json::json!({
+        "prompt": prompt
     });
+    
+    let mut request_body = serde_json::json!({
+        "instances": [instance_obj]
+    });
+    
+    // Add parameters object with durationSeconds if provided (API expects camelCase)
+    if let Some(duration) = duration_seconds {
+        if let Some(body_obj) = request_body.as_object_mut() {
+            let mut params_obj = serde_json::Map::new();
+            params_obj.insert("durationSeconds".to_string(), serde_json::json!(duration));
+            body_obj.insert("parameters".to_string(), serde_json::Value::Object(params_obj));
+        }
+    }
 
     // Send the POST request with retry logic
     let mut last_error: Option<std::string::String> = None;
@@ -59,6 +74,7 @@ pub async fn generate_veo3_video(
             }
 
             log::info!("Sending video generation request to Veo 3 API (attempt {})", attempt + 1);
+            log::debug!("Request body: {}", serde_json::to_string(&request_body).unwrap_or_else(|_| "Failed to serialize".to_string()));
 
             let request_builder = client
                 .post(&generate_url)
@@ -98,6 +114,19 @@ pub async fn generate_veo3_video(
                             }
                         }
                         Err(err) => {
+                            // For 400 errors, try to extract response body for better debugging
+                            if err.status() == Some(reqwest::StatusCode::BAD_REQUEST) {
+                                let error_text = err.to_string();
+                                let err_msg = format!(
+                                    "Attempt {}: HTTP error in video generation: {}. Request body: {}",
+                                    attempt + 1,
+                                    error_text,
+                                    serde_json::to_string(&request_body).unwrap_or_else(|_| "Failed to serialize".to_string())
+                                );
+                                log::error!("{}", err_msg);
+                                result = Err(err_msg);
+                                break;
+                            }
                             if err.status() == Some(reqwest::StatusCode::TOO_MANY_REQUESTS) {
                                 if attempt < max_retries - 1 {
                                     let wait_time_ms = std::cmp::max(1000, 100 * 2u64.pow(attempt as u32));

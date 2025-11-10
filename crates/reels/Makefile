@@ -95,7 +95,7 @@ endif
 app-run: $(EMULATOR_DEPS)
 	@echo "Running app..."
 	@$(MAKE) kill-8081
-	cd backend && env $(EMULATOR_ENV) cargo run
+	cd backend && env $(EMULATOR_ENV) cargo run --bin backend
 
 generate-api-client: $(EMULATOR_DEPS)
 	@$(MAKE) kill-8081
@@ -116,7 +116,7 @@ generate-api-client: $(EMULATOR_DEPS)
 		exit 1; \
 	fi; \
 	echo "Starting backend server on port $$PORT_TO_TRY in background..."; \
-	cd backend && env $(EMULATOR_ENV) PORT=$$PORT_TO_TRY cargo run & SERVER_PID=$$!; \
+	cd backend && env $(EMULATOR_ENV) PORT=$$PORT_TO_TRY cargo run --bin backend & SERVER_PID=$$!; \
 	echo "Backend server started (PID: $$SERVER_PID). Waiting for /health endpoint..."; \
 	MAX_WAIT=60; \
 	WAIT_COUNT=0; \
@@ -190,7 +190,7 @@ dev:
 	@echo "Starting local development environment..."
 	@$(MAKE) kill-8080
 	@echo "Starting backend..."
-	cd backend && env APP_ENV=dev && cargo build --workspace --bin backend && cargo run --bin backend
+	cd backend && env APP_ENV=dev && cargo build --workspace --bin backend && cargo run --bin backend --release
 
 
 ########################################

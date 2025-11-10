@@ -2,6 +2,26 @@ import { useState, useCallback, useRef } from 'react'
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080'
 
+/**
+ * Generates a default instruction text based on productUrl and duration.
+ * This is used as a placeholder/suggestion for the user.
+ * Returns just the user instructions text, not the full agent instruction.
+ */
+export function generateDefaultInstruction(
+  productUrl: string | null,
+  duration: number
+): string {
+  let userInstructions = `Create a ${duration}-second promotional reel showcasing the product or service`
+  
+  if (productUrl) {
+    userInstructions += ` from ${productUrl}`
+  }
+  
+  userInstructions += `. Include engaging visuals, clear messaging, and a compelling call-to-action.`
+  
+  return userInstructions
+}
+
 export interface LogEntry {
   message: string
   type: 'info' | 'success' | 'error' | 'warning'
@@ -81,22 +101,10 @@ export function useReelGeneration() {
     }
   }, [addLog])
 
-  const startResearch = useCallback(async (prompt: string, productUrl: string | null, duration: number) => {
+  const startResearch = useCallback(async (instruction: string) => {
     try {
       addLog('Starting research session...', 'info')
       addStatus('Creating research session...', 'info')
-
-      let instruction = `Generate a ${duration}-second promotional reel. Prompt: "${prompt}"`
-
-      if (productUrl) {
-        instruction += ` Use information from this URL: ${productUrl}`
-      }
-
-      instruction += ` Use the generate_reel tool with prompt: "${prompt}" and time_range_seconds: ${duration}`
-
-      if (productUrl) {
-        instruction += ` and product_url: "${productUrl}"`
-      }
 
       const response = await fetch(`${API_BASE_URL}/loupe/research`, {
         method: 'POST',
@@ -254,7 +262,7 @@ export function useReelGeneration() {
     return null
   }, [addLog])
 
-  const generateReel = useCallback(async (prompt: string, productUrl: string | null, duration: number) => {
+  const generateReel = useCallback(async (instruction: string) => {
     await terminateExistingSession()
 
     clearStatus()
@@ -264,7 +272,7 @@ export function useReelGeneration() {
     setIsGenerating(true)
 
     try {
-      const sessionId = await startResearch(prompt, productUrl, duration)
+      const sessionId = await startResearch(instruction)
       if (sessionId) {
         try {
           await connectWebSocket(sessionId, handleWebSocketEvent)

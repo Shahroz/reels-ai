@@ -9,7 +9,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { useToast } from '@/components/ui/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/hooks/useAuth';
-import { useReelGeneration } from '@/hooks/useReelGeneration';
+import { useReelGeneration, generateDefaultInstruction } from '@/hooks/useReelGeneration';
 import { Loader2, X, CheckCircle2, AlertCircle, Info, XCircle } from 'lucide-react';
 
 interface ProductFormProps {
@@ -22,7 +22,7 @@ const ProductForm = ({ onClose }: ProductFormProps) => {
   const [formData, setFormData] = useState({
     title: '',
     description: '',
-    prompt: 'Create a 15-second promotional reel about sustainable energy solutions',
+    instructions: 'Create a 15-second promotional reel about sustainable energy solutions',
     productUrl: '',
     duration: 15,
   });
@@ -58,12 +58,35 @@ const ProductForm = ({ onClose }: ProductFormProps) => {
       return;
     }
 
-    // Generate reel using the hook
-    generateReel(
-      formData.prompt || formData.description || `Create a promotional reel about ${formData.title}`,
-      formData.productUrl || null,
-      formData.duration
-    );
+    // Generate instruction and call generateReel
+    // Use the actual user input from the form
+    const userInstructions = formData.instructions.trim();
+    
+    if (!userInstructions) {
+      toast({
+        title: 'Instructions Required',
+        description: 'Please provide instructions for the reel.',
+        variant: 'destructive',
+      });
+      return;
+    }
+    
+    // Construct a clean prompt from the user's instructions (just the text, no extra formatting)
+    // This is what will be sent to the video generation API
+    const prompt = userInstructions.replace(/"/g, '\\"').replace(/\n/g, ' ');
+    
+    // Build instruction - the instruction itself is just the user's text
+    // Then we tell the agent to call the tool with the prompt parameter containing the user's text
+    let instruction = `${userInstructions}\n\n`
+    instruction += `Call the generate_reel tool with these parameters:\n`
+    instruction += `- prompt: "${prompt}"\n`
+    instruction += `- time_range_seconds: ${formData.duration}\n`
+    
+    if (formData.productUrl) {
+      instruction += `- product_url: "${formData.productUrl}"\n`
+    }
+    
+    generateReel(instruction);
   };
 
   const handleVideoComplete = async () => {
@@ -92,7 +115,7 @@ const ProductForm = ({ onClose }: ProductFormProps) => {
         .insert({
           user_id: user.id,
           title: formData.title || 'Generated Reel',
-          description: formData.description || formData.prompt,
+          description: formData.description || formData.instructions,
           category: '',
           price: 0,
           images: [],
@@ -196,12 +219,12 @@ const ProductForm = ({ onClose }: ProductFormProps) => {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="prompt">Reel Prompt *</Label>
+              <Label htmlFor="instructions">Instructions for the Reel *</Label>
               <Textarea
-                id="prompt"
-                placeholder="Describe the reel you want to generate... e.g., 'Create a 15-second promotional reel about a new fitness app with energetic music and dynamic visuals'"
-                value={formData.prompt}
-                onChange={(e) => setFormData({ ...formData, prompt: e.target.value })}
+                id="instructions"
+                placeholder="Describe what you want in the reel... e.g., 'Create a 15-second promotional reel about a new fitness app with energetic music and dynamic visuals'"
+                value={formData.instructions}
+                onChange={(e) => setFormData({ ...formData, instructions: e.target.value })}
                 required
                 rows={4}
                 disabled={isGenerating}
@@ -250,7 +273,7 @@ const ProductForm = ({ onClose }: ProductFormProps) => {
                 <Button
                   type="submit"
                   className="gradient-accent text-white"
-                  disabled={isGenerating || !formData.prompt.trim()}
+                  disabled={isGenerating || !formData.instructions.trim()}
                 >
                   {isGenerating && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                   {isGenerating ? 'Generating...' : 'Generate Video Page'}

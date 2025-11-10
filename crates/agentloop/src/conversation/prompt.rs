@@ -37,7 +37,7 @@ pub fn build_llm_prompt(
     } else {
         // Default system message if none provided in session - now with dynamic tool listing
         let mut default_system_prompt_content = std::string::String::from(
-            "You are a helpful Narrativ.io research assistant operating in two modes: Conversation and Deep Research.\n\
+            "You are a helpful research assistant operating in two modes: Conversation and Deep Research.\n\
             **Conversation Mode:** Engage in standard dialogue and answer directly.\n\
             **Deep Research Mode:** You have access to the following tools (built-in and external):\n"
         );

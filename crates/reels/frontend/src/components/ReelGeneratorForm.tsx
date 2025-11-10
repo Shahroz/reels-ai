@@ -2,49 +2,37 @@ import React from 'react'
 import './ReelGeneratorForm.css'
 
 interface ReelGeneratorFormProps {
-  prompt: string
   productUrl: string
   duration: number
+  instruction: string
   isGenerating: boolean
-  onPromptChange: (value: string) => void
   onProductUrlChange: (value: string) => void
   onDurationChange: (value: number) => void
+  onInstructionChange: (value: string) => void
   onGenerate: () => void
   onCancel: () => void
 }
 
 function ReelGeneratorForm({
-  prompt,
   productUrl,
   duration,
+  instruction,
   isGenerating,
-  onPromptChange,
   onProductUrlChange,
   onDurationChange,
+  onInstructionChange,
   onGenerate,
   onCancel,
 }: ReelGeneratorFormProps) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    if (!isGenerating && prompt.trim()) {
+    if (!isGenerating && instruction.trim()) {
       onGenerate()
     }
   }
 
   return (
     <form className="reel-generator-form" onSubmit={handleSubmit}>
-      <div className="form-group">
-        <label htmlFor="prompt">Reel Prompt</label>
-        <textarea
-          id="prompt"
-          value={prompt}
-          onChange={(e) => onPromptChange(e.target.value)}
-          placeholder="Describe the reel you want to generate... e.g., 'Create a 15-second promotional reel about a new fitness app with energetic music and dynamic visuals'"
-          disabled={isGenerating}
-          rows={4}
-        />
-      </div>
-      
       <div className="form-group">
         <label htmlFor="productUrl">Product/Service URL (Optional)</label>
         <input
@@ -70,11 +58,23 @@ function ReelGeneratorForm({
         />
       </div>
       
+      <div className="form-group">
+        <label htmlFor="instruction">Instructions for the Reel</label>
+        <textarea
+          id="instruction"
+          value={instruction}
+          onChange={(e) => onInstructionChange(e.target.value)}
+          placeholder="Describe what you want in the reel..."
+          disabled={isGenerating}
+          rows={8}
+        />
+      </div>
+      
       <div className="button-group">
         <button
           type="submit"
           className="btn-primary"
-          disabled={isGenerating || !prompt.trim()}
+          disabled={isGenerating || !instruction.trim()}
         >
           {isGenerating ? (
             <>
